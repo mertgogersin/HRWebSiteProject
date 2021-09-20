@@ -5,15 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Entities
+namespace Core.Entities.BaseEntities
 {
-    public class Debit
+    public class WorkState
     {
-        public int DebitID { get; set; }
-        public string ProductName { get; set; }
-        public string Description { get; set; }
-        public bool IsApproved { get; set; }
         public string UserID { get; set; }
+        public DateTime BeginDate { get; set; }
+        public DateTime EndDate { get; set; }
         public User User { get; set; }
+
     }
 }

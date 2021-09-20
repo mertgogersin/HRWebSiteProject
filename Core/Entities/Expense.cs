@@ -13,6 +13,7 @@ namespace Core.Entities
         public string Description { get; set; }
         public double TotalPrice { get; set; }
         public bool IsApproved { get; set; }
-        public ICollection<User> Users { get; set; }
+        public string UserID { get; set; }
+        public User User { get; set; }
     }
 }

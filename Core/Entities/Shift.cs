@@ -13,7 +13,7 @@ namespace Core.Entities
         public string Description { get; set; }
         public bool IsActive { get; set; }
         public DateTime BreakTime { get; set; }
-        public int UserID { get; set; }
+        public string UserID { get; set; }
         public User User { get; set; }
     }
 }

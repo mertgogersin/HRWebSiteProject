@@ -9,7 +9,8 @@ namespace Core.Entities
 {
     public class Bonus
     {
-        public int UserID { get; set; }
+        public int BonusID { get; set; }
+        public string UserID { get; set; }
         public decimal BonusAmount { get; set; }
         public DateTime Date { get; set; }
         public string Description { get; set; }
