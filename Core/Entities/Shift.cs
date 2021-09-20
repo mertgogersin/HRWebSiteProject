@@ -14,6 +14,6 @@ namespace Core.Entities
         public string Description { get; set; }
         public bool IsActive { get; set; }
         public DateTime BreakTime { get; set; }
-
+        public ICollection<User> Users { get; set; }
     }
 }

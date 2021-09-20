@@ -9,6 +9,8 @@ namespace Core.Entities
     public class DayOffType
     {
         public int DayOffTypeID { get; set; }
+        public string TypeName { get; set; }
+        public ICollection<DayOff> DayOffs { get; set; }
 
     }
 }
