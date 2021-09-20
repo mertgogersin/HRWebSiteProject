@@ -10,6 +10,7 @@ namespace Core.Model.Authentication
 {
     public class User : IdentityUser
     {
+        //scalar property
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Address { get; set; }
@@ -20,10 +21,17 @@ namespace Core.Model.Authentication
         public double Salary { get; set; }
         public int CompanyID { get; set; }
         public int VacationID { get; set; }
-        public Vacation Vacation { get; set; }
+
+        //navigational properties
+        public DayOff DayOff { get; set; }
         public Company Company { get; set; }
+        public Plan Plan { get; set; }
         public ICollection<Shift> Shifts { get; set; }
         public ICollection<Expense> Expenses { get; set; }
         public ICollection<Debit> Debits { get; set; }
+        public ICollection<DayOff> DayOffs { get; set; }
+        public ICollection<Bonus> Bonuses { get; set; }
+        public ICollection<File> Files { get; set; }
+        public ICollection<Notification> Notifications { get; set; }
     }
 }

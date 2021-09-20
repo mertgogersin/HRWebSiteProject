@@ -8,11 +8,14 @@ using System.Threading.Tasks;
 
 namespace Core.Entities
 {
-    public class Vacation :WorkState
+    public class DayOff :WorkState
     {
-        public int VacationID { get; set; }
+        public int DayOffID { get; set; }
+        public int DayOffTypeID { get; set; }
+        public bool IsApproved { get; set; }
         public string Title { get; set; }
         public bool IsActive { get; set; }
+        public DayOffType DayOffType { get; set; }
 
     }
 }
