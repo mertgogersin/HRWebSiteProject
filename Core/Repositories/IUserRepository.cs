@@ -1,4 +1,5 @@
-﻿using Core.Model.Authentication;
+﻿using Core.Enums;
+using Core.Model.Authentication;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,13 +8,19 @@ using System.Threading.Tasks;
 
 namespace Core.Repositories
 {
-    public interface IUserRepository:IRepository<User>
+    public interface IUserRepository:IRepository<User>,IEmailRepository
     {
         Task<bool> Login(string email, string password);
         //private void SetPassiveAllLinkedUsers(string companyID)
         Task SetUserToPassive(string userID);
-        Task ActivateUser(string userID);
-        Task<int> CountEmployees(string roleID); //employers da role id ye göre aynı metotta yazılabilir
-        Task<IEnumerable<>>
+        //Task SendRegisterMailToUser(string userID, string link);//update user(isActive)
+        //Task SendPasswordRenewalMailToUser(string userID, string link);//update user ile çözülür (password sadece)
+        
+        
+        //approve disapprove Role: Employer
+        Task SetUserExpenseStatus(int expenseID, bool status);
+        Task SetUserOffDayStatus(int offdayID, bool status);
+        //Role: Emploee
+        Task SetUserDebitStatus(int debitID, bool status);
     }
 }
