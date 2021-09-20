@@ -4,13 +4,11 @@ using System.Threading.Tasks;
 
 namespace Core.Repositories
 {
-    public interface IAdminRepository
+    public interface IAdminRepository:IEmailRepository
     {
         Task SetSubscriptionPlanForUser(string id, SubscriptionPlans type);
-        Task UpdateCompanyInfo(Company company);
-        Task SendNotificationMailToUser(string email,string link);
+        Task UpdateCompanyInfo(Company company);      
         Task SetPassiveCompany(string company);
-        Task SetVacationType(DayOff vacation); //revize yapılacak
 
 
     }
