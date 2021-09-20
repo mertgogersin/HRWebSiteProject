@@ -17,7 +17,7 @@ namespace DataAccess.Context
 
         public DbSet<Company> Companies { get; set; }
         public DbSet<Comment> Comments { get; set; }
-        public DbSet<Vacation> Vacations { get; set; }
+        public DbSet<DayOff> Vacations { get; set; }
         public DbSet<Plan> Plans { get; set; }
         public DbSet<Shift> Shifts { get; set; }
         public DbSet<Expense> Expenses { get; set; }

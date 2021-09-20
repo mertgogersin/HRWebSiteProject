@@ -10,7 +10,7 @@ namespace Core.Repositories
         Task UpdateCompanyInfo(Company company);
         Task SendNotificationMailToUser(string email,string link);
         Task SetPassiveCompany(string company);
-        Task SetVacationType(Vacation vacation); //revize yapılacak
+        Task SetVacationType(DayOff vacation); //revize yapılacak
 
 
     }
