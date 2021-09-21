@@ -17,7 +17,7 @@ namespace Core.Entities
         public byte Logo { get; set; }
         public virtual Comment Comment { get; set; }
         public Plan Plan { get; set; }
-        ICollection<User> Users { get; set; }
+        public ICollection<User> Users { get; set; }
 
     }
 }

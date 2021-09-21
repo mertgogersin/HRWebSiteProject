@@ -28,11 +28,21 @@ namespace DataAccess.Context
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<Plan> Plans { get; set; }
         public DbSet<Shift> Shifts { get; set; }
-
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.ApplyConfiguration(new BonusConfiguration());
+            builder.ApplyConfiguration(new CommentConfiguration());
             builder.ApplyConfiguration(new CompanyConfiguration());
-
+            builder.ApplyConfiguration(new DayOffConfiguration());
+            builder.ApplyConfiguration(new DayOffTypeConfiguration());
+            builder.ApplyConfiguration(new DebitConfiguration());
+            builder.ApplyConfiguration(new ExpenseConfiguration());
+            builder.ApplyConfiguration(new FileConfiguration());
+            builder.ApplyConfiguration(new FileTypeConfiguration());
+            builder.ApplyConfiguration(new NotificationConfiguration());
+            builder.ApplyConfiguration(new PlanConfiguration());
+            builder.ApplyConfiguration(new ShiftConfiguration());
+            builder.ApplyConfiguration(new UserConfiguration());
         }
 
     }

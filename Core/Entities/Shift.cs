@@ -13,7 +13,7 @@ namespace Core.Entities
         public int ShiftID { get; set; }
         public string Description { get; set; }
         public bool IsActive { get; set; }
-        public DateTime BreakTime { get; set; }
+        public DateTime? BreakTime { get; set; }
         public ICollection<User> Users { get; set; }
     }
 }
