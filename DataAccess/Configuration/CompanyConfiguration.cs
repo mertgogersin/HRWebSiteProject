@@ -15,14 +15,23 @@ namespace DataAccess.Configuration
         {
             builder.HasKey(x => x.CompanyID);
 
-            builder.Property(x => x.CompanyName).IsRequired().HasMaxLength(100);
+            builder.Property(x => x.CompanyName)
+                .IsRequired()
+                .HasMaxLength(100);
 
-            builder.Property(x => x.Description).HasMaxLength(500);
+            builder.Property(x => x.Description)
+                .HasMaxLength(500);
 
-            builder.Property(x => x.Address).HasMaxLength(200);
-            builder.Property(x => x.IsActive);
-            builder.Property(x => x.Logo);
-            builder.Property(x => x.Comment).HasMaxLength(1500);
+            builder.Property(x => x.Address)
+                .HasMaxLength(200);
+
+            builder.Property(x => x.Logo)
+                .HasColumnType("varbinary");
+
+            builder.Property(x => x.Comment)
+                .HasMaxLength(1500);
+
+            builder.ToTable("Company");
 
         }
     }

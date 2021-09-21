@@ -13,7 +13,16 @@ namespace DataAccess.Configuration
     {
         public void Configure(EntityTypeBuilder<Notification> builder)
         {
-            throw new NotImplementedException();
+            builder.HasKey(x => x.NotificationID);
+
+            builder.Property(x => x.NotificationFromName)
+                .HasMaxLength(100)
+                .IsRequired();
+
+            builder.Property(x => x.Description)
+                .HasMaxLength(200);
+
+            builder.ToTable("Notification");
         }
     }
 }

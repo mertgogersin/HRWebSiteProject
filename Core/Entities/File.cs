@@ -11,7 +11,9 @@ namespace Core.Entities
     {
         public int FileID { get; set; }
         public string FileName { get; set; }
+        public int FileTypeID { get; set; }
         public FileType FileType { get; set; }
+        public string UserID { get; set; }
         public User User { get; set; }
     }
 }

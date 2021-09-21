@@ -12,7 +12,7 @@ namespace Core.Entities
         public int BonusID { get; set; }
         public string UserID { get; set; }
         public decimal BonusAmount { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
         public string Description { get; set; }
         public User User { get; set; }
 

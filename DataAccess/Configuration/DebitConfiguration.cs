@@ -13,7 +13,15 @@ namespace DataAccess.Configuration
     {
         public void Configure(EntityTypeBuilder<Debit> builder)
         {
-            throw new NotImplementedException();
+            builder.HasKey(x => x.DebitID);
+
+            builder.Property(x => x.ProductName)
+                .IsRequired();
+
+            builder.Property(x => x.Description)
+                .HasMaxLength(200);
+
+            builder.ToTable("Debit");
         }
     }
 }
