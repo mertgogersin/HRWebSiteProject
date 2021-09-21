@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Repositories
+namespace DataAccess.Repositories
 {
-    public interface IBreakRepository : IRepository<DummyBreak>
+    public class ExpenseRepository
     {
     }
 }

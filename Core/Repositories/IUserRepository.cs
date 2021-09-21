@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Core.Repositories
 {
-    public interface IUserRepository:IRepository<User>,IEmailRepository
+    public interface IUserRepository:IRepository<User>
     {
         Task<bool> Login(string email, string password);
         //private void SetPassiveAllLinkedUsers(string companyID)

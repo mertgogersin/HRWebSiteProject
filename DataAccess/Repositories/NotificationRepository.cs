@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Repositories
+namespace DataAccess.Repositories
 {
-    public class DummyNotification
+    public class NotificationRepository
     {
     }
 }
