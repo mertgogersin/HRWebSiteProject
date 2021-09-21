@@ -13,7 +13,13 @@ namespace DataAccess.Configuration
     {
         public void Configure(EntityTypeBuilder<Shift> builder)
         {
-            throw new NotImplementedException();
+            builder.HasKey(x => x.ShiftID);
+
+            builder.Property(x => x.Description)
+                .HasMaxLength(200)
+                .IsRequired();
+
+            builder.ToTable("Shift");
         }
     }
 }

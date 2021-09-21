@@ -13,7 +13,13 @@ namespace DataAccess.Configuration
     {
         public void Configure(EntityTypeBuilder<DayOffType> builder)
         {
-            throw new NotImplementedException();
+            builder.HasKey(x => x.DayOffTypeID);
+
+            builder.Property(x => x.TypeName)
+                .HasMaxLength(150)
+                .IsRequired();
+
+            builder.ToTable("DayOffType");
         }
     }
 }

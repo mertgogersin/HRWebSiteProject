@@ -15,17 +15,17 @@ namespace Core.Model.Authentication
         public string LastName { get; set; }
         public string Address { get; set; }
         public bool IsActive { get; set; }
-        public DateTime StartingDate { get; set; }
-        public DateTime BirthDate { get; set; }
+        public DateTime? StartingDate { get; set; }
+        public DateTime? BirthDate { get; set; }
         public byte Photo { get; set; }
         public double Salary { get; set; }
+        public bool IsApprove { get; set; }
+        public int DayOffID { get; set; }
         public int CompanyID { get; set; }
-        public int VacationID { get; set; }
 
         //navigational properties
         public DayOff DayOff { get; set; }
         public Company Company { get; set; }
-        public Plan Plan { get; set; }
         public ICollection<Shift> Shifts { get; set; }
         public ICollection<Expense> Expenses { get; set; }
         public ICollection<Debit> Debits { get; set; }

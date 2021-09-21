@@ -15,8 +15,9 @@ namespace Core.Entities
         public string Address { get; set; }
         public bool IsActive { get; set; }
         public byte Logo { get; set; }
-        public virtual Comment Comment { get; set; }
-        public Plan Plan { get; set; }
+        public virtual Comment Comment { get; set; }    //burada  commentId gerekir mi?
+        public int PlanID { get; set; }
+        public Plan? Plan { get; set; }     //uyarıya bakalım
         public ICollection<User> Users { get; set; }
 
     }

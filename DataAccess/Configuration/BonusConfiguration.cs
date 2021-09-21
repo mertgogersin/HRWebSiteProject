@@ -13,7 +13,15 @@ namespace DataAccess.Configuration
     {
         public void Configure(EntityTypeBuilder<Bonus> builder)
         {
-            throw new NotImplementedException();
+            builder.HasKey(x => x.BonusID);
+
+            builder.Property(x => x.BonusAmount)
+                .IsRequired();
+
+            builder.Property(x => x.Description)
+                .HasMaxLength(200);
+
+            builder.ToTable("Bonus");
         }
     }
 }

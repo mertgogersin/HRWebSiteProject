@@ -13,7 +13,13 @@ namespace DataAccess.Configuration
     {
         public void Configure(EntityTypeBuilder<FileType> builder)
         {
-            throw new NotImplementedException();
+            builder.HasKey(x => x.FileTypeID);
+
+            builder.Property(x => x.FileTypeName)
+                .HasMaxLength(100)
+                .IsRequired();
+
+            builder.ToTable("FileType");
         }
     }
 }
