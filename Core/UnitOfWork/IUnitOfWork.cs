@@ -9,7 +9,6 @@ namespace Core.UnitOfWork
 {
     public interface IUnitOfWork : IDisposable
     {
-        IAdminRepository Admins { get; }
         IBonusRepository Bonuses { get; }       
         ICommentRepository Comments { get; }
         ICompanyRepository Companies { get; }

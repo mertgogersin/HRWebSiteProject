@@ -1,4 +1,5 @@
 using Core.EmailSenderManager;
+using Core.Entities;
 using Core.Model.Authentication;
 using Core.UnitOfWork;
 using DataAccess.Context;
@@ -46,6 +47,7 @@ namespace HRWebApi
 
             services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<HRContext>();
             services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
+            services.Configure<Admin>(Configuration.GetSection("Admin"));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

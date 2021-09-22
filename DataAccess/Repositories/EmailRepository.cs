@@ -13,10 +13,10 @@ namespace DataAccess.Repositories
     {
         HRContext context;
         private readonly EmailSettings emailSettings;
-        public EmailRepository(HRContext context, IOptions<EmailSettings> emailSettings)
+        public EmailRepository(HRContext context, EmailSettings emailSettings)
         {
             this.context = context;
-            this.emailSettings = emailSettings.Value;
+            this.emailSettings = emailSettings;
         }
 
         public async Task SendMailToUser(EmailRequest emailRequest)

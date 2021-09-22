@@ -23,14 +23,19 @@ namespace DataAccess.Repositories.Generics
             await _object.AddAsync(entity);
         }
 
-        public void DeleteAsync(T entity)
+        public void DeleteAsync(T entity) //isActive: false olacağı için update methodunu çağırdım.
         {
-            _object.Remove(entity);
+            UpdateAsync(entity);
         }
 
         public async Task<IEnumerable<T>> GetAllAsync()
         {
             return await _object.ToListAsync();
+        }
+
+        public async Task<T> GetByID(Guid id)
+        {
+            return await _object.FindAsync(id);
         }
 
         public void UpdateAsync(T entity) //örneğin sadece şifre değiştirdin diyelim, bütün entity i service kısmında doldur ki diğer kolonları null getirmesin (service layerda id ile çekip passwordu update yap bu methoda yolla.

@@ -2,6 +2,7 @@
 using Core.Repositories;
 using DataAccess.Context;
 using DataAccess.Repositories.Generics;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,11 @@ namespace DataAccess.Repositories
         private HRContext Context
         {
             get { return context; }
+        }
+
+        public async Task<IEnumerable<Debit>> GetDebitsByUserID(Guid userID)
+        {
+            return await context.Debits.Where(m => m.UserID == userID).ToListAsync();
         }
     }
 }

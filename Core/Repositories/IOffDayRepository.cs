@@ -9,7 +9,7 @@ namespace Core.Repositories
 {
     public interface IOffDayRepository :IRepository<DayOff>
     {
-        Task<IEnumerable<DayOff>> GetDummyClassDayOffsByUserID(string userID);
+        Task<IEnumerable<DayOff>> GetDayOffsByUserID(Guid userID);
         //Task SetDayOffType(DayOffType dayOff); //revize yapılacak
     }
 }
