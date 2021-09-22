@@ -10,8 +10,8 @@ namespace Core.Repositories
 {
     public interface ICompanyRepository : IRepository<Company>
     {       
-        Task<int> CountCompaniesAsync(string companyID);
-        Task<IEnumerable<User>> GetPersonnelList(int companyID,int roleID);
+        Task<IEnumerable<User>> GetPersonnelList(int companyID,string roleID);
         //Filter Company stats sonradan ekle, şimdilik gerek yok(dairesel grafik kısmını araştır
+     
     }
 }
