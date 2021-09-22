@@ -44,7 +44,7 @@ namespace HRWebApi
             services.AddDbContext<HRContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("SqlConnectionString")));
 
-            services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<HRContext>();
+            services.AddIdentity<User, Role>().AddEntityFrameworkStores<HRContext>();
             services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
         }
 
