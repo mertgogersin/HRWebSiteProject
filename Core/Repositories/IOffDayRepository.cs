@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace Core.Repositories
 {
-    public interface IOffDayRepository :IRepository<DummyClassDayOff>
+    public interface IOffDayRepository :IRepository<DayOff>
     {
-        Task<IEnumerable<DummyClassDayOff>> GetDummyClassDayOffsByUserID(string userID);
+        Task<IEnumerable<DayOff>> GetDummyClassDayOffsByUserID(string userID);
+        //Task SetDayOffType(DayOffType dayOff); //revize yapılacak
     }
 }

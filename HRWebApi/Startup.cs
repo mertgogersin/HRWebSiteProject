@@ -1,5 +1,8 @@
+using Core.EmailSenderManager;
 using Core.Model.Authentication;
+using Core.UnitOfWork;
 using DataAccess.Context;
+using DataAccess.UnitOfWork;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -36,10 +39,13 @@ namespace HRWebApi
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HRWebApi", Version = "v1" });
             });
 
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
             services.AddDbContext<HRContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("SqlConnectionString")));
 
             services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<HRContext>();
+            services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
