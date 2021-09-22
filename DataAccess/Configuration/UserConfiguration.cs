@@ -15,6 +15,12 @@ namespace DataAccess.Configuration
         {
             builder.HasKey(x => x.Id);
 
+            builder.HasIndex(x => x.Email)
+                .IsUnique();
+
+            builder.HasIndex(x => x.PhoneNumber)
+                .IsUnique();
+
             builder.Property(x => x.FirstName)
                 .HasMaxLength(50)
                 .IsRequired();

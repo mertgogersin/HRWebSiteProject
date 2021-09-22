@@ -10,6 +10,7 @@ namespace Core.Entities
     {
         public int DayOffTypeID { get; set; }
         public string TypeName { get; set; }
+        //nav prop
         public ICollection<DayOff> DayOffs { get; set; }
 
     }
