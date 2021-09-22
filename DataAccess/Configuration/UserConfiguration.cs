@@ -29,7 +29,11 @@ namespace DataAccess.Configuration
                 .HasMaxLength(50)
                 .IsRequired();
 
-            builder.ToTable("User");
+            builder.Property(x => x.Address)
+                .HasMaxLength(200);
+
+            builder.ToTable("Users");
+
         }
     }
 }

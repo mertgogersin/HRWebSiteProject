@@ -9,10 +9,10 @@ namespace Core.Entities
 {
     public class Comment
     {
-        public int CommentID { get; set; }
+        public Guid CommentID { get; set; }
         public string CommentTitle { get; set; }
         public string CommentContent { get; set; }
-        public int CompanyID { get; set; }
+        public Guid CompanyID { get; set; }
         //nav prop
         public virtual Company Company { get; set; }
     }

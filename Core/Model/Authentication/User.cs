@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Core.Model.Authentication
 {
-    public class User : IdentityUser
+    public class User : IdentityUser<Guid>
     {
         //scalar property
         public string FirstName { get; set; }
@@ -22,11 +22,11 @@ namespace Core.Model.Authentication
         public bool IsApprove { get; set; }
         public int DayOffID { get; set; }
         public int CompanyID { get; set; }
-
+        
         //navigational properties
         public DayOff DayOff { get; set; }
         public Company Company { get; set; }
-        public ICollection<Shift> Shifts { get; set; }
+        public ICollection<UserShift> UserShifts { get; set; }
         public ICollection<Expense> Expenses { get; set; }
         public ICollection<Debit> Debits { get; set; }
         public ICollection<DayOff> DayOffs { get; set; }

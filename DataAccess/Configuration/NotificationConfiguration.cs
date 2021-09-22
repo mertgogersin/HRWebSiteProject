@@ -22,7 +22,11 @@ namespace DataAccess.Configuration
             builder.Property(x => x.Description)
                 .HasMaxLength(200);
 
-            builder.ToTable("Notification");
+            builder.ToTable("Notifications");
+
+            builder.HasOne(x => x.User)
+                .WithMany(x => x.Notifications)
+                .HasForeignKey(x => x.UserID);
         }
     }
 }

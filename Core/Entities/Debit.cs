@@ -9,11 +9,11 @@ namespace Core.Entities
 {
     public class Debit
     {
-        public int DebitID { get; set; }
+        public Guid DebitID { get; set; }
         public string ProductName { get; set; }
         public string Description { get; set; }
         public bool IsApproved { get; set; }
-        public string UserID { get; set; }
+        public Guid UserID { get; set; }
         //nav prop
         public User User { get; set; }
     }

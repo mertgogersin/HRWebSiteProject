@@ -22,7 +22,8 @@ namespace DataAccess.Configuration
             builder.Property(x => x.Price)
                 .IsRequired();
 
-            builder.ToTable("Plan");
+            builder.ToTable("Plans");
+
         }
     }
 }

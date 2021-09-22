@@ -18,7 +18,11 @@ namespace DataAccess.Configuration
             builder.Property(x => x.Title)
                 .HasMaxLength(150);
 
-            builder.ToTable("DayOff");
+            builder.HasOne(x => x.DayOffType)
+                .WithMany(x => x.DayOffs)
+                .HasForeignKey(x => x.DayOffTypeID);
+
+            builder.ToTable("DayOffs");
         }
     }
 }

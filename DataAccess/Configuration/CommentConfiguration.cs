@@ -22,7 +22,12 @@ namespace DataAccess.Configuration
             builder.Property(x => x.CommentContent)
                .IsRequired()
                .HasMaxLength(1500);
-            builder.ToTable("Comment");
+
+            builder.HasOne(x => x.Company)
+                .WithOne(x => x.Comment)
+                .HasForeignKey<Company>(x => x.CompanyID);
+
+            builder.ToTable("Comments");
         }
     }
 }

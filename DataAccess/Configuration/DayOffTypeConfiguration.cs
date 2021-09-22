@@ -19,7 +19,7 @@ namespace DataAccess.Configuration
                 .HasMaxLength(150)
                 .IsRequired();
 
-            builder.ToTable("DayOffType");
+            builder.ToTable("DayOffTypes");
         }
     }
 }

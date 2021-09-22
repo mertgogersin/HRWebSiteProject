@@ -21,7 +21,12 @@ namespace DataAccess.Configuration
             builder.Property(x => x.Description)
                 .HasMaxLength(200);
 
-            builder.ToTable("Debit");
+            builder.ToTable("Debits");
+
+            builder.HasOne(x => x.User)
+                .WithMany(x => x.Debits)
+                .HasForeignKey(x => x.UserID);
+
         }
     }
 }

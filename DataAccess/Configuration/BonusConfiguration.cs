@@ -14,6 +14,7 @@ namespace DataAccess.Configuration
         public void Configure(EntityTypeBuilder<Bonus> builder)
         {
             builder.HasKey(x => x.BonusID);
+                
 
             builder.Property(x => x.BonusAmount)
                 .IsRequired();
@@ -21,7 +22,11 @@ namespace DataAccess.Configuration
             builder.Property(x => x.Description)
                 .HasMaxLength(200);
 
-            builder.ToTable("Bonus");
+            builder.ToTable("Bonuses");
+
+            builder.HasOne(x => x.User)
+                .WithMany(x => x.Bonuses)
+                .HasForeignKey(x => x.UserID);
         }
     }
 }

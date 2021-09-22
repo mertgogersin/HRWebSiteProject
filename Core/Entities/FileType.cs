@@ -8,7 +8,7 @@ namespace Core.Entities
 {
     public class FileType
     {
-        public int FileTypeID { get; set; }
+        public Guid FileTypeID { get; set; }
         public string FileTypeName { get; set; }
         //nav prop
         public ICollection<File> Files { get; set; }
