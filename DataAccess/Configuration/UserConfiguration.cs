@@ -13,7 +13,17 @@ namespace DataAccess.Configuration
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            throw new NotImplementedException();
+            builder.HasKey(x => x.Id);
+
+            builder.Property(x => x.FirstName)
+                .HasMaxLength(50)
+                .IsRequired();
+
+            builder.Property(x => x.LastName)
+                .HasMaxLength(50)
+                .IsRequired();
+
+            builder.ToTable("User");
         }
     }
 }

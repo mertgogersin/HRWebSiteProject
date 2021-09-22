@@ -13,6 +13,7 @@ namespace Core.Entities
         public int CommentID { get; set; }
         public string CommentTitle { get; set; }
         public string CommentContent { get; set; }
+        public int CompanyID { get; set; }
         public virtual Company Company { get; set; }
     }
 }

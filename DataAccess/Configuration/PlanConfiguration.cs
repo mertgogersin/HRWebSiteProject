@@ -13,7 +13,16 @@ namespace DataAccess.Configuration
     {
         public void Configure(EntityTypeBuilder<Plan> builder)
         {
-            throw new NotImplementedException();
+            builder.HasKey(x => x.PlanID);
+
+            builder.Property(x => x.PlanName)
+                .HasMaxLength(100)
+                .IsRequired();
+
+            builder.Property(x => x.Price)
+                .IsRequired();
+
+            builder.ToTable("Plan");
         }
     }
 }

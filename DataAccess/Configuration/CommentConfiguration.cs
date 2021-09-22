@@ -13,7 +13,16 @@ namespace DataAccess.Configuration
     {
         public void Configure(EntityTypeBuilder<Comment> builder)
         {
-            throw new NotImplementedException();
+            builder.HasKey(x => x.CommentID);
+
+            builder.Property(x => x.CommentTitle)
+                .IsRequired()
+                .HasMaxLength(100);
+
+            builder.Property(x => x.CommentContent)
+               .IsRequired()
+               .HasMaxLength(1500);
+            builder.ToTable("Comment");
         }
     }
 }
