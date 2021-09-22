@@ -22,9 +22,13 @@ namespace DataAccess.Repositories
         {
             get { return context; }
         }
-       
 
-        public async Task<IEnumerable<User>> GetPersonnelList(int companyID, string roleID)
+        public async Task<Company> GetCompanyByID(string companyID)
+        {
+            return await context.Companies.FindAsync(Guid.Parse(companyID));
+        }
+
+        public async Task<IEnumerable<User>> GetPersonnelList(int companyID, string roleID) //compid string olacak
         {
             List<User> personnels =await (from user in context.Users
                           join userRole in context.UserRoles on user.Id equals userRole.UserId
@@ -34,6 +38,10 @@ namespace DataAccess.Repositories
             return personnels;
         }
 
-       
+        //public Task SetSubscriptionPlanForCompany(string companyID, int planID) bu da update ile yapılacak
+        //{
+        //    Company company = context.Companies.Where(m => m.CompanyID == Guid.Parse(companyID) && m.IsActive && m.IsApprove).FirstOrDefault();
+        //    company.PlanID = planID;
+        //}
     }
 }

@@ -16,7 +16,7 @@ namespace DataAccess.Context
     {
         public HRContext(DbContextOptions<HRContext> dbContext) : base(dbContext) { }
 
-        public DbSet<Bonus> Bonus { get; set; }
+        public DbSet<Bonus> Bonuses { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Company> Companies { get; set; }
         public DbSet<DayOff> DayOffs { get; set; }

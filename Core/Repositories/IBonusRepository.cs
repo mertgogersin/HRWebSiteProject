@@ -9,5 +9,6 @@ namespace Core.Repositories
 {
     public interface IBonusRepository : IRepository<Bonus>
     {
+        Task<IEnumerable<Bonus>> GetBonusesByUserID(Guid userID);
     }
 }

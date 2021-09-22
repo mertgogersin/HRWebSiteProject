@@ -9,7 +9,6 @@ namespace Core.Repositories
 {
     public interface IFileRepository : IRepository<File>
     {
-        Task<IEnumerable<File>> GetFilesByUserID(string userID);
-        
+        Task<IEnumerable<File>> GetFilesByUserID(Guid userID);
     }
 }

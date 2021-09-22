@@ -9,8 +9,10 @@ namespace Core.Repositories
 {
     public interface IExpenseRepository
     {
+        Task<IEnumerable<Expense>> GetExpensesByUserID(Guid userID);
         Task<IEnumerable<Expense>> GetExpenses();
-        Task<Expense> AddExpense(Expense expense);
+        Task<Expense> GetExpenseByID(Guid expenseID);
+        Task AddExpense(Expense expense);
 
     }
 }

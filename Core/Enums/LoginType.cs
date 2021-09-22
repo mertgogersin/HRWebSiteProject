@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Repositories
+namespace Core.Enums
 {
-    public class DummyBreak
+    public enum LoginType
     {
+        Admin,
+        User
     }
 }

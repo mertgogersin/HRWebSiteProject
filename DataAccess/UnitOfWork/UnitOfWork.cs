@@ -1,11 +1,10 @@
-﻿using Core.Repositories;
+﻿using Core.EmailSenderManager;
+using Core.Entities;
+using Core.Repositories;
 using Core.UnitOfWork;
 using DataAccess.Context;
 using DataAccess.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Microsoft.Extensions.Options;
 using System.Threading.Tasks;
 
 namespace DataAccess.UnitOfWork
@@ -13,8 +12,10 @@ namespace DataAccess.UnitOfWork
     public class UnitOfWork : IUnitOfWork
     {
         private readonly HRContext context;
-        private AdminRepository adminRepository;
-        private BonusRepository bonusRepository;     
+        private readonly EmailSettings emailSettings;
+        private readonly Admin admin;
+
+        private BonusRepository bonusRepository;
         private CommentRepository commentRepository;
         private CompanyRepository companyRepository;
         private DebitRepository debitRepository;
@@ -26,15 +27,14 @@ namespace DataAccess.UnitOfWork
         private ShiftRepository shiftRepository;
         private UserRepository userRepository;
 
-        public UnitOfWork(HRContext context)
+        public UnitOfWork(HRContext context, IOptions<EmailSettings> emailSettings, IOptions<Admin> admin)
         {
             this.context = context;
+            this.emailSettings = emailSettings.Value;
+            this.admin = admin.Value;
         }
-
-        public IAdminRepository Admins => adminRepository = adminRepository ?? new AdminRepository(context);
-
+     
         public IBonusRepository Bonuses => bonusRepository = bonusRepository ?? new BonusRepository(context);
-      
 
         public ICommentRepository Comments => commentRepository = commentRepository ?? new CommentRepository(context);
 
@@ -42,19 +42,19 @@ namespace DataAccess.UnitOfWork
 
         public IDebitRepository Debits => debitRepository = debitRepository ?? new DebitRepository(context);
 
-        public IEmailRepository Emails => emailRepository = emailRepository ?? new EmailRepository(context);
+        public IEmailRepository Emails => emailRepository = emailRepository ?? new EmailRepository(context,emailSettings);
 
-        public IExpenseRepository Expenses => expenseRepository = expenseRepository ?? new ExpenseRepository();
+        public IExpenseRepository Expenses => expenseRepository = expenseRepository ?? new ExpenseRepository(context);
 
-        public IFileRepository Files => fileRepository = fileRepository ?? new FileRepository();
+        public IFileRepository Files => fileRepository = fileRepository ?? new FileRepository(context);
 
-        public INotificationRepository Notifications => notificationRepository = notificationRepository ?? new NotificationRepository();
+        public INotificationRepository Notifications => notificationRepository = notificationRepository ?? new NotificationRepository(context);
 
-        public IOffDayRepository OffDays => offDayRepository = offDayRepository ?? new OffDayRepository();
+        public IOffDayRepository OffDays => offDayRepository = offDayRepository ?? new OffDayRepository(context);
 
-        public IShiftRepository Shifts => shiftRepository = shiftRepository ?? new ShiftRepository();
+        public IShiftRepository Shifts => shiftRepository = shiftRepository ?? new ShiftRepository(context);
 
-        public IUserRepository Users => userRepository = userRepository ?? new UserRepository();
+        public IUserRepository Users => userRepository = userRepository ?? new UserRepository(context,admin);
 
         public async Task<int> CommitAsync()
         {
