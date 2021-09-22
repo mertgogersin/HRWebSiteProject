@@ -19,7 +19,8 @@ namespace DataAccess.Configuration
                 .HasMaxLength(200)
                 .IsRequired();
 
-            builder.ToTable("Shift");
+            builder.ToTable("Shifts");
+
         }
     }
 }

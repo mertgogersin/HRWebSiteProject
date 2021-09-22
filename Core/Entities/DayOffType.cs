@@ -8,7 +8,7 @@ namespace Core.Entities
 {
     public class DayOffType
     {
-        public int DayOffTypeID { get; set; }
+        public Guid DayOffTypeID { get; set; }
         public string TypeName { get; set; }
         //nav prop
         public ICollection<DayOff> DayOffs { get; set; }

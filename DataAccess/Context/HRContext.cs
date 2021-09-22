@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Context
 {
-    public class HRContext : IdentityDbContext<User, IdentityRole, string>
+    public class HRContext : IdentityDbContext<User, Role, Guid>
     {
         public HRContext(DbContextOptions<HRContext> dbContext) : base(dbContext) { }
 
@@ -28,6 +28,7 @@ namespace DataAccess.Context
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<Plan> Plans { get; set; }
         public DbSet<Shift> Shifts { get; set; }
+        public DbSet<UserShift> UserShifts { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new BonusConfiguration());

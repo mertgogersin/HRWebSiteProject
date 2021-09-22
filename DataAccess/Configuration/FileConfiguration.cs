@@ -17,13 +17,20 @@ namespace DataAccess.Configuration
 
             builder.Property(x => x.FileName)
                 .HasMaxLength(100)
-                .IsRequired();
-            
+                .IsRequired();       
 
             builder.Property(x => x.FileTypeID)
                 .IsRequired();
 
-            builder.ToTable("File");
+            builder.ToTable("Files");
+
+            builder.HasOne(x => x.User)
+                .WithMany(x => x.Files)
+                .HasForeignKey(x => x.UserID);
+
+            builder.HasOne(x => x.FileType)
+                .WithMany(x => x.Files)
+                .HasForeignKey(x => x.FileTypeID);
         }
     }
 }

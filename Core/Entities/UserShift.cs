@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace Core.Entities
 {
-    public class Expense
+    public class UserShift
     {
-        public Guid ExpenseID { get; set; }
-        public string Description { get; set; }
-        public double TotalPrice { get; set; }
-        public bool IsApproved { get; set; }
         public Guid UserID { get; set; }
-        //nav prop
+        public Guid ShiftID { get; set; }
+        //nav
         public User User { get; set; }
+        public Shift Shift { get; set; }
+
+
     }
 }

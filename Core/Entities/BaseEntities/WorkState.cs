@@ -9,7 +9,7 @@ namespace Core.Entities.BaseEntities
 {
     public class WorkState
     {
-        public string UserID { get; set; }
+        public Guid UserID { get; set; }
         public DateTime BeginDate { get; set; }
         public DateTime EndDate { get; set; }
         public User User { get; set; }

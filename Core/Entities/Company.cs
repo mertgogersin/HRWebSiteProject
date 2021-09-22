@@ -15,7 +15,7 @@ namespace Core.Entities
         public string Address { get; set; }
         public bool IsActive { get; set; }
         public byte Logo { get; set; }
-        public int? PlanID { get; set; }
+        public Guid? PlanID { get; set; }
         public bool IsApprove { get; set; }
         //nav prop
         public Plan Plan { get; set; }

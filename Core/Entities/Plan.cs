@@ -8,7 +8,7 @@ namespace Core.Entities
 {
     public class Plan
     {
-        public int PlanID { get; set; }
+        public Guid PlanID { get; set; }
         public string PlanName { get; set; }
         public double Price { get; set; }
         //nav prop

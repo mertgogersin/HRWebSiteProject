@@ -31,7 +31,11 @@ namespace DataAccess.Configuration
             builder.Property(x => x.Comment)
                 .HasMaxLength(1500);
 
-            builder.ToTable("Company");
+            builder.ToTable("Companies");
+
+            builder.HasOne(x => x.Plan)
+                .WithMany(x => x.Companies)
+                .HasForeignKey(x => x.PlanID);
 
         }
     }

@@ -10,11 +10,11 @@ namespace Core.Entities
 {
     public class Shift : WorkState
     {
-        public int ShiftID { get; set; }
+        public Guid ShiftID { get; set; }
         public string Description { get; set; }
         public bool IsActive { get; set; }
         public DateTime? BreakTime { get; set; }
         //nav prop
-        public ICollection<User> Users { get; set; }
+        public ICollection<UserShift> UserShifts { get; set; }
     }
 }

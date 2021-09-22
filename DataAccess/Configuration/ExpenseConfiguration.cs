@@ -21,7 +21,11 @@ namespace DataAccess.Configuration
             builder.Property(x => x.TotalPrice)
                 .IsRequired();
 
-            builder.ToTable("Expense");
+            builder.ToTable("Expenses");
+
+            builder.HasOne(x => x.User)
+                .WithMany(x => x.Expenses)
+                .HasForeignKey(x => x.UserID);
         }
     }
 }

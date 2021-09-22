@@ -19,7 +19,7 @@ namespace DataAccess.Configuration
                 .HasMaxLength(100)
                 .IsRequired();
 
-            builder.ToTable("FileType");
+            builder.ToTable("FileTypes");
         }
     }
 }
