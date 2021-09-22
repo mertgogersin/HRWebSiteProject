@@ -9,11 +9,11 @@ namespace Core.Entities
 {
     public class Comment
     {
-        [ForeignKey("Company")]
         public int CommentID { get; set; }
         public string CommentTitle { get; set; }
         public string CommentContent { get; set; }
         public int CompanyID { get; set; }
+        //nav prop
         public virtual Company Company { get; set; }
     }
 }

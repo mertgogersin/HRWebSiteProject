@@ -10,6 +10,7 @@ namespace Core.Entities
     {
         public int FileTypeID { get; set; }
         public string FileTypeName { get; set; }
+        //nav prop
         public ICollection<File> Files { get; set; }
     }
 }

@@ -14,6 +14,7 @@ namespace Core.Entities
         public string Description { get; set; }
         public bool IsApproved { get; set; }
         public string UserID { get; set; }
+        //nav prop
         public User User { get; set; }
     }
 }

@@ -15,6 +15,7 @@ namespace Core.Entities
         public DateTime? CreatedDate { get; set; }
         public DateTime? IsSeen { get; set; }
         public string UserID { get; set; }
+        //nav prop
         public User User { get; set; }
     }
 }

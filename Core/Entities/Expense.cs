@@ -14,6 +14,7 @@ namespace Core.Entities
         public double TotalPrice { get; set; }
         public bool IsApproved { get; set; }
         public string UserID { get; set; }
+        //nav prop
         public User User { get; set; }
     }
 }

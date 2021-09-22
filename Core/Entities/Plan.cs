@@ -11,6 +11,7 @@ namespace Core.Entities
         public int PlanID { get; set; }
         public string PlanName { get; set; }
         public double Price { get; set; }
+        //nav prop
         public ICollection<Company> Companies { get; set; }
     }
 }
