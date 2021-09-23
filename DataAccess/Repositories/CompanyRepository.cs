@@ -25,14 +25,14 @@ namespace DataAccess.Repositories
 
         public async Task<Company> GetCompanyByID(string companyID)
         {
-            return await context.Companies.FindAsync(Guid.Parse(companyID));
+            return await Context.Companies.FindAsync(Guid.Parse(companyID));
         }
 
-        public async Task<IEnumerable<User>> GetPersonnelList(int companyID, string roleID) //compid string olacak
+        public async Task<IEnumerable<User>> GetPersonnelList(int companyID, Guid roleID) //compid string olacak
         {
-            List<User> personnels =await (from user in context.Users
-                          join userRole in context.UserRoles on user.Id equals userRole.UserId
-                          join role in context.Roles on userRole.RoleId equals role.Id
+            List<User> personnels =await (from user in Context.Users
+                          join userRole in Context.UserRoles on user.Id equals userRole.UserId
+                          join role in Context.Roles on userRole.RoleId equals role.Id
                           where user.CompanyID == companyID && role.Id == roleID
                           select user).ToListAsync();
             return personnels;

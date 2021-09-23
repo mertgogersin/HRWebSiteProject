@@ -15,43 +15,20 @@ namespace DataAccess.Repositories
 {
     public class UserRepository : Repository<User>, IUserRepository
     {
-        private readonly Admin admin;
-        public UserRepository(HRContext context, Admin admin) : base(context)
+        
+        public UserRepository(HRContext context) : base(context)
         {
-            this.admin = admin;
         }
         private HRContext Context
         {
             get { return context; }
         }
 
-        public async Task<User> GetUserByEmail(string email)
+        public async Task<User> GetUserByPhoneNumber(string phone)
         {
-            return await context.Users.Where(m => m.Email == email).FirstOrDefaultAsync();
+            return await Context.Users.Where(m => m.PhoneNumber == phone).FirstOrDefaultAsync();
         }
 
-        public async Task<bool> Login(string email, string password, LoginType type)
-        {
-            bool check = false;
-            switch (type)
-            {
-                case LoginType.Admin:
-                    if (admin.Email == email && admin.Password == password)
-                    {
-                        check = true;
-                    }
-                    break;
-                case LoginType.User:
-                    foreach (User item in await GetAllAsync())
-                    {
-                        if (item.Email == email && item.PasswordHash == password)
-                        {
-                            check = true;
-                        }
-                    }
-                    break;
-            }
-            return await Task.FromResult(check);
-        }
+        
     }
 }

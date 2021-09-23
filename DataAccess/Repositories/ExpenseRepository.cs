@@ -22,9 +22,9 @@ namespace DataAccess.Repositories
             await context.Expenses.AddAsync(expense);          
         }
 
-        public Task<Expense> GetExpenseByID(Guid expenseID)
+        public async Task<Expense> GetExpenseByID(Guid expenseID)
         {
-            throw new NotImplementedException();
+            return await context.Expenses.Where(m => m.ExpenseID == expenseID).FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<Expense>> GetExpenses()

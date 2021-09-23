@@ -8,11 +8,10 @@ using System.Threading.Tasks;
 
 namespace Core.Repositories
 {
-    public interface IUserRepository:IRepository<User>
+    public interface IUserRepository : IRepository<User>
     {
-        Task<bool> Login(string email, string password,LoginType type);
         //Task ActivateUser(string userID);
-        Task<User> GetUserByEmail(string email);
+        Task<User> GetUserByPhoneNumber(string phone);
         //private void SetPassiveAllLinkedUsers(string companyID)
         //Task SetUserToPassive(string userID);
         //Task SendRegisterMailToUser(string userID, string link);//update user(isActive)
