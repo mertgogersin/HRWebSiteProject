@@ -24,7 +24,7 @@ namespace DataAccess.Repositories
         }
         public async Task<IEnumerable<File>> GetFilesByUserID(Guid userID)
         {
-            return await context.Files.Where(m => m.UserID == userID).ToListAsync();
+            return await Context.Files.Where(m => m.UserID == userID).ToListAsync();
         }
       
     }

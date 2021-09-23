@@ -10,7 +10,7 @@ namespace Core.Repositories
 {
     public interface ICompanyRepository : IRepository<Company>
     {       
-        Task<IEnumerable<User>> GetPersonnelList(int companyID,string roleID);
+        Task<IEnumerable<User>> GetPersonnelList(int companyID,Guid roleID);
       
         //Task SetSubscriptionPlanForCompany(string companyID, int planID);
         //Filter Company stats sonradan ekle, şimdilik gerek yok(dairesel grafik kısmını araştır

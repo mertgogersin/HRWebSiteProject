@@ -24,7 +24,7 @@ namespace DataAccess.Repositories
 
         public async Task<IEnumerable<Shift>> GetShiftsByUserID(Guid userID)
         {
-            return await context.Shifts.Where(m => m.UserID == userID).ToListAsync();
+            return await Context.Shifts.Where(m => m.UserID == userID).ToListAsync();
         }
     }
 }

@@ -24,7 +24,7 @@ namespace DataAccess.Repositories
 
         public async Task<IEnumerable<Bonus>> GetBonusesByUserID(Guid userID)
         {
-            return await context.Bonuses.Where(m => m.UserID == userID).ToListAsync();
+            return await Context.Bonuses.Where(m => m.UserID == userID).ToListAsync();
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Core.EmailSenderManager;
-using Core.Entities;
 using Core.Repositories;
 using Core.UnitOfWork;
 using DataAccess.Context;
@@ -13,7 +12,6 @@ namespace DataAccess.UnitOfWork
     {
         private readonly HRContext context;
         private readonly EmailSettings emailSettings;
-        private readonly Admin admin;
 
         private BonusRepository bonusRepository;
         private CommentRepository commentRepository;
@@ -27,13 +25,12 @@ namespace DataAccess.UnitOfWork
         private ShiftRepository shiftRepository;
         private UserRepository userRepository;
 
-        public UnitOfWork(HRContext context, IOptions<EmailSettings> emailSettings, IOptions<Admin> admin)
+        public UnitOfWork(HRContext context, IOptions<EmailSettings> emailSettings)
         {
             this.context = context;
             this.emailSettings = emailSettings.Value;
-            this.admin = admin.Value;
         }
-     
+
         public IBonusRepository Bonuses => bonusRepository = bonusRepository ?? new BonusRepository(context);
 
         public ICommentRepository Comments => commentRepository = commentRepository ?? new CommentRepository(context);
@@ -42,7 +39,7 @@ namespace DataAccess.UnitOfWork
 
         public IDebitRepository Debits => debitRepository = debitRepository ?? new DebitRepository(context);
 
-        public IEmailRepository Emails => emailRepository = emailRepository ?? new EmailRepository(context,emailSettings);
+        public IEmailRepository Emails => emailRepository = emailRepository ?? new EmailRepository(context, emailSettings);
 
         public IExpenseRepository Expenses => expenseRepository = expenseRepository ?? new ExpenseRepository(context);
 
@@ -54,7 +51,7 @@ namespace DataAccess.UnitOfWork
 
         public IShiftRepository Shifts => shiftRepository = shiftRepository ?? new ShiftRepository(context);
 
-        public IUserRepository Users => userRepository = userRepository ?? new UserRepository(context,admin);
+        public IUserRepository Users => userRepository = userRepository ?? new UserRepository(context);
 
         public async Task<int> CommitAsync()
         {

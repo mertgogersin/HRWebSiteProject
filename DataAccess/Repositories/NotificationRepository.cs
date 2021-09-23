@@ -23,7 +23,7 @@ namespace DataAccess.Repositories
 
         public async Task<IEnumerable<Notification>> GetNotificationsByUserID(Guid userID)
         {
-            return await context.Notifications.Where(m => m.UserID == userID).ToListAsync();
+            return await Context.Notifications.Where(m => m.UserID == userID).ToListAsync();
         }
     }
 }

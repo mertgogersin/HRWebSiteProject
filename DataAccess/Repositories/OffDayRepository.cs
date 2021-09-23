@@ -23,7 +23,7 @@ namespace DataAccess.Repositories
         }
         public async Task<IEnumerable<DayOff>> GetDayOffsByUserID(Guid userID)
         {
-            return await context.DayOffs.Where(m => m.UserID == userID).ToListAsync();
+            return await Context.DayOffs.Where(m => m.UserID == userID).ToListAsync();
         }
 
        
