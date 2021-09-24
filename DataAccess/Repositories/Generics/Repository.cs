@@ -25,7 +25,7 @@ namespace DataAccess.Repositories.Generics
 
         public void DeleteAsync(T entity) //isActive: false olacağı için update methodunu çağırdım.
         {
-            UpdateAsync(entity);
+            Update(entity);
         }
 
         public async Task<IEnumerable<T>> GetAllAsync()
@@ -38,7 +38,7 @@ namespace DataAccess.Repositories.Generics
             return await _object.FindAsync(id);
         }
 
-        public void UpdateAsync(T entity) //örneğin sadece şifre değiştirdin diyelim, bütün entity i service kısmında doldur ki diğer kolonları null getirmesin (service layerda id ile çekip passwordu update yap bu methoda yolla.
+        public void Update(T entity) //örneğin sadece şifre değiştirdin diyelim, bütün entity i service kısmında doldur ki diğer kolonları null getirmesin (service layerda id ile çekip passwordu update yap bu methoda yolla.
         {
             _object.Attach(entity);
             context.Entry(entity).State = EntityState.Modified;

@@ -10,7 +10,9 @@ namespace Core.Services
 {
    public interface IUserService
     {
-        Task<List<string>> RegisterEmployer(User user);
+        Task<List<string>> RegisterEmployer(User user,string password);
         Task<bool> LoginAsync(string email, string password, LoginType type);
+        Task ActivateUser(Guid userID);
+        Task SetUserToPassive(Guid userID);
     }
 }
