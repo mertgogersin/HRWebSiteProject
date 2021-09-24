@@ -9,5 +9,7 @@ namespace Core.Model.Authentication
 {
     public class Role : IdentityRole<Guid>
     {
+
+
     }
 }
