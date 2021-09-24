@@ -26,10 +26,7 @@ namespace DataAccess.Configuration
                 .HasMaxLength(200);
 
             builder.Property(x => x.Logo)
-                .HasColumnType("varbinary");
-
-            builder.Property(x => x.Comment)
-                .HasMaxLength(1500);
+                .HasColumnType("image");
 
             builder.ToTable("Companies");
 

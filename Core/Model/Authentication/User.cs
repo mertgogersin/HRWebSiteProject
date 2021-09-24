@@ -17,14 +17,12 @@ namespace Core.Model.Authentication
         public bool IsActive { get; set; }
         public DateTime? StartingDate { get; set; }
         public DateTime? BirthDate { get; set; }
-        public byte Photo { get; set; }
+        public byte[] Photo { get; set; }
         public double Salary { get; set; }
         public bool IsApprove { get; set; }
-        public int DayOffID { get; set; }
-        public int CompanyID { get; set; }
+        public Guid CompanyID { get; set; }
         
         //navigational properties
-        public DayOff DayOff { get; set; }
         public Company Company { get; set; }
         public ICollection<UserShift> UserShifts { get; set; }
         public ICollection<Expense> Expenses { get; set; }

@@ -15,6 +15,7 @@ namespace Core.Entities
         public bool IsApproved { get; set; }
         public string Title { get; set; }
         public bool IsActive { get; set; }
+
         //nav prop
         public DayOffType DayOffType { get; set; }
 

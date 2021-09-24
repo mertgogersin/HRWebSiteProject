@@ -14,7 +14,7 @@ namespace DataAccess.Configuration
         public void Configure(EntityTypeBuilder<UserShift> builder)
         {
 
-            builder.HasKey(x => new { x.Shift, x.User });
+            builder.HasKey(x => new { x.ShiftID, x.UserID });
 
             builder.ToTable("UserShifts");
         }

@@ -29,5 +29,6 @@ namespace DataAccess.Configuration
 
             builder.ToTable("Comments");
         }
+
     }
 }

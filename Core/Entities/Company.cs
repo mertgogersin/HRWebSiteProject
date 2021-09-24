@@ -14,12 +14,12 @@ namespace Core.Entities
         public string Description { get; set; }
         public string Address { get; set; }
         public bool IsActive { get; set; }
-        public byte Logo { get; set; }
+        public byte[] Logo { get; set; }
         public Guid? PlanID { get; set; }
         public bool IsApprove { get; set; }
         //nav prop
         public Plan Plan { get; set; }
-        public virtual Comment Comment { get; set; }
+        public Comment Comment { get; set; }
         public ICollection<User> Users { get; set; }
 
     }

@@ -14,6 +14,6 @@ namespace Core.Entities
         public string CommentContent { get; set; }
         public Guid CompanyID { get; set; }
         //nav prop
-        public virtual Company Company { get; set; }
+        public Company Company { get; set; }
     }
 }

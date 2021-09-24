@@ -28,7 +28,7 @@ namespace DataAccess.Repositories
             return await Context.Companies.FindAsync(Guid.Parse(companyID));
         }
 
-        public async Task<IEnumerable<User>> GetPersonnelList(int companyID, Guid roleID) //compid string olacak
+        public async Task<IEnumerable<User>> GetPersonnelList(Guid companyID, Guid roleID) //compid string olacak
         {
             List<User> personnels =await (from user in Context.Users
                           join userRole in Context.UserRoles on user.Id equals userRole.UserId

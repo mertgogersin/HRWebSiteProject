@@ -11,6 +11,7 @@ namespace Core.Entities
     {
         public Guid FileID { get; set; }
         public string FileName { get; set; }
+        public byte[] Files { get; set; }
         public Guid FileTypeID { get; set; }
         public Guid UserID { get; set; }
         //nav prop
