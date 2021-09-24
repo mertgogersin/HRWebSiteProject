@@ -2,6 +2,7 @@
 using Core.Repositories;
 using DataAccess.Context;
 using DataAccess.Repositories.Generics;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;

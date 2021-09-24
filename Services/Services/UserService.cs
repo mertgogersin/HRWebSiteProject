@@ -18,6 +18,7 @@ namespace Services.Services
         private readonly IUnitOfWork unitOfWork;
         private readonly Admin admin;
         UserManager<User> userManager;
+        
         public UserService(IUnitOfWork unitOfWork, IOptions<Admin> admin, UserManager<User> userManager)
         {
             this.unitOfWork = unitOfWork;
@@ -27,7 +28,7 @@ namespace Services.Services
 
         public async Task<bool> LoginAsync(string email, string password, LoginType type)
         {
-
+            
             bool check = false;
             switch (type)
             {
@@ -65,10 +66,30 @@ namespace Services.Services
             {
                 user.PasswordHash = userManager.PasswordHasher.HashPassword(user, password);
                 await unitOfWork.Users.AddAsync(user);
+                await unitOfWork.CommitAsync();
                 return null;
             }
             return errors;
 
+        }
+
+        public async Task ActivateUser(Guid userID)
+        {
+            User userToActivate = await unitOfWork.Users.GetByID(userID);
+            userToActivate.IsActive = true;
+            unitOfWork.Users.Update(userToActivate);
+            await unitOfWork.CommitAsync();
+        }
+        private  Task SetPassiveAllLinkedUsers(Guid companyID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task SetUserToPassive(Guid userID)
+        {
+            
+            User userToPassive = await unitOfWork.Users.GetByID(userID);
+            await userManager.GetRolesAsync(userToPassive);
         }
     }
 }
