@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Core.Entities.BaseEntities
 {
-    public class WorkState
+    public abstract class WorkState
     {
         public Guid UserID { get; set; }
         public DateTime BeginDate { get; set; }

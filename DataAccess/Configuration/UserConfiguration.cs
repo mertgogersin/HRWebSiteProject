@@ -18,6 +18,9 @@ namespace DataAccess.Configuration
             builder.HasIndex(x => x.Email)
                 .IsUnique();
 
+            builder.Property(x => x.Email)
+                .HasMaxLength(50);
+
             builder.HasIndex(x => x.PhoneNumber)
                 .IsUnique();
 
