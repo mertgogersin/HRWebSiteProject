@@ -14,7 +14,5 @@ namespace Core.Services
         Task<bool> LoginAsync(string email, string password, LoginType type);
         Task ActivateUserAsync(Guid userID);
         Task SetUserToPassiveAsync(Guid userID);
-        Task SendEmailToUserAsync(string email, EmailLinkType type, string content = null, string link = null);
-        Task<string> ChangePassword(Guid userID, string password);
     }
 }

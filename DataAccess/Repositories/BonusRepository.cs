@@ -22,7 +22,7 @@ namespace DataAccess.Repositories
             get { return context; }
         }
 
-        public async Task<IEnumerable<Bonus>> GetBonusesByUserID(Guid userID)
+        public async Task<IEnumerable<Bonus>> GetBonusesByUserIDAsync(Guid userID)
         {
             return await Context.Bonuses.Where(m => m.UserID == userID).ToListAsync();
         }

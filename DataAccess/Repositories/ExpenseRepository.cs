@@ -17,22 +17,22 @@ namespace DataAccess.Repositories
         {
             this.context = context;
         }
-        public async Task AddExpense(Expense expense)
+        public async Task AddExpenseAsync(Expense expense)
         {
             await context.Expenses.AddAsync(expense);          
         }
 
-        public async Task<Expense> GetExpenseByID(Guid expenseID)
+        public async Task<Expense> GetExpenseByIDAsync(Guid expenseID)
         {
             return await context.Expenses.Where(m => m.ExpenseID == expenseID).FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<Expense>> GetExpenses()
+        public async Task<IEnumerable<Expense>> GetExpensesAsync()
         {
             return await context.Expenses.ToListAsync();
         }
 
-        public async Task<IEnumerable<Expense>> GetExpensesByUserID(Guid userID)
+        public async Task<IEnumerable<Expense>> GetExpensesByUserIDAsync(Guid userID)
         {
             return await context.Expenses.Where(m => m.UserID == userID).ToListAsync();
         }

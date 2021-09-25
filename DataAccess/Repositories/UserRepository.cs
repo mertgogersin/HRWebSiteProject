@@ -24,7 +24,7 @@ namespace DataAccess.Repositories
             get { return context; }
         }
 
-        public async Task<User> GetUserByPhoneNumber(string phone)
+        public async Task<User> GetUserByPhoneNumberAsync(string phone)
         {
             return await Context.Users.Where(m => m.PhoneNumber == phone).FirstOrDefaultAsync();
         }

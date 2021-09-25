@@ -9,6 +9,6 @@ namespace Core.Repositories
 {
     public interface INotificationRepository : IRepository<Notification>
     {
-        Task<IEnumerable<Notification>> GetNotificationsByUserID(Guid userID);
+        Task<IEnumerable<Notification>> GetNotificationsByUserIDAsync(Guid userID);
     }
 }

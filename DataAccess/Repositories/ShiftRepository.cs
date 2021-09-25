@@ -22,7 +22,7 @@ namespace DataAccess.Repositories
             get { return context; }
         }
 
-        public async Task<IEnumerable<Shift>> GetShiftsByUserID(Guid userID)
+        public async Task<IEnumerable<Shift>> GetShiftsByUserIDAsync(Guid userID)
         {
             throw new NotImplementedException();
         }

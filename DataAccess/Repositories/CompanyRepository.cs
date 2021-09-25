@@ -23,12 +23,12 @@ namespace DataAccess.Repositories
             get { return context; }
         }
 
-        public async Task<Company> GetCompanyByID(string companyID)
+        public async Task<Company> GetCompanyByIDAsync(Guid companyID)
         {
-            return await Context.Companies.FindAsync(Guid.Parse(companyID));
+            return await Context.Companies.FindAsync(companyID);
         }
 
-        public async Task<IEnumerable<User>> GetPersonnelList(Guid companyID, Guid roleID) //compid string olacak
+        public async Task<IEnumerable<User>> GetPersonnelListAsync(Guid companyID, Guid roleID) //compid string olacak
         {
             List<User> personnels =await (from user in Context.Users
                           join userRole in Context.UserRoles on user.Id equals userRole.UserId

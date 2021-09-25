@@ -8,6 +8,6 @@ namespace Core.Repositories
 {
     public interface IDebitRepository : IRepository<Debit>
     {
-        Task<IEnumerable<Debit>> GetDebitsByUserID(Guid userID);
+        Task<IEnumerable<Debit>> GetDebitsByUserIDAsync(Guid userID);
     }
 }

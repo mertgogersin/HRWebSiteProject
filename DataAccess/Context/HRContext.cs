@@ -32,7 +32,7 @@ namespace DataAccess.Context
         protected override void OnModelCreating(ModelBuilder builder)
         {
 
-            SeedContext.Initialize()
+            //SeedContext.Initialize();
 
             builder.ApplyConfiguration(new BonusConfiguration());
             builder.ApplyConfiguration(new CommentConfiguration());

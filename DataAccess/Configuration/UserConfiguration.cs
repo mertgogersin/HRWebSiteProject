@@ -27,7 +27,7 @@ namespace DataAccess.Configuration
 
             builder.Property(x => x.LastName)
                 .HasMaxLength(50)
-                .IsRequired();
+                .IsRequired();    
 
             builder.Property(x => x.Address)
                 .HasMaxLength(200);

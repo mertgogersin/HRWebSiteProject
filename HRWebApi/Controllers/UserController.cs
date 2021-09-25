@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace HRWebApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class UserController : ControllerBase
     {

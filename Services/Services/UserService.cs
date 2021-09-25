@@ -62,7 +62,7 @@ namespace Services.Services
             User checkEmail = await userManager.FindByEmailAsync(user.Email);
             if (checkEmail != null && checkEmail.Email.EndsWith("@gmail.com")) { errors.Add("Please use another email."); }
 
-            User checkPhone = await unitOfWork.Users.GetUserByPhoneNumber(user.PhoneNumber);
+            User checkPhone = await unitOfWork.Users.GetUserByPhoneNumberAsync(user.PhoneNumber);
             if (checkPhone != null) { errors.Add("Please use another phone number."); }
 
             var result = await userManager.CreateAsync(user, password);
@@ -152,10 +152,6 @@ namespace Services.Services
 
         }
 
-        public async Task<string> ChangePassword(Guid userID, string password)
-        {
-            throw new NotImplementedException();
-
-        }
+       
     }
 }

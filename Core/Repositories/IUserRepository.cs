@@ -11,7 +11,7 @@ namespace Core.Repositories
     public interface IUserRepository : IRepository<User>
     {
         //Task ActivateUser(string userID);
-        Task<User> GetUserByPhoneNumber(string phone);
+        Task<User> GetUserByPhoneNumberAsync(string phone);
         //private void SetPassiveAllLinkedUsers(string companyID)
         //Task SetUserToPassive(string userID);
         //Task SendRegisterMailToUser(string userID, string link);//update user(isActive)
