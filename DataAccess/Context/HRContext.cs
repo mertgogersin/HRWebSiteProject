@@ -31,9 +31,9 @@ namespace DataAccess.Context
         public DbSet<UserShift> UserShifts { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
-
+            base.OnModelCreating(builder);
             //SeedContext.Initialize();
-
+        
             builder.ApplyConfiguration(new BonusConfiguration());
             builder.ApplyConfiguration(new CommentConfiguration());
             builder.ApplyConfiguration(new CompanyConfiguration());
@@ -49,7 +49,7 @@ namespace DataAccess.Context
             builder.ApplyConfiguration(new UserConfiguration());
             builder.ApplyConfiguration(new UserShiftConfiguration());
 
-            base.OnModelCreating(builder);
+            
         }
 
     }

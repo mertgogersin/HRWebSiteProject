@@ -25,7 +25,7 @@ namespace DataAccess.Configuration
 
             builder.HasOne(x => x.Company)
                 .WithOne(x => x.Comment)
-                .HasForeignKey<Company>(x => x.CompanyID);
+                .HasForeignKey<Comment>(x => x.CompanyID);
 
             builder.ToTable("Comments");
         }

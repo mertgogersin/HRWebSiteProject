@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.Entities;
 using Core.Model.Authentication;
 using Core.Services;
 using HRWebApi.DTO;
@@ -29,7 +30,14 @@ namespace HRWebApi.Controllers
         {
             //modelstate, jquery validation ile kontrol edilecek
             var user = mapper.Map<RegisterDTO, User>(registerDTO);
-            List<string> errors = await userService.RegisterEmployerAsync(user, registerDTO.Password);
+            Company company = new Company()
+            {
+                CompanyID = Guid.NewGuid(),
+                CompanyName = registerDTO.CompanyName,
+                IsActive = true
+            };
+            user.CompanyID = company.CompanyID;
+            List<string> errors = await userService.RegisterEmployerAsync(user, registerDTO.Password,company);
             if (errors != null)
             {
                 return BadRequest(errors); //ajax ın error function ına gider

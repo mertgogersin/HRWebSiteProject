@@ -61,10 +61,14 @@ namespace DataAccess.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<Guid>("CompanyID")
+                    b.Property<Guid?>("CompanyID")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("CommentID");
+
+                    b.HasIndex("CompanyID")
+                        .IsUnique()
+                        .HasFilter("[CompanyID] IS NOT NULL");
 
                     b.ToTable("Comments");
                 });
@@ -72,6 +76,7 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("Core.Entities.Company", b =>
                 {
                     b.Property<Guid>("CompanyID")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Address")
@@ -227,7 +232,7 @@ namespace DataAccess.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<byte[]>("Files")
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("image");
 
                     b.Property<Guid>("UserID")
                         .HasColumnType("uniqueidentifier");
@@ -384,9 +389,6 @@ namespace DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
                     b.Property<string>("Address")
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
@@ -424,12 +426,6 @@ namespace DataAccess.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -448,7 +444,7 @@ namespace DataAccess.Migrations
                         .HasColumnType("bit");
 
                     b.Property<byte[]>("Photo")
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("image");
 
                     b.Property<double>("Salary")
                         .HasColumnType("float");
@@ -458,13 +454,6 @@ namespace DataAccess.Migrations
 
                     b.Property<DateTime?>("StartingDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
 
@@ -486,7 +475,7 @@ namespace DataAccess.Migrations
                         .IsUnique()
                         .HasFilter("[PhoneNumber] IS NOT NULL");
 
-                    b.ToTable("AspNetUsers");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -601,19 +590,20 @@ namespace DataAccess.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Core.Entities.Comment", b =>
+                {
+                    b.HasOne("Core.Entities.Company", "Company")
+                        .WithOne("Comment")
+                        .HasForeignKey("Core.Entities.Comment", "CompanyID");
+
+                    b.Navigation("Company");
+                });
+
             modelBuilder.Entity("Core.Entities.Company", b =>
                 {
-                    b.HasOne("Core.Entities.Comment", "Comment")
-                        .WithOne("Company")
-                        .HasForeignKey("Core.Entities.Company", "CompanyID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Core.Entities.Plan", "Plan")
                         .WithMany("Companies")
                         .HasForeignKey("PlanID");
-
-                    b.Navigation("Comment");
 
                     b.Navigation("Plan");
                 });
@@ -770,13 +760,10 @@ namespace DataAccess.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Core.Entities.Comment", b =>
-                {
-                    b.Navigation("Company");
-                });
-
             modelBuilder.Entity("Core.Entities.Company", b =>
                 {
+                    b.Navigation("Comment");
+
                     b.Navigation("Users");
                 });
 

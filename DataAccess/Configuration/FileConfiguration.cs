@@ -28,6 +28,9 @@ namespace DataAccess.Configuration
                 .WithMany(x => x.Files)
                 .HasForeignKey(x => x.UserID);
 
+            builder.Property(x => x.Files)
+                .HasColumnType("image");
+
             builder.HasOne(x => x.FileType)
                 .WithMany(x => x.Files)
                 .HasForeignKey(x => x.FileTypeID);
