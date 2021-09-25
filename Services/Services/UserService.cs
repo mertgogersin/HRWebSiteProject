@@ -31,24 +31,18 @@ namespace Services.Services
 
         public async Task<bool> LoginAsync(string email, string password, LoginType type)
         {
-
+           
             bool check = false;
             switch (type)
             {
                 case LoginType.Admin:
-                    if (admin.Email == email && admin.Password == password)
-                    {
-                        check = true;
-                    }
+                    if (admin.Email == email && admin.Password == password) { check = true; }                  
                     break;
                 case LoginType.User:
                     User loggedInUser = await userManager.FindByEmailAsync(email);
                     if (loggedInUser != null)
                     {
-                        if (userManager.PasswordHasher.VerifyHashedPassword(loggedInUser, loggedInUser.PasswordHash, password) != PasswordVerificationResult.Failed)
-                        {
-                            check = true;
-                        }
+                        if (userManager.PasswordHasher.VerifyHashedPassword(loggedInUser, loggedInUser.PasswordHash, password) != PasswordVerificationResult.Failed) { check = true; }                      
                     }
                     break;
             }
@@ -57,30 +51,17 @@ namespace Services.Services
         public async Task<List<string>> RegisterEmployerAsync(User user, string password,Company company)
         {
           
-            IEnumerable<User> users = await unitOfWork.Users.GetAllAsync();
-            List<string> errors = new List<string>();
+            IEnumerable<User> users = await unitOfWork.Users.GetAllAsync();          
+            List<string> errors = new List<string>();      
             
-            User checkEmail = await userManager.FindByEmailAsync(user.Email);
-            if (checkEmail != null && checkEmail.Email.EndsWith("@gmail.com")) { errors.Add("Please use another email."); }
-
-            User checkPhone = await unitOfWork.Users.GetUserByPhoneNumberAsync(user.PhoneNumber);
-            if (checkPhone != null) { errors.Add("Please use another phone number."); }
-
             user.UserName = user.Email; //username hatası aldığım için çözüm olarak unique data girmek oldu.
-
-            await CreateCompany(company);
-            
+            await CreateCompany(company);           
             var result = await userManager.CreateAsync(user, password);
-            if (result.Succeeded && errors.Count == 0)
-            {             
-                return null; //hatasız
-            }
-            foreach (var error in result.Errors)
-            {
-                errors.Add(error.Description);
-            }
-            await unitOfWork.CommitAsync();
-               
+
+            if (result.Succeeded && errors.Count == 0) { return null; }//hatasız         
+            foreach (var error in result.Errors) {errors.Add(error.Description); }   
+            
+            await unitOfWork.CommitAsync();             
             return errors;
 
         }
@@ -101,10 +82,7 @@ namespace Services.Services
         private void SetPassiveAllLinkedUsers(Guid companyID)
         {
             List<User> users = (List<User>)unitOfWork.Users.ListAsync(m => m.CompanyID == companyID);
-            foreach (User item in users)
-            {
-                item.IsActive = false;
-            }
+            foreach (User item in users) { item.IsActive = false; }         
         }
 
         public async Task SetUserToPassiveAsync(Guid userID)
@@ -114,10 +92,7 @@ namespace Services.Services
             List<string> roles = (List<string>)await userManager.GetRolesAsync(userToPassive);
             foreach (string item in roles)
             {
-                if (item == "Employer")
-                {
-                    SetPassiveAllLinkedUsers(userToPassive.CompanyID);
-                }
+                if (item == "Employer") { SetPassiveAllLinkedUsers(userToPassive.CompanyID);}               
             }
             userToPassive.IsActive = false;
             await unitOfWork.CommitAsync();

@@ -4,6 +4,7 @@ using Core.Model.Authentication;
 using Core.Services;
 using Core.UnitOfWork;
 using DataAccess.Context;
+using DataAccess.CustomPolicies;
 using DataAccess.UnitOfWork;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -57,7 +58,8 @@ namespace HRWebApi
                 opts.Password.RequireLowercase = true;
                 opts.Password.RequireDigit = true;
             
-            }).AddEntityFrameworkStores<HRContext>();
+            }).AddEntityFrameworkStores<HRContext>()
+              .AddPasswordValidator<CustomEmailPhonePolicy>();
             services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
             services.Configure<Admin>(Configuration.GetSection("Admin"));
             services.AddAutoMapper(typeof(Startup));
