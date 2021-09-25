@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,7 +24,7 @@ namespace DataAccess.Repositories.Generics
             await _object.AddAsync(entity);
         }
 
-        public void DeleteAsync(T entity) //isActive: false olacağı için update methodunu çağırdım.
+        public void Delete(T entity) //isActive: false olacağı için update methodunu çağırdım.
         {
             Update(entity);
         }
@@ -33,9 +34,14 @@ namespace DataAccess.Repositories.Generics
             return await _object.ToListAsync();
         }
 
-        public async Task<T> GetByID(Guid id)
+        public async Task<T> GetByIDAsync(Guid id)
         {
             return await _object.FindAsync(id);
+        }
+
+        public IEnumerable<T> ListAsync(Expression<Func<T, bool>> predicate)
+        {
+            return _object.Where(predicate);
         }
 
         public void Update(T entity) //örneğin sadece şifre değiştirdin diyelim, bütün entity i service kısmında doldur ki diğer kolonları null getirmesin (service layerda id ile çekip passwordu update yap bu methoda yolla.

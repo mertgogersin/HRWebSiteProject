@@ -10,16 +10,16 @@ namespace Core.Model.Authentication
 {
     public class User : IdentityUser<Guid>
     {
-        //scalar property
+        //scalar properties
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Address { get; set; }
-        public bool IsActive { get; set; }
+        public bool IsActive { get; set; } = false;
         public DateTime? StartingDate { get; set; }
         public DateTime? BirthDate { get; set; }
         public byte[] Photo { get; set; }
         public double Salary { get; set; }
-        public bool IsApprove { get; set; }
+        public bool IsApprove { get; set; } = false;
         public Guid CompanyID { get; set; }
         
         //navigational properties

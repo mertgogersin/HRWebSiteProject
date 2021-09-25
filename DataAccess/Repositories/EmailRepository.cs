@@ -19,7 +19,7 @@ namespace DataAccess.Repositories
             this.emailSettings = emailSettings;
         }
 
-        public async Task SendMailToUser(EmailRequest emailRequest)
+        public async Task SendMailToUserAsync(EmailRequest emailRequest)
         {
             var email = new MimeMessage();
             email.Sender = MailboxAddress.Parse(emailSettings.Mail);
