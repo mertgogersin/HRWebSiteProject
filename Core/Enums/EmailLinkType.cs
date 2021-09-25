@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace Core.Enums
 {
-    public enum EmailType
+    public enum EmailLinkType
     {
         Register,
         PasswordRenewal,
         Debit,
-        OffDay,
-        Activation
-
+        OffDay 
     }
 }

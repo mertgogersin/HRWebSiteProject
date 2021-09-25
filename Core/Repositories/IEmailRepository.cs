@@ -10,6 +10,6 @@ namespace Core.Repositories
 {
     public interface IEmailRepository
     {
-        Task SendMailToUser(EmailRequest emailRequest);
+        Task SendMailToUserAsync(EmailRequest emailRequest);
     }
 }
