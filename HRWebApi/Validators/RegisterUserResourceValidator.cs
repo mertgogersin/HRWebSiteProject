@@ -21,6 +21,9 @@ namespace HRWebApi.Validators
                 .WithMessage("Last name can't longer than 50 chars.");
             RuleFor(m => m.LastName).NotEmpty().WithMessage("Last name can't be empty");
 
+            RuleFor(m => m.CompanyName)
+                .NotEmpty()
+                .WithMessage("Company Name can't be null.");
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Core.Entities
         public bool IsActive { get; set; }
         public byte[] Logo { get; set; }
         public Guid? PlanID { get; set; }
-        public bool IsApprove { get; set; }
+        public bool IsApprove { get; set; } = false;
         //nav prop
         public Plan Plan { get; set; }
         public Comment Comment { get; set; }

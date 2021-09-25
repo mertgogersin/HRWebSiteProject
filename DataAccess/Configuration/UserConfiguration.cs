@@ -25,9 +25,19 @@ namespace DataAccess.Configuration
                 .HasMaxLength(50)
                 .IsRequired();
 
+
+            builder.Ignore(x => x.UserName)
+                .Ignore(x=>x.AccessFailedCount)
+                .Ignore(x=>x.LockoutEnabled)
+                .Ignore(x=>x.LockoutEnd)
+                .Ignore(x=>x.TwoFactorEnabled);
+
             builder.Property(x => x.LastName)
                 .HasMaxLength(50)
-                .IsRequired();    
+                .IsRequired();
+
+            builder.Property(x => x.Photo)
+                .HasColumnType("image");
 
             builder.Property(x => x.Address)
                 .HasMaxLength(200);

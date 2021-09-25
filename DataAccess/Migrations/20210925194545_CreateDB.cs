@@ -22,20 +22,6 @@ namespace DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Comments",
-                columns: table => new
-                {
-                    CommentID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CommentTitle = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    CommentContent = table.Column<string>(type: "nvarchar(1500)", maxLength: 1500, nullable: false),
-                    CompanyID = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Comments", x => x.CommentID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "DayOffTypes",
                 columns: table => new
                 {
@@ -126,12 +112,6 @@ namespace DataAccess.Migrations
                 {
                     table.PrimaryKey("PK_Companies", x => x.CompanyID);
                     table.ForeignKey(
-                        name: "FK_Companies_Comments_CompanyID",
-                        column: x => x.CompanyID,
-                        principalTable: "Comments",
-                        principalColumn: "CommentID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_Companies_Plans_PlanID",
                         column: x => x.PlanID,
                         principalTable: "Plans",
@@ -140,7 +120,27 @@ namespace DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUsers",
+                name: "Comments",
+                columns: table => new
+                {
+                    CommentID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CommentTitle = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    CommentContent = table.Column<string>(type: "nvarchar(1500)", maxLength: 1500, nullable: false),
+                    CompanyID = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comments", x => x.CommentID);
+                    table.ForeignKey(
+                        name: "FK_Comments_Companies_CompanyID",
+                        column: x => x.CompanyID,
+                        principalTable: "Companies",
+                        principalColumn: "CompanyID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -150,11 +150,10 @@ namespace DataAccess.Migrations
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     StartingDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     BirthDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Photo = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    Photo = table.Column<byte[]>(type: "image", nullable: true),
                     Salary = table.Column<double>(type: "float", nullable: false),
                     IsApprove = table.Column<bool>(type: "bit", nullable: false),
                     CompanyID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -163,17 +162,13 @@ namespace DataAccess.Migrations
                     SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PhoneNumber = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
-                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
+                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                    table.PrimaryKey("PK_Users", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AspNetUsers_Companies_CompanyID",
+                        name: "FK_Users_Companies_CompanyID",
                         column: x => x.CompanyID,
                         principalTable: "Companies",
                         principalColumn: "CompanyID",
@@ -194,9 +189,9 @@ namespace DataAccess.Migrations
                 {
                     table.PrimaryKey("PK_AspNetUserClaims", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AspNetUserClaims_AspNetUsers_UserId",
+                        name: "FK_AspNetUserClaims_Users_UserId",
                         column: x => x.UserId,
-                        principalTable: "AspNetUsers",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -214,9 +209,9 @@ namespace DataAccess.Migrations
                 {
                     table.PrimaryKey("PK_AspNetUserLogins", x => new { x.LoginProvider, x.ProviderKey });
                     table.ForeignKey(
-                        name: "FK_AspNetUserLogins_AspNetUsers_UserId",
+                        name: "FK_AspNetUserLogins_Users_UserId",
                         column: x => x.UserId,
-                        principalTable: "AspNetUsers",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -238,9 +233,9 @@ namespace DataAccess.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_AspNetUserRoles_AspNetUsers_UserId",
+                        name: "FK_AspNetUserRoles_Users_UserId",
                         column: x => x.UserId,
-                        principalTable: "AspNetUsers",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -258,9 +253,9 @@ namespace DataAccess.Migrations
                 {
                     table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
                     table.ForeignKey(
-                        name: "FK_AspNetUserTokens_AspNetUsers_UserId",
+                        name: "FK_AspNetUserTokens_Users_UserId",
                         column: x => x.UserId,
-                        principalTable: "AspNetUsers",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -279,9 +274,9 @@ namespace DataAccess.Migrations
                 {
                     table.PrimaryKey("PK_Bonuses", x => x.BonusID);
                     table.ForeignKey(
-                        name: "FK_Bonuses_AspNetUsers_UserID",
+                        name: "FK_Bonuses_Users_UserID",
                         column: x => x.UserID,
-                        principalTable: "AspNetUsers",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -303,16 +298,16 @@ namespace DataAccess.Migrations
                 {
                     table.PrimaryKey("PK_DayOffs", x => x.DayOffID);
                     table.ForeignKey(
-                        name: "FK_DayOffs_AspNetUsers_UserID",
-                        column: x => x.UserID,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_DayOffs_DayOffTypes_DayOffTypeID",
                         column: x => x.DayOffTypeID,
                         principalTable: "DayOffTypes",
                         principalColumn: "DayOffTypeID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DayOffs_Users_UserID",
+                        column: x => x.UserID,
+                        principalTable: "Users",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -330,9 +325,9 @@ namespace DataAccess.Migrations
                 {
                     table.PrimaryKey("PK_Debits", x => x.DebitID);
                     table.ForeignKey(
-                        name: "FK_Debits_AspNetUsers_UserID",
+                        name: "FK_Debits_Users_UserID",
                         column: x => x.UserID,
-                        principalTable: "AspNetUsers",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -351,9 +346,9 @@ namespace DataAccess.Migrations
                 {
                     table.PrimaryKey("PK_Expenses", x => x.ExpenseID);
                     table.ForeignKey(
-                        name: "FK_Expenses_AspNetUsers_UserID",
+                        name: "FK_Expenses_Users_UserID",
                         column: x => x.UserID,
-                        principalTable: "AspNetUsers",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -364,7 +359,7 @@ namespace DataAccess.Migrations
                 {
                     FileID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FileName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Files = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    Files = table.Column<byte[]>(type: "image", nullable: true),
                     FileTypeID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserID = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
@@ -372,16 +367,16 @@ namespace DataAccess.Migrations
                 {
                     table.PrimaryKey("PK_Files", x => x.FileID);
                     table.ForeignKey(
-                        name: "FK_Files_AspNetUsers_UserID",
-                        column: x => x.UserID,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_Files_FileTypes_FileTypeID",
                         column: x => x.FileTypeID,
                         principalTable: "FileTypes",
                         principalColumn: "FileTypeID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Files_Users_UserID",
+                        column: x => x.UserID,
+                        principalTable: "Users",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -400,9 +395,9 @@ namespace DataAccess.Migrations
                 {
                     table.PrimaryKey("PK_Notifications", x => x.NotificationID);
                     table.ForeignKey(
-                        name: "FK_Notifications_AspNetUsers_UserID",
+                        name: "FK_Notifications_Users_UserID",
                         column: x => x.UserID,
-                        principalTable: "AspNetUsers",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -418,16 +413,16 @@ namespace DataAccess.Migrations
                 {
                     table.PrimaryKey("PK_UserShifts", x => new { x.ShiftID, x.UserID });
                     table.ForeignKey(
-                        name: "FK_UserShifts_AspNetUsers_UserID",
-                        column: x => x.UserID,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_UserShifts_Shifts_ShiftID",
                         column: x => x.ShiftID,
                         principalTable: "Shifts",
                         principalColumn: "ShiftID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserShifts_Users_UserID",
+                        column: x => x.UserID,
+                        principalTable: "Users",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -459,40 +454,16 @@ namespace DataAccess.Migrations
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
-                name: "EmailIndex",
-                table: "AspNetUsers",
-                column: "NormalizedEmail");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_CompanyID",
-                table: "AspNetUsers",
-                column: "CompanyID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_Email",
-                table: "AspNetUsers",
-                column: "Email",
-                unique: true,
-                filter: "[Email] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_PhoneNumber",
-                table: "AspNetUsers",
-                column: "PhoneNumber",
-                unique: true,
-                filter: "[PhoneNumber] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "UserNameIndex",
-                table: "AspNetUsers",
-                column: "NormalizedUserName",
-                unique: true,
-                filter: "[NormalizedUserName] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Bonuses_UserID",
                 table: "Bonuses",
                 column: "UserID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_CompanyID",
+                table: "Comments",
+                column: "CompanyID",
+                unique: true,
+                filter: "[CompanyID] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Companies_PlanID",
@@ -535,6 +506,37 @@ namespace DataAccess.Migrations
                 column: "UserID");
 
             migrationBuilder.CreateIndex(
+                name: "EmailIndex",
+                table: "Users",
+                column: "NormalizedEmail");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_CompanyID",
+                table: "Users",
+                column: "CompanyID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_Email",
+                table: "Users",
+                column: "Email",
+                unique: true,
+                filter: "[Email] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_PhoneNumber",
+                table: "Users",
+                column: "PhoneNumber",
+                unique: true,
+                filter: "[PhoneNumber] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "UserNameIndex",
+                table: "Users",
+                column: "NormalizedUserName",
+                unique: true,
+                filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserShifts_UserID",
                 table: "UserShifts",
                 column: "UserID");
@@ -559,6 +561,9 @@ namespace DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "Bonuses");
+
+            migrationBuilder.DropTable(
+                name: "Comments");
 
             migrationBuilder.DropTable(
                 name: "DayOffs");
@@ -588,16 +593,13 @@ namespace DataAccess.Migrations
                 name: "FileTypes");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
                 name: "Shifts");
 
             migrationBuilder.DropTable(
-                name: "Companies");
+                name: "Users");
 
             migrationBuilder.DropTable(
-                name: "Comments");
+                name: "Companies");
 
             migrationBuilder.DropTable(
                 name: "Plans");

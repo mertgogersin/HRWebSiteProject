@@ -34,6 +34,8 @@ namespace DataAccess.Configuration
                 .WithMany(x => x.Companies)
                 .HasForeignKey(x => x.PlanID);
 
+            
+
         }
     }
 }

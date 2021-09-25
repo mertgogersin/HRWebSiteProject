@@ -12,7 +12,7 @@ namespace Core.Entities
         public Guid CommentID { get; set; }
         public string CommentTitle { get; set; }
         public string CommentContent { get; set; }
-        public Guid CompanyID { get; set; }
+        public Guid? CompanyID { get; set; }
         //nav prop
         public Company Company { get; set; }
     }

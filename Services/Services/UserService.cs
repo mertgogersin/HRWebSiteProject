@@ -54,8 +54,9 @@ namespace Services.Services
             }
             return await Task.FromResult(check);
         }
-        public async Task<List<string>> RegisterEmployerAsync(User user, string password)
+        public async Task<List<string>> RegisterEmployerAsync(User user, string password,Company company)
         {
+          
             IEnumerable<User> users = await unitOfWork.Users.GetAllAsync();
             List<string> errors = new List<string>();
             
@@ -65,6 +66,10 @@ namespace Services.Services
             User checkPhone = await unitOfWork.Users.GetUserByPhoneNumberAsync(user.PhoneNumber);
             if (checkPhone != null) { errors.Add("Please use another phone number."); }
 
+            user.UserName = user.Email; //username hatası aldığım için çözüm olarak unique data girmek oldu.
+
+            await CreateCompany(company);
+            
             var result = await userManager.CreateAsync(user, password);
             if (result.Succeeded && errors.Count == 0)
             {             
@@ -78,6 +83,11 @@ namespace Services.Services
                
             return errors;
 
+        }
+
+        private async Task CreateCompany(Company company)
+        {
+            await unitOfWork.Companies.AddAsync(company);
         }
 
         public async Task ActivateUserAsync(Guid userID)
