@@ -27,19 +27,27 @@ namespace HRWebApi.Controllers
             this.mapper = _mapper;
         }
         [HttpPut("{id}")]
-        public async Task<ActionResult<CompanyDTO>> SetEmployerStatus(Guid id, bool status)
+        public async Task<ActionResult<UserDTO>> SetEmployerStatus(Guid id, bool status)
         {
             await userService.SetUserStatus(id, status);
 
-            var updatedActive = await companyService.GetCompanyByIDAsync(id);
+            var updatedActive = await userService.GetUseryByIDAsync(id);
 
-            var updateCompanyActivated = mapper.Map<Company, CompanyDTO>(updatedActive);
+            var updateCompanyActivated = mapper.Map<User, UserDTO>(updatedActive);
 
             return Ok(updateCompanyActivated);
         }
+        [HttpPut("{id}")]
+        public async Task<ActionResult<CompanyDTO>> SetCompanyApproveStatus(Guid id, bool status)
+        {
+            await companyService.SetCompanyApprove(id, status);
 
-        
+            var updateApprove = await companyService.GetCompanyByIDAsync(id);
 
+            var updateCompanyApproved = mapper.Map<Company, CompanyDTO>(updateApprove);
+
+            return Ok(updateCompanyApproved);
+        }
 
     }
 }

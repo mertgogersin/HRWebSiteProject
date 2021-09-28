@@ -8,6 +8,6 @@ namespace HRWebApi.DTO
     public class CompanyDTO
     {
         public string CompanyName { get; set; }
-        public bool IsActive { get; set; }
+        public bool IsApprove { get; set; }
     }
 }

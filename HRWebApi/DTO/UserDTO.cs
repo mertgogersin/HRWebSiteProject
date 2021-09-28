@@ -12,6 +12,6 @@ namespace HRWebApi.DTO
         public string Email { get; set; }
         public string LastName { get; set; }
         public Guid CompanyID { get; set; }
-
+        public bool IsActive { get; set; }
     }
 }

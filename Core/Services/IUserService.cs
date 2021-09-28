@@ -22,5 +22,7 @@ namespace Core.Services
         Task SendEmailToUserAsync(string email, EmailType type, string content = "", string link = "");
         Task<List<string>> UpdateUserInfoAsync(User user);
         Task SetUserStatus(Guid userID, bool status);
+        Task<User> GetUseryByIDAsync(Guid userID);
+
     }
 }
