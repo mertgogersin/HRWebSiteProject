@@ -24,5 +24,8 @@ namespace Core.Repositories
 
         //Role: Emploee
         //Task SetUserDebitStatus(int debitID, bool status);
+
+        //get company
+        Task<IEnumerable<User>> GetAllWithCompanyByCompanyID(Guid companyId);
     }
 }

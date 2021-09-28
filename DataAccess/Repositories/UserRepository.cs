@@ -24,6 +24,13 @@ namespace DataAccess.Repositories
             get { return context; }
         }
 
+        public async Task<IEnumerable<User>> GetAllWithCompanyByCompanyID(Guid companyId)
+        {
+            return await Context.Users
+                .Include(x => x.Company)
+                .Where(x => x.CompanyID == companyId).ToListAsync();
+        }
+
         public async Task<User> GetUserByPhoneNumberAsync(string phone)
         {
             return await Context.Users.Where(m => m.PhoneNumber == phone).FirstOrDefaultAsync();

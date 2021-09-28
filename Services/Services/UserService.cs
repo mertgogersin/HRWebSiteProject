@@ -97,8 +97,7 @@ namespace Services.Services
             userToPassive.IsActive = false;
             await unitOfWork.CommitAsync();
         }
-
-        public async Task SendEmailToUserAsync(string email, EmailLinkType type, string content = "", string link = "")
+        public async Task SendEmailToUserAsync(string email, EmailType type, string content = "", string link = "")
         {
             User user = await userManager.FindByEmailAsync(email);
             if (user != null)
@@ -109,19 +108,22 @@ namespace Services.Services
                 emailRequest.Subject = "Notification Mail";
                 switch (type)
                 {
-                    case EmailLinkType.Register:
+                    case EmailType.Register:
                         emailContent = "Account Activation Link: ";
                         emailRequest.Subject = "Activation Link";
                         break;
-                    case EmailLinkType.PasswordRenewal:
+                    case EmailType.PasswordRenewal:
                         emailContent = "Password Renewal Link: ";
                         emailRequest.Subject = "Password Renewal";
                         break;
-                    case EmailLinkType.Debit:
+                    case EmailType.Debit:
                         emailContent = content;
                         break;
-                    case EmailLinkType.OffDay:
+                    case EmailType.OffDay:
                         emailContent = content;
+                        break;
+                    case EmailType.Activated:
+
                         break;
                 }
 

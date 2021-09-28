@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.Entities;
 using Core.Model.Authentication;
 using HRWebApi.DTO;
 using System;
@@ -13,6 +14,8 @@ namespace HRWebApi.Mapping
         public MappingProfile()
         {
             CreateMap<RegisterDTO, User>();
+
+            CreateMap<User, UserDTO>();
         }
     }
 }

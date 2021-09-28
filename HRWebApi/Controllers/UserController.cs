@@ -48,5 +48,15 @@ namespace HRWebApi.Controllers
             }
 
         }
+
+        //[HttpGet]
+        //public async Task<ActionResult<IEnumerable<UserDTO>>> GetAllUsers()
+        //{
+        //    var users = await adminService.GetAllUser();
+
+        //    var adminDTO = mapper.Map<IEnumerable<User>, IEnumerable<UserDTO>>(users);
+
+        //    return Ok(adminDTO);
+        //}
     }
 }

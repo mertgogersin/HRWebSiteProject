@@ -45,21 +45,22 @@ namespace HRWebApi
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IUserService,UserService>();
+            services.AddScoped<IAdminService, AdminService>();
 
             services.AddDbContext<HRContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("SqlConnectionString")));
 
             services.AddIdentity<User, Role>(opts => {
-            
+
                 opts.User.RequireUniqueEmail = true;
                 opts.Password.RequiredLength = 8;
                 opts.Password.RequireNonAlphanumeric = true;
                 opts.Password.RequireUppercase = true;
                 opts.Password.RequireLowercase = true;
                 opts.Password.RequireDigit = true;
-            
-            }).AddEntityFrameworkStores<HRContext>()
-              .AddPasswordValidator<CustomEmailPhonePolicy>();
+
+            }).AddEntityFrameworkStores<HRContext>();
+              //.AddPasswordValidator<CustomEmailPhonePolicy>();
             services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
             services.Configure<Admin>(Configuration.GetSection("Admin"));
             services.AddAutoMapper(typeof(Startup));
