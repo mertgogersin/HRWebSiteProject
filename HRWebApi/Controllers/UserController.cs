@@ -70,7 +70,28 @@ namespace HRWebApi.Controllers
             }
             return BadRequest(ModelState.Values.SelectMany(x => x.Errors).ToList());
         }
+         [HttpGet]
+        public async Task<IActionResult> GetAllUsers()
+        {
+            IEnumerable<User> users = await userService.GetUsersAsync();
 
+            IEnumerable<UserDTO> userDTOs = mapper.Map<IEnumerable<User>, IEnumerable<UserDTO>>(users);
+
+            return Ok(userDTOs);
+        }
+        [HttpPut]
+        public async Task<IActionResult> UpdateUserInfo(UserDTO userDTO) //userdto propertyleri değişebilir
+        {
+            if (ModelState.IsValid)
+            {
+                User userToBeUpdated = userService.GetUserByID(userDTO.UserID);
+                User user = mapper.Map(userDTO,userToBeUpdated);
+                List<string> errors = await userService.UpdateUserInfoAsync(user);
+                if (errors != null) { return BadRequest(errors); }
+                return Ok("User is successfully updated!");
+            }
+            return BadRequest(ModelState.Values.SelectMany(x => x.Errors).ToList());
+        }
 
     }
 }
