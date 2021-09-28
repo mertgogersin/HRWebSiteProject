@@ -22,9 +22,6 @@ namespace DataAccess.Repositories
             get { return context; }
         }
 
-        public async Task<IEnumerable<Notification>> GetNotificationsByUserIDAsync(Guid userID)
-        {
-            return await Context.Notifications.Where(m => m.UserID == userID).ToListAsync();
-        }
+        
     }
 }

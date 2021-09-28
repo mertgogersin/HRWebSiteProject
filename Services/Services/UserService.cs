@@ -168,5 +168,15 @@ namespace Services.Services
         {
             return await userManager.GenerateEmailConfirmationTokenAsync(user);
         }
+
+        public async Task SetUserStatus(Guid userID, bool status)
+        {
+            User user = (User)unitOfWork.Users.List(x => x.Id == userID);
+
+            if (!status) { user.IsActive = false; }
+            else { user.IsActive = true; }
+
+            await unitOfWork.CommitAsync();
+        }
     }
 }
