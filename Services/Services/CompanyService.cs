@@ -21,7 +21,7 @@ namespace Services.Services
         public Task<bool> CheckCompanyPlanStatus(Guid companyID)
         {
             Company company = (Company)unitOfWork.Companies.List(m => m.CompanyID == companyID);
-            if(company.PlanID != null) { return Task.FromResult(true); }
+            if (company.PlanID != null) { return Task.FromResult(true); }
             return Task.FromResult(false);
         }
 
@@ -39,7 +39,7 @@ namespace Services.Services
 
         public Company GetCompanyByID(Guid companyID)
         {
-            return  (Company)unitOfWork.Companies.List(m => m.CompanyID == companyID);
+            return (Company)unitOfWork.Companies.List(m => m.CompanyID == companyID);
         }
 
         public async Task<IEnumerable<User>> GetEmployeesWithUpcomingBirthdaysAsync(Guid companyId)
@@ -55,5 +55,6 @@ namespace Services.Services
             }
             return employees;
         }
+        
     }
 }
