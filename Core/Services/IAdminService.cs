@@ -10,7 +10,7 @@ namespace Core.Services
 {
     public interface IAdminService
     {
-        Task SetUserStatus(Guid userID);
+        Task<bool> SetUserStatus(Guid userID);
 
     }
 }

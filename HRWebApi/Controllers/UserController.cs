@@ -51,7 +51,7 @@ namespace HRWebApi.Controllers
                     var confirmationLink = "<a href='"
                         + Url.Action("ActivateUser", "Register", new { token = token }, Request.Scheme) //mvc deki action controller a linkleriz.(ActivateUser: Action, Register: Controller)
                         + "'>Click here</a>";
-                    await userService.SendEmailToUserAsync(user.Email, EmailLinkType.Register, confirmationLink);
+                    await userService.SendEmailToUserAsync(user.Email, EmailType.Register, confirmationLink);
                     return Ok("Email has been sent, please check your inbox."); // ajax ın success function ına gider. mvc kısmında token validate edilecek
                 }
             }

@@ -23,9 +23,16 @@ namespace Services.Services
             this.userManager = _userManager;
         }
 
-        public Task SetUserStatus(Guid userID)
+        public Task<bool> SetUserStatus(Guid userID)
         {
-            throw new NotImplementedException();
+            User user = (User)unitOfWork.Users.List(x => x.Id == userID);
+            if (!user.IsActive)
+            {
+                return Task.FromResult(true);
+            }
+
+            return Task.FromResult(false);
         }
+
     }
 }

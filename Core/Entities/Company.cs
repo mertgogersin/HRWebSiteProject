@@ -13,7 +13,7 @@ namespace Core.Entities
         public string CompanyName { get; set; }
         public string Description { get; set; }
         public string Address { get; set; }
-        public bool IsActive { get; set; }
+        public bool IsActive { get; set; } = false;
         public byte[] Logo { get; set; }
         public Guid? PlanID { get; set; }
         public bool IsApprove { get; set; } = false;

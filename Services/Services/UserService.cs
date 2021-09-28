@@ -120,7 +120,7 @@ namespace Services.Services
             await unitOfWork.CommitAsync();
         }
 
-        public async Task SendEmailToUserAsync(string email, EmailLinkType type, string content = "", string link = "")
+        public async Task SendEmailToUserAsync(string email, EmailType type, string content = "", string link = "")
         {
             User user = await userManager.FindByEmailAsync(email);
             if (user != null)
@@ -162,6 +162,9 @@ namespace Services.Services
 
         }
 
-       
+        public Task<string> GenerateEmailConfirmationTokenAsync(User user)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
