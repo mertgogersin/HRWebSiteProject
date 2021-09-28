@@ -5,6 +5,7 @@ using Core.Model.Authentication;
 using Core.Services;
 using Core.UnitOfWork;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
@@ -31,13 +32,16 @@ namespace Services.Services
 
         public User GetUserByID(Guid userID)
         {
-            return (User) unitOfWork.Users.List(m => m.Id == userID);
+            return unitOfWork.Users.List(m => m.Id == userID).FirstOrDefault();
         }
         public async Task<User> GetUserByEmailAsync(string email)
         {
             return await userManager.FindByEmailAsync(email);
         }
-       
+        public async Task<IEnumerable<User>> GetUsersAsync()
+        {
+            return await userManager.Users.ToListAsync();
+        }
         public async Task<List<string>> UpdateUserInfoAsync(User user) //custom policy hazırlanacak
         {
             List<string> errors = new List<string>();
@@ -71,9 +75,7 @@ namespace Services.Services
             return await Task.FromResult(check);
         }
         public async Task<List<string>> RegisterEmployerAsync(User user, string password,Company company)
-        {
-          
-            IEnumerable<User> users = await unitOfWork.Users.GetAllAsync();          
+        {      
             List<string> errors = new List<string>();      
             
             user.UserName = user.Email; //username hatası aldığım için çözüm olarak unique data girmek oldu.
@@ -95,7 +97,7 @@ namespace Services.Services
 
         public async Task ActivateUserAsync(Guid userID)
         {
-            User userToActivate = (User) unitOfWork.Users.List(m => m.Id == userID);
+            User userToActivate = unitOfWork.Users.List(m => m.Id == userID).FirstOrDefault();
             userToActivate.IsActive = true;
             await userManager.AddToRoleAsync(userToActivate, "Employer");
             unitOfWork.Users.Update(userToActivate);
@@ -103,14 +105,14 @@ namespace Services.Services
         }
         private void SetPassiveAllLinkedUsers(Guid companyID)
         {
-            List<User> users = (List<User>) unitOfWork.Users.List(m => m.CompanyID == companyID);
+            List<User> users = unitOfWork.Users.List(m => m.CompanyID == companyID).ToList();
             foreach (User item in users) { item.IsActive = false; }         
         }
 
         public async Task SetUserToPassiveAsync(Guid userID)
         {
 
-            User userToPassive = (User) unitOfWork.Users.List(m => m.Id == userID);
+            User userToPassive = unitOfWork.Users.List(m => m.Id == userID).FirstOrDefault();
             List<string> roles = (List<string>)await userManager.GetRolesAsync(userToPassive);
             foreach (string item in roles)
             {
@@ -162,9 +164,9 @@ namespace Services.Services
 
         }
 
-        public Task<string> GenerateEmailConfirmationTokenAsync(User user)
+        public async Task<string> GenerateEmailConfirmationTokenAsync(User user)
         {
-            throw new NotImplementedException();
+            return await userManager.GenerateEmailConfirmationTokenAsync(user);
         }
     }
 }

@@ -45,15 +45,12 @@ namespace HRWebApi.Controllers
                 {
                     return BadRequest(errors); //ajax ın error function ına gider
                 }
-                else
-                {
-                    string token = await userService.GenerateEmailConfirmationTokenAsync(user);
-                    var confirmationLink = "<a href='"
-                        + Url.Action("ActivateUser", "Register", new { token = token }, Request.Scheme) //mvc deki action controller a linkleriz.(ActivateUser: Action, Register: Controller)
-                        + "'>Click here</a>";
-                    await userService.SendEmailToUserAsync(user.Email, EmailType.Register, confirmationLink);
-                    return Ok("Email has been sent, please check your inbox."); // ajax ın success function ına gider. mvc kısmında token validate edilecek
-                }
+                string token = await userService.GenerateEmailConfirmationTokenAsync(user);
+                var confirmationLink = "<a href='"
+                    + Url.Action("ActivateUser", "Register", new { token = token }, Request.Scheme) //mvc deki action controller a linkleriz.(ActivateUser: Action, Register: Controller)
+                    + "'>Click here</a>";
+                await userService.SendEmailToUserAsync(user.Email, EmailType.Register, confirmationLink);
+                return Ok("Email has been sent, please check your inbox."); // ajax ın success function ına gider. mvc kısmında token validate edilecek              
             }
             return BadRequest(ModelState.Values.SelectMany(x => x.Errors).ToList());
 
@@ -73,14 +70,27 @@ namespace HRWebApi.Controllers
             return BadRequest(ModelState.Values.SelectMany(x => x.Errors).ToList());
         }
 
-        //[HttpGet]
-        //public async Task<ActionResult<IEnumerable<UserDTO>>> GetAllUsers()
-        //{
-        //    var users = await adminService.GetAllUser();
+        [HttpGet]
+        public async Task<IActionResult> GetAllUsers()
+        {
+            IEnumerable<User> users = await userService.GetUsersAsync();
 
-        //    var adminDTO = mapper.Map<IEnumerable<User>, IEnumerable<UserDTO>>(users);
+            IEnumerable<UserDTO> userDTOs = mapper.Map<IEnumerable<User>, IEnumerable<UserDTO>>(users);
 
-        //    return Ok(adminDTO);
-        //}
+            return Ok(userDTOs);
+        }
+        [HttpPut]
+        public async Task<IActionResult> UpdateUserInfo(UserDTO userDTO) //userdto propertyleri değişebilir
+        {
+            if (ModelState.IsValid)
+            {
+                User userToBeUpdated = userService.GetUserByID(userDTO.UserID);
+                User user = mapper.Map(userDTO,userToBeUpdated);
+                List<string> errors = await userService.UpdateUserInfoAsync(user);
+                if (errors != null) { return BadRequest(errors); }
+                return Ok("User is successfully updated!");
+            }
+            return BadRequest(ModelState.Values.SelectMany(x => x.Errors).ToList());
+        }
     }
 }
