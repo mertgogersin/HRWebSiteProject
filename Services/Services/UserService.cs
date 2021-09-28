@@ -176,5 +176,10 @@ namespace Services.Services
 
             await unitOfWork.CommitAsync();
         }
+
+        public async Task<User> GetUseryByIDAsync(Guid userID)
+        {
+            return await unitOfWork.Users.GetByIdAsync(userID);
+        }
     }
 }

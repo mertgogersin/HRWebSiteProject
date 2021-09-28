@@ -16,6 +16,7 @@ namespace Core.Services
         Task<bool> CheckCompanyPlanStatus(Guid companyID);
         Task<Company> GetCompanyByIDAsync(Guid companyID);
         Task UpdateCompany(Company companyToUpdate, Company company);
+        Task SetCompanyApprove(Guid companyID, bool status);
 
     }
 }

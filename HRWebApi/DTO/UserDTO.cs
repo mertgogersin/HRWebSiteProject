@@ -10,6 +10,6 @@ namespace HRWebApi.DTO
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public Guid CompanyID { get; set; }
-
+        public bool IsActive { get; set; }
     }
 }

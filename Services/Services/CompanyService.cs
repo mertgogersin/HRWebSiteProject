@@ -66,6 +66,17 @@ namespace Services.Services
 
             await unitOfWork.CommitAsync();
         }
+        public async Task SetCompanyApprove(Guid companyID, bool status)
+        {
+            Company company = (Company)unitOfWork.Companies.List(x => x.CompanyID == companyID);
+
+            if (!status)
+                company.IsApprove = false;
+            else
+                company.IsApprove = true;
+
+            await unitOfWork.CommitAsync();
+        }
 
        
     }
