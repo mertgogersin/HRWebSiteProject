@@ -46,15 +46,12 @@ namespace HRWebApi.Controllers
                 {
                     return BadRequest(errors); //ajax ın error function ına gider
                 }
-                else
-                {
-                    string token = await userService.GenerateEmailConfirmationTokenAsync(user);
-                    var confirmationLink = "<a href='"
-                        + Url.Action("ActivateUser", "Register", new { token = token }, Request.Scheme) //mvc deki action controller a linkleriz.(ActivateUser: Action, Register: Controller)
-                        + "'>Click here</a>";
-                    await userService.SendEmailToUserAsync(user.Email, EmailType.Register, confirmationLink);
-                    return Ok("Email has been sent, please check your inbox."); // ajax ın success function ına gider. mvc kısmında token validate edilecek
-                }
+                string token = await userService.GenerateEmailConfirmationTokenAsync(user);
+                var confirmationLink = "<a href='"
+                    + Url.Action("ActivateUser", "Register", new { token = token }, Request.Scheme) //mvc deki action controller a linkleriz.(ActivateUser: Action, Register: Controller)
+                    + "'>Click here</a>";
+                await userService.SendEmailToUserAsync(user.Email, EmailType.Register, confirmationLink);
+                return Ok("Email has been sent, please check your inbox."); // ajax ın success function ına gider. mvc kısmında token validate edilecek              
             }
             return BadRequest(ModelState.Values.SelectMany(x => x.Errors).ToList());
 
@@ -73,6 +70,7 @@ namespace HRWebApi.Controllers
             }
             return BadRequest(ModelState.Values.SelectMany(x => x.Errors).ToList());
         }
+
 
     }
 }

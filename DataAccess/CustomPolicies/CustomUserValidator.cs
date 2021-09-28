@@ -8,13 +8,11 @@ using System.Threading.Tasks;
 
 namespace DataAccess.CustomPolicies
 {
-
-    public class CustomEmailPhonePolicy : UserValidator<User>
+    public class CustomUserValidator<T> :IUserValidator<T> where T : User
     {
-        public async override Task<IdentityResult> ValidateAsync(UserManager<User> manager, User user)
+        public async Task<IdentityResult> ValidateAsync(UserManager<T> manager, T user)
         {
-            IdentityResult result = await base.ValidateAsync(manager, user);
-            List<IdentityError> errors = result.Succeeded ? new List<IdentityError>() : result.Errors.ToList();
+            List<IdentityError> errors = new List<IdentityError>();
 
             if (!user.Email.ToLower().EndsWith("@gmail.com"))
             {
@@ -39,12 +37,22 @@ namespace DataAccess.CustomPolicies
                 IdentityError error = new()
                 {
                     Code = "PhoneNumberValidation",
-                    Description = "Please use another phone number" //mesajı sonra düzeltiriz
+                    Description = "Please use another phone number"
                 };
                 errors.Add(error);
             }
-            return errors.Count == 0 ? IdentityResult.Success : IdentityResult.Failed(errors.ToArray());
+            string phoneNumber = null;
+            phoneNumber = await manager.GetPhoneNumberAsync(user);
+            if (phoneNumber != null)
+            {
+                IdentityError error = new()
+                {
+                    Code = "UniquePhoneNumberValidation",
+                    Description = "This phone number already in use, please try another phone number"
+                };
+                errors.Add(error);
+            }
+            return await Task.FromResult(errors.Count == 0 ? IdentityResult.Success : IdentityResult.Failed(errors.ToArray()));
         }
     }
-
 }

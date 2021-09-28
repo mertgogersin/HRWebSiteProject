@@ -8,6 +8,7 @@ using DataAccess.CustomPolicies;
 using DataAccess.UnitOfWork;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -35,14 +36,16 @@ namespace HRWebApi
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HRWebApi", Version = "v1" });
             });
 
+
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<IUserService,UserService>();
+            services.AddScoped<IUserService, UserService>();
 
             services.AddDbContext<HRContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("SqlConnectionString")));
 
-            services.AddIdentity<User, Role>(opts => {
-            
+            services.AddIdentity<User, Role>(opts =>
+            {
+
                 opts.User.RequireUniqueEmail = true;
                 opts.Password.RequiredLength = 8;
                 opts.Password.RequireNonAlphanumeric = true;
@@ -50,8 +53,10 @@ namespace HRWebApi
                 opts.Password.RequireLowercase = true;
                 opts.Password.RequireDigit = true;
 
-            }).AddEntityFrameworkStores<HRContext>();
-              //.AddPasswordValidator<CustomEmailPhonePolicy>();
+            }).AddEntityFrameworkStores<HRContext>()
+            .AddDefaultTokenProviders()
+            .AddUserValidator<CustomUserValidator<User>>();
+
             services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
             services.Configure<Admin>(Configuration.GetSection("Admin"));
             services.AddAutoMapper(typeof(Startup));

@@ -16,6 +16,7 @@ namespace HRWebApi.Mapping
             CreateMap<RegisterDTO, User>();
 
             CreateMap<User, UserDTO>();
+            CreateMap<UserDTO, User>();
 
             CreateMap<CompanySaveDTO, Company>();
         }

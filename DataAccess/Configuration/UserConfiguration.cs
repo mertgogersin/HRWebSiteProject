@@ -18,20 +18,22 @@ namespace DataAccess.Configuration
             builder.HasIndex(x => x.Email)
                 .IsUnique();
 
+            builder.HasIndex(x => x.PhoneNumber)
+                .IsUnique();
             builder.Property(x => x.Email)
                 .HasMaxLength(50);
 
-            
+
             builder.Property(x => x.FirstName)
                 .HasMaxLength(50)
                 .IsRequired();
 
 
             builder.Ignore(x => x.UserName)
-                .Ignore(x=>x.AccessFailedCount)
-                .Ignore(x=>x.LockoutEnabled)
-                .Ignore(x=>x.LockoutEnd)
-                .Ignore(x=>x.TwoFactorEnabled);
+                .Ignore(x => x.AccessFailedCount)
+                .Ignore(x => x.LockoutEnabled)
+                .Ignore(x => x.LockoutEnd)
+                .Ignore(x => x.TwoFactorEnabled);
 
             builder.Property(x => x.LastName)
                 .HasMaxLength(50)
