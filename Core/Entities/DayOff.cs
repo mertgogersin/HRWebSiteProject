@@ -12,7 +12,7 @@ namespace Core.Entities
     {
         public Guid DayOffID { get; set; }
         public Guid DayOffTypeID { get; set; }
-        public bool IsApproved { get; set; }
+        public bool? IsApproved { get; set; }
         public string Title { get; set; }
         public bool IsActive { get; set; }
 

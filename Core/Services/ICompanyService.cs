@@ -15,6 +15,5 @@ namespace Core.Services
         Task DeactivateCompanyAsync(Company company);
         Task<bool> CheckCompanyPlanStatus(Guid companyID);
         Company GetCompanyByID(Guid companyID);
-       
     }
 }
