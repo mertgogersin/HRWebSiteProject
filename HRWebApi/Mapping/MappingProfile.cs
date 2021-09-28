@@ -13,6 +13,7 @@ namespace HRWebApi.Mapping
         public MappingProfile()
         {
             CreateMap<RegisterDTO, User>();
+            CreateMap<LoginDTO, User>();
         }
     }
 }

@@ -15,5 +15,10 @@ namespace Core.Services
         Task<bool> LoginAsync(string email, string password, LoginType type);
         Task ActivateUserAsync(Guid userID);
         Task SetUserToPassiveAsync(Guid userID);
+        User GetUserByID(Guid userID);
+        Task<User> GetUserByEmailAsync(string email);
+        Task<string> GenerateEmailConfirmationTokenAsync(User user);
+        Task SendEmailToUserAsync(string email, EmailLinkType type, string content = "", string link = "");
+        Task<List<string>> UpdateUserInfoAsync(User user);
     }
 }
