@@ -59,8 +59,7 @@ namespace HRWebApi
                 opts.Password.RequireLowercase = true;
                 opts.Password.RequireDigit = true;
 
-            }).AddEntityFrameworkStores<HRContext>();
-              //.AddPasswordValidator<CustomEmailPhonePolicy>();
+            
             services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
             services.Configure<Admin>(Configuration.GetSection("Admin"));
             services.AddAutoMapper(typeof(Startup));
