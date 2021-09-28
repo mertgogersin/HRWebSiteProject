@@ -29,6 +29,7 @@ namespace HRWebApi.Controllers
         [HttpPost]
         public async Task<IActionResult> RegisterEmployer(RegisterDTO registerDTO)
         {
+            
             //modelstate, jquery validation ile kontrol edilecek
             if (ModelState.IsValid)
             {
@@ -73,14 +74,5 @@ namespace HRWebApi.Controllers
             return BadRequest(ModelState.Values.SelectMany(x => x.Errors).ToList());
         }
 
-        //[HttpGet]
-        //public async Task<ActionResult<IEnumerable<UserDTO>>> GetAllUsers()
-        //{
-        //    var users = await adminService.GetAllUser();
-
-        //    var adminDTO = mapper.Map<IEnumerable<User>, IEnumerable<UserDTO>>(users);
-
-        //    return Ok(adminDTO);
-        //}
     }
 }

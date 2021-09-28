@@ -22,9 +22,6 @@ namespace DataAccess.Repositories
             get { return context; }
         }
 
-        public  Task<IEnumerable<Shift>> GetShiftsByUserIDAsync(Guid userID)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

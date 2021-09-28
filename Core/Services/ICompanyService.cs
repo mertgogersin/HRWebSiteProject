@@ -14,6 +14,8 @@ namespace Core.Services
         Task<IEnumerable<Company>> GetCompaniesAsync();
         Task DeactivateCompanyAsync(Company company);
         Task<bool> CheckCompanyPlanStatus(Guid companyID);
-        Company GetCompanyByID(Guid companyID);
+        Task<Company> GetCompanyByIDAsync(Guid companyID);
+        Task UpdateCompany(Company companyToUpdate, Company company);
+
     }
 }

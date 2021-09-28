@@ -22,9 +22,6 @@ namespace DataAccess.Repositories
             get { return context; }
         }
 
-        public async Task<IEnumerable<Debit>> GetDebitsByUserIDAsync(Guid userID)
-        {
-            return await Context.Debits.Where(m => m.UserID == userID).ToListAsync();
-        }
+        
     }
 }

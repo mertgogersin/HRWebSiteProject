@@ -10,6 +10,7 @@ namespace Core.Repositories
     public interface IRepository<T> where T : class
     {
         Task<IEnumerable<T>> GetAllAsync();
+        Task<T> GetByIdAsync(Guid id);
         IEnumerable<T> List(Expression<Func<T, bool>> predicate);
         Task AddAsync(T entity);
         void Update(T entity);
