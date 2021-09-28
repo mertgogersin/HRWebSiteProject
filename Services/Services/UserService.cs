@@ -29,6 +29,26 @@ namespace Services.Services
             this.signInManager = signInManager;
         }
 
+        public User GetUserByID(Guid userID)
+        {
+            return (User) unitOfWork.Users.List(m => m.Id == userID);
+        }
+        public async Task<User> GetUserByEmailAsync(string email)
+        {
+            return await userManager.FindByEmailAsync(email);
+        }
+       
+        public async Task<List<string>> UpdateUserInfoAsync(User user) //custom policy hazırlanacak
+        {
+            List<string> errors = new List<string>();
+            var result = await userManager.UpdateAsync(user);
+            if (!result.Succeeded)
+            {
+                foreach (var error in result.Errors) {errors.Add(error.Description); }
+            }
+            await unitOfWork.CommitAsync();
+            return errors;          
+        }
         public async Task<bool> LoginAsync(string email, string password, LoginType type)
         {
            
@@ -42,7 +62,9 @@ namespace Services.Services
                     User loggedInUser = await userManager.FindByEmailAsync(email);
                     if (loggedInUser != null)
                     {
-                        if (userManager.PasswordHasher.VerifyHashedPassword(loggedInUser, loggedInUser.PasswordHash, password) != PasswordVerificationResult.Failed) { check = true; }                      
+                        var result = await signInManager.PasswordSignInAsync(loggedInUser.Email, password, false, false);
+                        if (result.Succeeded) { check = true; }
+                       
                     }
                     break;
             }
@@ -73,7 +95,7 @@ namespace Services.Services
 
         public async Task ActivateUserAsync(Guid userID)
         {
-            User userToActivate = await unitOfWork.Users.GetByIDAsync(userID);
+            User userToActivate = (User) unitOfWork.Users.List(m => m.Id == userID);
             userToActivate.IsActive = true;
             await userManager.AddToRoleAsync(userToActivate, "Employer");
             unitOfWork.Users.Update(userToActivate);
@@ -81,27 +103,28 @@ namespace Services.Services
         }
         private void SetPassiveAllLinkedUsers(Guid companyID)
         {
-            List<User> users = (List<User>)unitOfWork.Users.ListAsync(m => m.CompanyID == companyID);
+            List<User> users = (List<User>) unitOfWork.Users.List(m => m.CompanyID == companyID);
             foreach (User item in users) { item.IsActive = false; }         
         }
 
         public async Task SetUserToPassiveAsync(Guid userID)
         {
 
-            User userToPassive = await unitOfWork.Users.GetByIDAsync(userID);
+            User userToPassive = (User) unitOfWork.Users.List(m => m.Id == userID);
             List<string> roles = (List<string>)await userManager.GetRolesAsync(userToPassive);
             foreach (string item in roles)
             {
-                if (item == "Employer") { SetPassiveAllLinkedUsers(userToPassive.CompanyID);}               
+                if (item == "Employer") {  SetPassiveAllLinkedUsers(userToPassive.CompanyID);}               
             }
             userToPassive.IsActive = false;
             await unitOfWork.CommitAsync();
         }
-        public async Task SendEmailToUserAsync(string email, EmailType type, string content = "", string link = "")
+
+        public async Task SendEmailToUserAsync(string email, EmailLinkType type, string content = "", string link = "")
         {
             User user = await userManager.FindByEmailAsync(email);
             if (user != null)
-            {
+            {             
                 EmailRequest emailRequest = new EmailRequest();
                 emailRequest.ToEmail = user.Email;
                 string emailContent = string.Empty;

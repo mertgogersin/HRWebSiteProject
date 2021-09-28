@@ -32,14 +32,9 @@ namespace DataAccess.Repositories.Generics
         public async Task<IEnumerable<T>> GetAllAsync()
         {
             return await _object.ToListAsync();
-        }
+        }      
 
-        public async Task<T> GetByIDAsync(Guid id)
-        {
-            return await _object.FindAsync(id);
-        }
-
-        public IEnumerable<T> ListAsync(Expression<Func<T, bool>> predicate)
+        public IEnumerable<T> List(Expression<Func<T, bool>> predicate)
         {
             return _object.Where(predicate);
         }

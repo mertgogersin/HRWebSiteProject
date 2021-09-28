@@ -8,20 +8,12 @@ using DataAccess.CustomPolicies;
 using DataAccess.UnitOfWork;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Services.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace HRWebApi
 {
@@ -45,13 +37,12 @@ namespace HRWebApi
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IUserService,UserService>();
-            services.AddScoped<IAdminService, AdminService>();
 
             services.AddDbContext<HRContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("SqlConnectionString")));
 
             services.AddIdentity<User, Role>(opts => {
-
+            
                 opts.User.RequireUniqueEmail = true;
                 opts.Password.RequiredLength = 8;
                 opts.Password.RequireNonAlphanumeric = true;
@@ -64,6 +55,13 @@ namespace HRWebApi
             services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
             services.Configure<Admin>(Configuration.GetSection("Admin"));
             services.AddAutoMapper(typeof(Startup));
+
+            services.AddCors(opts => opts.AddPolicy("myPolicy", builder =>
+            {
+                builder.AllowAnyMethod();
+                builder.AllowAnyHeader();
+                builder.WithOrigins("http://localhost:37338");
+            }));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
