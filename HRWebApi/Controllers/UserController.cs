@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Core.Entities;
+using Core.Enums;
 using Core.Model.Authentication;
 using Core.Services;
 using HRWebApi.DTO;
@@ -29,24 +30,47 @@ namespace HRWebApi.Controllers
         public async Task<IActionResult> RegisterEmployer(RegisterDTO registerDTO)
         {
             //modelstate, jquery validation ile kontrol edilecek
-            var user = mapper.Map<RegisterDTO, User>(registerDTO);
-            Company company = new Company()
+            if (ModelState.IsValid)
             {
-                CompanyID = Guid.NewGuid(),
-                CompanyName = registerDTO.CompanyName,
-                IsActive = true
-            };
-            user.CompanyID = company.CompanyID;
-            List<string> errors = await userService.RegisterEmployerAsync(user, registerDTO.Password,company);
-            if (errors != null)
-            {
-                return BadRequest(errors); //ajax ın error function ına gider
+                var user = mapper.Map<RegisterDTO, User>(registerDTO);
+                Company company = new Company()
+                {
+                    CompanyID = Guid.NewGuid(),
+                    CompanyName = registerDTO.CompanyName,
+                    IsActive = true
+                };
+                user.CompanyID = company.CompanyID;
+                List<string> errors = await userService.RegisterEmployerAsync(user, registerDTO.Password, company);
+                if (errors != null)
+                {
+                    return BadRequest(errors); //ajax ın error function ına gider
+                }
+                else
+                {
+                    string token = await userService.GenerateEmailConfirmationTokenAsync(user);
+                    var confirmationLink = "<a href='"
+                        + Url.Action("ActivateUser", "Register", new { token = token }, Request.Scheme) //mvc deki action controller a linkleriz.(ActivateUser: Action, Register: Controller)
+                        + "'>Click here</a>";
+                    await userService.SendEmailToUserAsync(user.Email, EmailLinkType.Register, confirmationLink);
+                    return Ok("Email has been sent, please check your inbox."); // ajax ın success function ına gider. mvc kısmında token validate edilecek
+                }
             }
-            else
-            {
-                return Ok("Success"); // ajax ın success function ına gider
-            }
+            return BadRequest(ModelState.Values.SelectMany(x => x.Errors).ToList());
 
+        }
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginDTO loginDTO)
+        {
+            if (ModelState.IsValid)
+            {
+                bool check = await userService.LoginAsync(loginDTO.Email, loginDTO.Password, LoginType.User);
+                if (check)
+                {
+                    return Ok(userService.GetUserByEmailAsync(loginDTO.Email));
+                }
+                return BadRequest("Login attempt is invalid");
+            }
+            return BadRequest(ModelState.Values.SelectMany(x => x.Errors).ToList());
         }
     }
 }
