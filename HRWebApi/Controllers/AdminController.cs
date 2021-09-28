@@ -16,14 +16,29 @@ namespace HRWebApi.Controllers
     [ApiController]
     public class AdminController : ControllerBase
     {
-        private readonly IAdminService adminService;
+        private readonly ICompanyService companyService;
+        private readonly IUserService userService;
         private readonly IMapper mapper;
 
-        public AdminController(IAdminService _adminService, IMapper _mapper)
+        public AdminController(IUserService _userService,ICompanyService _companyService,IMapper _mapper)
         {
-            this.adminService = _adminService;
+            this.userService = _userService;
+            this.companyService = _companyService;
             this.mapper = _mapper;
         }
+        [HttpPut("{id}")]
+        public async Task<ActionResult<CompanyDTO>> SetEmployerStatus(Guid id, bool status)
+        {
+            await userService.SetUserStatus(id, status);
+
+            var updatedActive = await companyService.GetCompanyByIDAsync(id);
+
+            var updateCompanyActivated = mapper.Map<Company, CompanyDTO>(updatedActive);
+
+            return Ok(updateCompanyActivated);
+        }
+
+        
 
 
     }

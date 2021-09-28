@@ -22,10 +22,7 @@ namespace DataAccess.Repositories
         {
             get { return context; }
         }
-        public async Task<IEnumerable<File>> GetFilesByUserIDAsync(Guid userID)
-        {
-            return await Context.Files.Where(m => m.UserID == userID).ToListAsync();
-        }
+       
       
     }
 }

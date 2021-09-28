@@ -20,5 +20,6 @@ namespace Core.Services
         Task<string> GenerateEmailConfirmationTokenAsync(User user);
         Task SendEmailToUserAsync(string email, EmailType type, string content = "", string link = "");
         Task<List<string>> UpdateUserInfoAsync(User user);
+        Task SetUserStatus(Guid userID, bool status);
     }
 }

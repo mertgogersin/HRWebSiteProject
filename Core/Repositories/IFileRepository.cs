@@ -9,6 +9,6 @@ namespace Core.Repositories
 {
     public interface IFileRepository : IRepository<File>
     {
-        Task<IEnumerable<File>> GetFilesByUserIDAsync(Guid userID);
+        
     }
 }

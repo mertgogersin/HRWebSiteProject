@@ -9,6 +9,6 @@ namespace Core.Repositories
 {
     public interface IShiftRepository:IRepository<Shift>
     {
-        Task<IEnumerable<Shift>> GetShiftsByUserIDAsync(Guid userID);
+       
     }
 }

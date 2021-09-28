@@ -29,6 +29,11 @@ namespace DataAccess.Repositories.Generics
             Update(entity);
         }
 
+        public async Task<T> GetByIdAsync(Guid id)
+        {
+            return await _object.FindAsync(id);
+        }
+
         public async Task<IEnumerable<T>> GetAllAsync()
         {
             return await _object.ToListAsync();

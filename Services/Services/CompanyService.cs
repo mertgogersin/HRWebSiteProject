@@ -2,6 +2,7 @@
 using Core.Model.Authentication;
 using Core.Services;
 using Core.UnitOfWork;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +14,11 @@ namespace Services.Services
     public class CompanyService : ICompanyService
     {
         private readonly IUnitOfWork unitOfWork;
-        public CompanyService(IUnitOfWork unitOfWork)
+        UserManager<User> userManager;
+        public CompanyService(IUnitOfWork unitOfWork, UserManager<User> _userManager)
         {
             this.unitOfWork = unitOfWork;
+            this.userManager = _userManager;
         }
 
         public Task<bool> CheckCompanyPlanStatus(Guid companyID)
@@ -37,9 +40,10 @@ namespace Services.Services
             return await unitOfWork.Companies.GetAllAsync();
         }
 
-        public Company GetCompanyByID(Guid companyID)
+
+        public async Task<Company> GetCompanyByIDAsync(Guid companyID)
         {
-            return (Company)unitOfWork.Companies.List(m => m.CompanyID == companyID);
+            return await unitOfWork.Companies.GetByIdAsync(companyID);
         }
 
         public async Task<IEnumerable<User>> GetEmployeesWithUpcomingBirthdaysAsync(Guid companyId)
@@ -55,6 +59,14 @@ namespace Services.Services
             }
             return employees;
         }
-        
+
+        public async Task UpdateCompany(Company companyToUpdate, Company company)
+        {
+            companyToUpdate.IsActive = company.IsActive;
+
+            await unitOfWork.CommitAsync();
+        }
+
+       
     }
 }

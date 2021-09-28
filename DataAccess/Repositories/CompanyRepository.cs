@@ -23,11 +23,6 @@ namespace DataAccess.Repositories
             get { return context; }
         }
 
-        public async Task<Company> GetCompanyByIDAsync(Guid companyID)
-        {
-            return await Context.Companies.FindAsync(companyID);
-        }
-
         public async Task<IEnumerable<User>> GetPersonnelListAsync(Guid companyID, Guid roleID) //compid string olacak
         {
             List<User> personnels =await (from user in Context.Users
