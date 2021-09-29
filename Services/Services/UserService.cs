@@ -42,6 +42,11 @@ namespace Services.Services
         {
             return await userManager.Users.ToListAsync();
         }
+        public List<User> GetEmployees(Guid companyId, bool isActive)
+        {
+            List<User> employees = unitOfWork.Users.List(x => x.CompanyID == companyId && x.IsActive == isActive).ToList();
+            return employees;
+        }
         public async Task<List<string>> UpdateUserInfoAsync(User user) //custom policy hazırlanacak
         {
             List<string> errors = new List<string>();
@@ -74,12 +79,12 @@ namespace Services.Services
             }
             return await Task.FromResult(check);
         }
-        public async Task<List<string>> RegisterEmployerAsync(User user, string password,Company company)
+        public async Task<List<string>> RegisterEmployerAsync(User user, string password)
         {      
             List<string> errors = new List<string>();      
             
             user.UserName = user.Email; //username hatası aldığım için çözüm olarak unique data girmek oldu.
-            await CreateCompany(company);           
+                       
             var result = await userManager.CreateAsync(user, password);
 
             if (result.Succeeded && errors.Count == 0) { return null; }//hatasız         
@@ -90,10 +95,6 @@ namespace Services.Services
 
         }
 
-        private async Task CreateCompany(Company company)
-        {
-            await unitOfWork.Companies.AddAsync(company);
-        }
 
         public async Task ActivateUserAsync(Guid userID)
         {

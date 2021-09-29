@@ -59,7 +59,10 @@ namespace Services.Services
             }
             return employees;
         }
-
+        public async Task CreateCompanyAsync(Company company)
+        {
+            await unitOfWork.Companies.AddAsync(company);
+        }
         public async Task UpdateCompany(Company companyToUpdate, Company company)
         {
             companyToUpdate.IsActive = company.IsActive;
@@ -78,6 +81,10 @@ namespace Services.Services
             await unitOfWork.CommitAsync();
         }
 
-       
+        public async Task UpdateCompany(Company company)
+        {
+            unitOfWork.Companies.Update(company);
+            await unitOfWork.CommitAsync();
+        }
     }
 }
