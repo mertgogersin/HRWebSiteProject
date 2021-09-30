@@ -39,6 +39,7 @@ namespace HRWebApi
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ICompanyService, CompanyService>();
 
             services.AddDbContext<HRContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("SqlConnectionString")));
