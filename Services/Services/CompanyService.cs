@@ -75,7 +75,16 @@ namespace Services.Services
             await unitOfWork.CommitAsync();
         }
 
+        public Company GetCompanyByID(Guid companyID)
+        {
+            return unitOfWork.Companies.List(x => x.CompanyID == companyID).FirstOrDefault();
+        }
 
+        public async Task UpdateCompany(Company company)
+        {
+            unitOfWork.Companies.Update(company);
+            await unitOfWork.CommitAsync();
+        }
        
 
     }
