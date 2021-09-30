@@ -14,11 +14,10 @@ namespace Services.Services
     public class CompanyService : ICompanyService
     {
         private readonly IUnitOfWork unitOfWork;
-        UserManager<User> userManager;
-        public CompanyService(IUnitOfWork unitOfWork, UserManager<User> _userManager)
+
+        public CompanyService(IUnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
-            this.userManager = _userManager;
         }
 
         public Task<bool> CheckCompanyPlanStatus(Guid companyID)
@@ -62,7 +61,12 @@ namespace Services.Services
 
         public async Task UpdateCompany(Company companyToUpdate, Company company)
         {
+            companyToUpdate.CompanyName = company.CompanyName;
+            companyToUpdate.Description = company.Description;
+            companyToUpdate.Address = company.Address;
+            companyToUpdate.Comment = company.Comment;
             companyToUpdate.IsActive = company.IsActive;
+            companyToUpdate.Logo = company.Logo;
 
             await unitOfWork.CommitAsync();
         }
@@ -78,6 +82,11 @@ namespace Services.Services
             await unitOfWork.CommitAsync();
         }
 
-       
+        public Company GetCompanyByID(Guid companyID)
+        {
+            return unitOfWork.Companies.List(x => x.CompanyID == companyID).FirstOrDefault();
+        }
+
+
     }
 }

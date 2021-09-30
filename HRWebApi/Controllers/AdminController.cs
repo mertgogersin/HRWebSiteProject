@@ -3,6 +3,7 @@ using Core.Entities;
 using Core.Model.Authentication;
 using Core.Services;
 using HRWebApi.DTO;
+using HRWebApi.Validators;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -29,6 +30,7 @@ namespace HRWebApi.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<UserDTO>> SetEmployerStatus(Guid id, bool status)
         {
+            
             await userService.SetUserStatus(id, status);
 
             var updatedActive = await userService.GetUseryByIDAsync(id);
@@ -38,13 +40,13 @@ namespace HRWebApi.Controllers
             return Ok(updateCompanyActivated);
         }
         [HttpPut("{id}")]
-        public async Task<ActionResult<CompanyDTO>> SetCompanyApproveStatus(Guid id, bool status)
+        public async Task<ActionResult<CompanySaveDTO>> SetCompanyApproveStatus(Guid id, bool status)
         {
             await companyService.SetCompanyApprove(id, status);
 
             var updateApprove = await companyService.GetCompanyByIDAsync(id);
 
-            var updateCompanyApproved = mapper.Map<Company, CompanyDTO>(updateApprove);
+            var updateCompanyApproved = mapper.Map<Company, CompanySaveDTO>(updateApprove);
 
             return Ok(updateCompanyApproved);
         }

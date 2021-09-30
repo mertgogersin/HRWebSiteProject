@@ -9,8 +9,8 @@ namespace HRWebApi.DTO
     {
         public Guid UserID { get; set; }
         public string FirstName { get; set; }
-        public string Email { get; set; }
         public string LastName { get; set; }
+        public string Email { get; set; }
         public Guid CompanyID { get; set; }
         public bool IsActive { get; set; }
     }
