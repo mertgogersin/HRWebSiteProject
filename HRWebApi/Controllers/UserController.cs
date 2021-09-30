@@ -19,9 +19,10 @@ namespace HRWebApi.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService userService;
+        private readonly ICompanyService companyService;
         private readonly IMapper mapper;
 
-        public UserController(IUserService userService, IMapper mapper)
+        public UserController(IUserService userService, IMapper mapper, ICompanyService companyService)
         {
             this.userService = userService;
             this.mapper = mapper;
@@ -29,7 +30,7 @@ namespace HRWebApi.Controllers
         [HttpPost]
         public async Task<IActionResult> RegisterEmployer(RegisterDTO registerDTO)
         {
-            
+
             //modelstate, jquery validation ile kontrol edilecek
             if (ModelState.IsValid)
             {
@@ -40,8 +41,9 @@ namespace HRWebApi.Controllers
                     CompanyName = registerDTO.CompanyName,
                     IsActive = true
                 };
+                await companyService.CreateCompanyAsync(company);
                 user.CompanyID = company.CompanyID;
-                List<string> errors = await userService.RegisterEmployerAsync(user, registerDTO.Password, company);
+                List<string> errors = await userService.RegisterEmployerAsync(user, registerDTO.Password);
                 if (errors != null)
                 {
                     return BadRequest(errors); //ajax ın error function ına gider
@@ -70,7 +72,13 @@ namespace HRWebApi.Controllers
             }
             return BadRequest(ModelState.Values.SelectMany(x => x.Errors).ToList());
         }
-         [HttpGet]
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeactivateUser(Guid id)
+        {
+            await userService.SetUserStatus(id, false);
+            return Ok("User is successfully deactivated.");
+        }
+        [HttpGet]
         public async Task<IActionResult> GetAllUsers()
         {
             IEnumerable<User> users = await userService.GetUsersAsync();
@@ -79,13 +87,19 @@ namespace HRWebApi.Controllers
 
             return Ok(userDTOs);
         }
+        [HttpGet("{id}")]
+        public IActionResult GetCompanyUsers(Guid id)
+        {
+            IEnumerable<User> users = userService.GetEmployees(id, true);
+            return Ok(users);
+        }
         [HttpPut]
         public async Task<IActionResult> UpdateUserInfo(UserDTO userDTO) //userdto propertyleri değişebilir
         {
             if (ModelState.IsValid)
             {
                 User userToBeUpdated = userService.GetUserByID(userDTO.UserID);
-                User user = mapper.Map(userDTO,userToBeUpdated);
+                User user = mapper.Map(userDTO, userToBeUpdated);
                 List<string> errors = await userService.UpdateUserInfoAsync(user);
                 if (errors != null) { return BadRequest(errors); }
                 return Ok("User is successfully updated!");

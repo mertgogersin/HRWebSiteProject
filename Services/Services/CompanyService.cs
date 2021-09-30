@@ -58,18 +58,11 @@ namespace Services.Services
             }
             return employees;
         }
-
-        public async Task UpdateCompany(Company companyToUpdate, Company company)
+        public async Task CreateCompanyAsync(Company company)
         {
-            companyToUpdate.CompanyName = company.CompanyName;
-            companyToUpdate.Description = company.Description;
-            companyToUpdate.Address = company.Address;
-            companyToUpdate.Comment = company.Comment;
-            companyToUpdate.IsActive = company.IsActive;
-            companyToUpdate.Logo = company.Logo;
-
-            await unitOfWork.CommitAsync();
+            await unitOfWork.Companies.AddAsync(company);
         }
+        
         public async Task SetCompanyApprove(Guid companyID, bool status)
         {
             Company company = (Company)unitOfWork.Companies.List(x => x.CompanyID == companyID);
@@ -82,11 +75,8 @@ namespace Services.Services
             await unitOfWork.CommitAsync();
         }
 
-        public Company GetCompanyByID(Guid companyID)
-        {
-            return unitOfWork.Companies.List(x => x.CompanyID == companyID).FirstOrDefault();
-        }
 
+       
 
     }
 }
