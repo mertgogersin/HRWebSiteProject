@@ -20,12 +20,14 @@ namespace HRWebApi.Controllers
     {
         private readonly ICompanyService companyService;
         private readonly IUserService userService;
+        private readonly IDayOffService dayOffService;
         private readonly IMapper mapper;
 
-        public AdminController(IUserService _userService, ICompanyService _companyService, IMapper _mapper)
+        public AdminController(IUserService _userService, ICompanyService _companyService, IDayOffService _dayOffService, IMapper _mapper)
         {
             this.userService = _userService;
             this.companyService = _companyService;
+            this.dayOffService = _dayOffService;
             this.mapper = _mapper;
         }
         [HttpPut("{id}")]
@@ -77,7 +79,7 @@ namespace HRWebApi.Controllers
                     Description = dayOffDTO.Description
                 };
                 await companyService.CreateDayOffTypeAsync(dayOffType);
-                //var newDayOff = await userService.CreateDayOffTypeAsync(dayOffTypeToCreate);
+                var newDayOff = await dayOffService.CreateDayOffTypeAsync(dayOffTypeToCreate);
             }
             return BadRequest(ModelState.Values.SelectMany(x => x.Errors).ToList());
         }

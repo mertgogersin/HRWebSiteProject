@@ -25,5 +25,14 @@ namespace Services.Services
 
             return await Task.FromResult(dayOffs);
         }
+
+        public async Task<DayOffType> CreateDayOffTypeAsync(DayOffType newDayOffType)
+        {
+            await unitOfWork.OffDays.CreateDayOffTypeAsync(newDayOffType);
+            await unitOfWork.CommitAsync();
+
+            return newDayOffType;
+        }
+
     }
 }
