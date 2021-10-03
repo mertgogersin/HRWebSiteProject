@@ -24,7 +24,7 @@ namespace DataAccess.Repositories
 
         public async Task CreateDayOffTypeAsync(DayOffType dayOffType)
         {
-            await context.AddAsync(dayOffType);
+            await Context.AddAsync(dayOffType);
         }
 
         public async Task<IEnumerable<DayOff>> GetOffDaysByUserIDAsync(Guid userID)
