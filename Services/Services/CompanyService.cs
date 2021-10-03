@@ -62,12 +62,6 @@ namespace Services.Services
             await unitOfWork.Companies.AddAsync(company);
         }
         
-        public async Task CreateDayOffTypeAsync(DayOffType dayOffType)
-        {
-            await unitOfWork.OffDays.CreateDayOffTypeAsync(dayOffType);
-        }
-
-
         public async Task SetCompanyApproveAsync(Guid companyID, bool status)
         {
             Company company = (Company)unitOfWork.Companies.List(x => x.CompanyID == companyID);

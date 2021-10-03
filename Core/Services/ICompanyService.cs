@@ -14,7 +14,6 @@ namespace Core.Services
         Task<IEnumerable<Company>> GetCompaniesAsync();
         Task DeactivateCompanyAsync(Company company);
         Task CreateCompanyAsync(Company company);
-        Task CreateDayOffTypeAsync(DayOffType dayOffType);
         Task<bool> CheckCompanyPlanStatus(Guid companyID);
         Task<Company> GetCompanyByIDAsync(Guid companyID);
         Task UpdateCompanyAsync(Company company);

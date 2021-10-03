@@ -78,7 +78,7 @@ namespace HRWebApi.Controllers
                     TypeName = dayOffDTO.TypeName,
                     Description = dayOffDTO.Description
                 };
-                await companyService.CreateDayOffTypeAsync(dayOffType);
+                await dayOffService.CreateDayOffTypeAsync(dayOffType);
                 var newDayOff = await dayOffService.CreateDayOffTypeAsync(dayOffTypeToCreate);
             }
             return BadRequest(ModelState.Values.SelectMany(x => x.Errors).ToList());
