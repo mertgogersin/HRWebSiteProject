@@ -30,7 +30,6 @@ namespace HRWebApi.Controllers
         [HttpPost]
         public async Task<IActionResult> RegisterEmployer(RegisterDTO registerDTO)
         {
-
             //modelstate, jquery validation ile kontrol edilecek
             if (ModelState.IsValid)
             {
@@ -56,7 +55,6 @@ namespace HRWebApi.Controllers
                 return Ok("Email has been sent, please check your inbox."); // ajax ın success function ına gider. mvc kısmında token validate edilecek              
             }
             return BadRequest(ModelState.Values.SelectMany(x => x.Errors).ToList());
-
         }
         [HttpPost]
         public async Task<IActionResult> Login(LoginDTO loginDTO)

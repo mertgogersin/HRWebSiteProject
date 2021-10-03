@@ -18,6 +18,9 @@ namespace DataAccess.Configuration
             builder.Property(x => x.TypeName)
                 .HasMaxLength(150)
                 .IsRequired();
+            builder.Property(x => x.Description)
+                .HasMaxLength(200);
+                
 
             builder.ToTable("DayOffTypes");
         }

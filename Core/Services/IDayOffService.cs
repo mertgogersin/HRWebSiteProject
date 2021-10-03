@@ -9,6 +9,6 @@ namespace Core.Services
 {
     public interface IDayOffService
     {
-        Task<IEnumerable<DayOff>> WaitingApprovementDayOffs(Guid companyID);
+        Task<IEnumerable<DayOff>> WaitingApprovementDayOffsAsync(Guid companyID);
     }
 }

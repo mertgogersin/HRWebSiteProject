@@ -30,7 +30,6 @@ namespace HRWebApi.Controllers
             IEnumerable<CompanySaveDTO> companyDTOs = mapper.Map<IEnumerable<Company>, IEnumerable<CompanySaveDTO>>(companies);
             return Ok(companyDTOs);
         }
-
         [HttpPut]
         public async Task<IActionResult> UpdateCompanyInfo(CompanySaveDTO companySaveDTO)
         {
@@ -38,12 +37,11 @@ namespace HRWebApi.Controllers
             {
                 Company companyToBeUpdated = companyService.GetCompanyByID(companySaveDTO.CompanyID);
                 Company company = mapper.Map(companySaveDTO,companyToBeUpdated);
-                await companyService.UpdateCompany(companyToBeUpdated, company);
+                await companyService.UpdateCompanyAsync(company);
+                                
                 return Ok("Company is successfully updated!");
             }
             return BadRequest(ModelState.Values.SelectMany(x => x.Errors).ToList());
         }
-
-
     }
 }

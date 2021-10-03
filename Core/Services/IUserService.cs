@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Core.Services
 {
-   public interface IUserService
+    public interface IUserService
     {
-        Task<List<string>> RegisterEmployerAsync(User user,string password);
+        Task<List<string>> RegisterEmployerAsync(User user, string password);
         Task<bool> LoginAsync(string email, string password, LoginType type);
         Task<IEnumerable<User>> GetUsersAsync();
         List<User> GetEmployees(Guid companyId, bool isActive);
@@ -23,7 +23,9 @@ namespace Core.Services
         Task SendEmailToUserAsync(string email, EmailType type, string content = "", string link = "");
         Task<List<string>> UpdateUserInfoAsync(User user);
         Task SetUserStatus(Guid userID, bool status);
-        Task<User> GetUseryByIDAsync(Guid userID);
+        Task<User> GetUserByIDAsync(Guid userID);
+        
+        Task<string> GetUserRoleAsync(Guid userID);
 
     }
 }
