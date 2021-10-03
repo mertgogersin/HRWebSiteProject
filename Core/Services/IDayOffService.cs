@@ -11,5 +11,9 @@ namespace Core.Services
     {
         Task<IEnumerable<DayOff>> WaitingApprovementDayOffsAsync(Guid companyID);
         Task<DayOffType> CreateDayOffTypeAsync(DayOffType newDayOffType);
+        Task<IEnumerable<DayOff>> GetAllDayOffsByUserIDAsync(Guid userID);
+        Task<string> AddDayOffAsync(DayOff dayOff);
+        Task<string> UpdateDayOffAsync(DayOff dayOff);
+        Task DeleteDayOffAsync(Guid dayOffID);
     }
 }

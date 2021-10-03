@@ -33,5 +33,46 @@ namespace Services.Services
             return newDayOffType;
         }
 
+        public async Task<IEnumerable<DayOff>> GetAllDayOffsByUserIDAsync(Guid userID)
+        {
+            return await unitOfWork.OffDays.GetOffDaysByUserIDAsync(userID);
+        }
+
+        public async Task<string> AddDayOffAsync(DayOff dayOff)
+        {
+            string error = null;
+            try
+            {
+                await unitOfWork.OffDays.AddAsync(dayOff);
+                await unitOfWork.CommitAsync();
+            }
+            catch (Exception)
+            {
+                error = "Off day couldn't be added!";
+            }
+            return error;
+        }
+
+        public async Task<string> UpdateDayOffAsync(DayOff dayOff)
+        {
+            string error = null;
+            try
+            {
+                unitOfWork.OffDays.Update(dayOff);
+                await unitOfWork.CommitAsync();
+            }
+            catch (Exception)
+            {
+                error = "Off day couldn't be updated!";
+            }
+            return error;
+        }
+
+        public async Task DeleteDayOffAsync(Guid dayOffID)
+        {
+            DayOff dayOffToDelete = await unitOfWork.OffDays.GetByIdAsync(dayOffID);
+            dayOffToDelete.IsActive = false;
+            unitOfWork.OffDays.Delete(dayOffToDelete);
+        }
     }
 }

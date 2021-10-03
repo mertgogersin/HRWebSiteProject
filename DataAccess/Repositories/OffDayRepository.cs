@@ -26,5 +26,16 @@ namespace DataAccess.Repositories
         {
             await context.AddAsync(dayOffType);
         }
+
+        public async Task<IEnumerable<DayOff>> GetOffDaysByUserIDAsync(Guid userID)
+        {
+            List<Guid> offDaysID = await Context.DayOffs.Where(x => x.UserID == userID).Select(x => x.DayOffID).ToListAsync();
+            List<DayOff> dayOffs = new List<DayOff>();
+            foreach (Guid item in offDaysID)
+            {
+                dayOffs.Add(Context.DayOffs.Where(x => x.DayOffID == item).FirstOrDefault());
+            }
+            return dayOffs;        
+        }
     }
 }
