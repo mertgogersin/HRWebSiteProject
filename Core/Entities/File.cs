@@ -14,6 +14,7 @@ namespace Core.Entities
         public byte[] Files { get; set; }
         public Guid FileTypeID { get; set; }
         public Guid UserID { get; set; }
+        public bool IsActive { get; set; } = false;
         //nav prop
         public FileType FileType { get; set; }
         public User User { get; set; }
