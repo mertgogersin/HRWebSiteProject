@@ -14,6 +14,7 @@ namespace HRWebApi.Mapping
         public MappingProfile()
         {
             CreateMap<RegisterDTO, User>();
+            CreateMap<DayOffDTO, DayOff>();
 
             CreateMap<User, UserDTO>();
             CreateMap<UserDTO, User>();

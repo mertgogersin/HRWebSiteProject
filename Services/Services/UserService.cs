@@ -107,21 +107,20 @@ namespace Services.Services
         private void SetPassiveAllLinkedUsers(Guid companyID)
         {
             List<User> users = unitOfWork.Users.List(m => m.CompanyID == companyID).ToList();
-            foreach (User item in users) { item.IsActive = false; }         
+            foreach (User item in users) { item.IsActive = false; }
         }
 
         public async Task SetUserToPassiveAsync(Guid userID)
         {
-
+            string role = await GetUserRoleAsync(userID);
             User userToPassive = unitOfWork.Users.List(m => m.Id == userID).FirstOrDefault();
-            List<string> roles = (List<string>)await userManager.GetRolesAsync(userToPassive);
-            foreach (string item in roles)
-            {
-                if (item == "Employer") {  SetPassiveAllLinkedUsers(userToPassive.CompanyID);}               
-            }
+
+            if (role == "Employer") { SetPassiveAllLinkedUsers(userToPassive.CompanyID); }
+
             userToPassive.IsActive = false;
             await unitOfWork.CommitAsync();
         }
+        
 
         public async Task SendEmailToUserAsync(string email, EmailType type, string content = "", string link = "")
         {
@@ -149,7 +148,7 @@ namespace Services.Services
                         emailContent = content;
                         break;
                     case EmailType.Activated:
-
+                        emailContent = content;
                         break;
                 }
 
@@ -162,7 +161,6 @@ namespace Services.Services
                                 "</html>";
                 await unitOfWork.Emails.SendMailToUserAsync(emailRequest);
             }
-
         }
 
         public async Task<string> GenerateEmailConfirmationTokenAsync(User user)
@@ -180,9 +178,30 @@ namespace Services.Services
             await unitOfWork.CommitAsync();
         }
 
-        public async Task<User> GetUseryByIDAsync(Guid userID)
+        public async Task<User> GetUserByIDAsync(Guid userID)
         {
             return await unitOfWork.Users.GetByIdAsync(userID);
+        }
+        
+        
+
+        public async Task<string> GetUserRoleAsync(Guid userID)
+        {
+            User user = unitOfWork.Users.List(m => m.Id == userID).FirstOrDefault();
+            List<string> roles = (List<string>)await userManager.GetRolesAsync(user);
+            foreach (string item in roles)
+            {
+                if (item == "Employer")
+                {
+                    return item;
+                }
+                else if (item == "Employee")
+                {
+                    return item;
+                }
+
+            }
+            return null;
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Core.Repositories
 {
     public interface IOffDayRepository :IRepository<DayOff>
     {
-        
+        Task CreateDayOffTypeAsync(DayOffType dayOffType);
         //Task SetDayOffType(DayOffType dayOff); //revize yapılacak
     }
 }

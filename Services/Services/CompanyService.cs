@@ -39,7 +39,6 @@ namespace Services.Services
             return await unitOfWork.Companies.GetAllAsync();
         }
 
-
         public async Task<Company> GetCompanyByIDAsync(Guid companyID)
         {
             return await unitOfWork.Companies.GetByIdAsync(companyID);
@@ -63,7 +62,13 @@ namespace Services.Services
             await unitOfWork.Companies.AddAsync(company);
         }
         
-        public async Task SetCompanyApprove(Guid companyID, bool status)
+        public async Task CreateDayOffTypeAsync(DayOffType dayOffType)
+        {
+            await unitOfWork.OffDays.CreateDayOffTypeAsync(dayOffType);
+        }
+
+
+        public async Task SetCompanyApproveAsync(Guid companyID, bool status)
         {
             Company company = (Company)unitOfWork.Companies.List(x => x.CompanyID == companyID);
 
@@ -80,12 +85,11 @@ namespace Services.Services
             return unitOfWork.Companies.List(x => x.CompanyID == companyID).FirstOrDefault();
         }
 
-        public async Task UpdateCompany(Company company)
+        public async Task UpdateCompanyAsync(Company company)
         {
             unitOfWork.Companies.Update(company);
             await unitOfWork.CommitAsync();
         }
-       
-
+        
     }
 }

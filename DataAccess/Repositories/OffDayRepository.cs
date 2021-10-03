@@ -21,8 +21,10 @@ namespace DataAccess.Repositories
         {
             get { return context; }
         }
-        
 
-       
+        public async Task CreateDayOffTypeAsync(DayOffType dayOffType)
+        {
+            await context.AddAsync(dayOffType);
+        }
     }
 }

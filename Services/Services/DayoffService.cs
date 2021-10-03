@@ -17,7 +17,7 @@ namespace Services.Services
         {
             this.unitOfWork = unitOfWork;
         }
-        public async Task<IEnumerable<DayOff>> WaitingApprovementDayOffs(Guid companyID)
+        public async Task<IEnumerable<DayOff>> WaitingApprovementDayOffsAsync(Guid companyID)
         {
             List<DayOff> dayOffs = new List<DayOff>();
             foreach (User item in (List<User>)unitOfWork.Users.List(x => x.CompanyID == companyID))
@@ -25,5 +25,14 @@ namespace Services.Services
 
             return await Task.FromResult(dayOffs);
         }
+
+        public async Task<DayOffType> CreateDayOffTypeAsync(DayOffType newDayOffType)
+        {
+            await unitOfWork.OffDays.CreateDayOffTypeAsync(newDayOffType);
+            await unitOfWork.CommitAsync();
+
+            return newDayOffType;
+        }
+
     }
 }
