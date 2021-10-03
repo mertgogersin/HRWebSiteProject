@@ -24,7 +24,6 @@ namespace Core.Services
         Task<List<string>> UpdateUserInfoAsync(User user);
         Task SetUserStatus(Guid userID, bool status);
         Task<User> GetUserByIDAsync(Guid userID);
-        
         Task<string> GetUserRoleAsync(Guid userID);
 
     }

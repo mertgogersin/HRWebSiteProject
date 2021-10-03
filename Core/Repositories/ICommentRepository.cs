@@ -9,6 +9,8 @@ namespace Core.Repositories
 {
     public interface ICommentRepository:IRepository<Comment>
     {
+        Task<IEnumerable<Comment>> GetCommentsByCompanyIDAsync(Guid userID);
+        
 
     }
 }

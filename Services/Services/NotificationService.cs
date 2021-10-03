@@ -26,7 +26,7 @@ namespace Services.Services
             }
             catch (Exception)
             {
-                error = "Notification couldn't be added ";
+                error = "Notification couldn't be added!";
             }
 
             return error;
