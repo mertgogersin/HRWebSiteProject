@@ -13,7 +13,8 @@ namespace Core.Entities
         public string NotificationFromName { get; set; }
         public string Description { get; set; }
         public DateTime? CreatedDate { get; set; }
-        public DateTime? IsSeen { get; set; }
+        public bool IsSeen { get; set; } = false;
+        public bool IsActive { get; set; } = false;
         public Guid UserID { get; set; }
         //nav prop
         public User User { get; set; }

@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Repositories
 {
-   public class ShiftRepository : Repository<Shift>,IShiftRepository
+    public class ShiftRepository : Repository<Shift>, IShiftRepository
     {
-        public ShiftRepository(HRContext context):base(context)
+        public ShiftRepository(HRContext context) : base(context)
         {
 
         }
@@ -22,6 +22,15 @@ namespace DataAccess.Repositories
             get { return context; }
         }
 
-        
+        public async Task<IEnumerable<Shift>> GetShiftsByUserIDAsync(Guid userID)
+        {
+            List<Guid> shiftIDs = await Context.UserShifts.Where(m => m.UserID == userID).Select(m => m.ShiftID).ToListAsync();
+            List<Shift> shifts = new List<Shift>();
+            foreach (Guid item in shiftIDs)
+            {
+                shifts.Add(Context.Shifts.Where(m => m.ShiftID == item).FirstOrDefault());
+            }
+            return shifts;
+        }
     }
 }

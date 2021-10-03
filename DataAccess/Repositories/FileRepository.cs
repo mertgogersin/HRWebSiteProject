@@ -22,7 +22,10 @@ namespace DataAccess.Repositories
         {
             get { return context; }
         }
-       
-      
+
+        public async Task<FileType> GetFileTypeByIDAsync(Guid fileTypeID)
+        {
+            return await Context.FileTypes.Where(m => m.FileTypeID == fileTypeID).FirstOrDefaultAsync();
+        }
     }
 }
