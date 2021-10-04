@@ -43,15 +43,15 @@ namespace HRWebApi.Controllers
             return Ok(updateCompanyActivated);
         }
         [HttpPut("{id}")]
-        public async Task<IActionResult> SetCompanyApproveStatus(Guid companyId, bool status)
+        public async Task<IActionResult> SetCompanyStatus(Guid id)
         {
-            await companyService.SetCompanyApproveAsync(companyId, status);
+            bool status = await companyService.SetCompanyStatusAsync(id);
 
-            Company updateApprove = await companyService.GetCompanyByIDAsync(companyId);
+            Company updateApprove = await companyService.GetCompanyByIDAsync(id);
 
-            var updateCompanyApproved = mapper.Map<Company, CompanySaveDTO>(updateApprove);
+            CompanySaveDTO updateCompanyApproved = mapper.Map<Company, CompanySaveDTO>(updateApprove);
 
-            List<User> users = updateApprove.Users.Where(x => x.CompanyID == companyId).ToList();
+            List<User> users = updateApprove.Users.Where(x => x.CompanyID == id).ToList();
             string role = string.Empty;
             foreach (User item in users)
             {
@@ -59,6 +59,7 @@ namespace HRWebApi.Controllers
                 if (role == "Employer")
                 {
                     string content = "Your account has been approved.";
+                    if (!status) { content = "Your account has been disapproved."; }
                     await userService.SendEmailToUserAsync(item.Email, EmailType.Activated, content);
 
                 }

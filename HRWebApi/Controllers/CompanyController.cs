@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Core.Entities;
+using Core.Model.Authentication;
 using Core.Services;
 using HRWebApi.DTO;
 using Microsoft.AspNetCore.Http;
@@ -30,6 +31,19 @@ namespace HRWebApi.Controllers
             IEnumerable<CompanySaveDTO> companyDTOs = mapper.Map<IEnumerable<Company>, IEnumerable<CompanySaveDTO>>(companies);
             return Ok(companyDTOs);
         }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetEmployeesWithUpcomingBirthdays(Guid id)
+        {
+            List<User> employees = (List<User>)await companyService.GetEmployeesWithUpcomingBirthdaysAsync(id);
+            List<UpcomingBirthdaysDTO> upcomingBirthdaysDTOs = mapper.Map<List<User>, List<UpcomingBirthdaysDTO>>(employees);
+            return Ok(upcomingBirthdaysDTOs);
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteCompany(Guid id)
+        {
+            await companyService.DeactivateCompanyAsync(id);
+            return Ok("Company is successfully deleted!");
+        }
         [HttpPut]
         public async Task<IActionResult> UpdateCompanyInfo(CompanySaveDTO companySaveDTO)
         {
@@ -43,5 +57,6 @@ namespace HRWebApi.Controllers
             }
             return BadRequest(ModelState.Values.SelectMany(x => x.Errors).ToList());
         }
+        
     }
 }

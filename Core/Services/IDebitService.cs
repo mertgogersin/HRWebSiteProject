@@ -11,6 +11,7 @@ namespace Core.Services
     {
         Task<IEnumerable<Debit>> GetAllDebitsByUserIDAsync(Guid userID);
         Task<IEnumerable<Debit>> GetAllApproveDebitsByUserIDAsync(Guid userID);
+        Task<Debit> GetDebitByIDAsync(Guid debitID);
         Task<string> AddDebitAsync(Debit debit);
         Task<string> UpdateDebitAsync(Debit debit);
         Task DeleteDebitAsync(Guid debitID);
