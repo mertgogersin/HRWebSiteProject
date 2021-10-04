@@ -12,7 +12,8 @@ namespace Core.Entities
         public Guid DebitID { get; set; }
         public string ProductName { get; set; }
         public string Description { get; set; }
-        public bool IsApproved { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public bool? IsApproved { get; set; }
         public Guid UserID { get; set; }
         //nav prop
         public User User { get; set; }
