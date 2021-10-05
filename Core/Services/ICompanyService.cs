@@ -12,12 +12,11 @@ namespace Core.Services
     {
         Task<IEnumerable<User>> GetEmployeesWithUpcomingBirthdaysAsync(Guid companyId);
         Task<IEnumerable<Company>> GetCompaniesAsync();
-        Task DeactivateCompanyAsync(Company company);
+        Task DeactivateCompanyAsync(Guid companyID);
         Task CreateCompanyAsync(Company company);
-        Task<bool> CheckCompanyPlanStatus(Guid companyID);
         Task<Company> GetCompanyByIDAsync(Guid companyID);
         Task UpdateCompanyAsync(Company company);
-        Task SetCompanyApproveAsync(Guid companyID, bool status);
+        Task<bool> SetCompanyStatusAsync(Guid companyID);
         Company GetCompanyByID(Guid companyID);
 
     }

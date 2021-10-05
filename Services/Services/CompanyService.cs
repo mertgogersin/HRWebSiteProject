@@ -20,15 +20,16 @@ namespace Services.Services
             this.unitOfWork = unitOfWork;
         }
 
-        public Task<bool> CheckCompanyPlanStatus(Guid companyID)
+        private Task<bool> CheckCompanyPlanStatus(Guid companyID)
         {
             Company company = (Company)unitOfWork.Companies.List(m => m.CompanyID == companyID);
             if (company.PlanID != null) { return Task.FromResult(true); }
             return Task.FromResult(false);
         }
 
-        public async Task DeactivateCompanyAsync(Company company)
+        public async Task DeactivateCompanyAsync(Guid companyID)
         {
+            Company company = await unitOfWork.Companies.GetByIdAsync(companyID);
             company.IsActive = false;
             unitOfWork.Companies.Delete(company);
             await unitOfWork.CommitAsync();
@@ -61,17 +62,21 @@ namespace Services.Services
         {
             await unitOfWork.Companies.AddAsync(company);
         }
-        
-        public async Task SetCompanyApproveAsync(Guid companyID, bool status)
+
+        public async Task<bool> SetCompanyStatusAsync(Guid companyID)
         {
             Company company = (Company)unitOfWork.Companies.List(x => x.CompanyID == companyID);
-
+            bool status = await CheckCompanyPlanStatus(companyID);
             if (!status)
+            {
                 company.IsApprove = false;
+                return false;
+            }
             else
                 company.IsApprove = true;
 
             await unitOfWork.CommitAsync();
+            return true;
         }
 
         public Company GetCompanyByID(Guid companyID)
@@ -84,6 +89,6 @@ namespace Services.Services
             unitOfWork.Companies.Update(company);
             await unitOfWork.CommitAsync();
         }
-        
+
     }
 }

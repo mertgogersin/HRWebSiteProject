@@ -9,7 +9,13 @@ namespace HRWebApi.DTO
     {
         public Guid DebitID { get; set; }
         public Guid UserID { get; set; }
+
         public string ProductName { get; set; }
         public string Description { get; set; }
+
+        public bool? IsApproved { get; set; }
+        public string Description { get; set; }
+        public DateTime CreatedDate { get; set; }
+
     }
 }

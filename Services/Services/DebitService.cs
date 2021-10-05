@@ -31,23 +31,28 @@ namespace Services.Services
             }
             return error;
         }
-
+        public async Task<Debit> GetDebitByIDAsync(Guid debitID)
+        {
+            return await unitOfWork.Debits.GetByIdAsync(debitID);
+        }
         public async Task DeleteDebitAsync(Guid debitID)
         {
-            Debit debitToDelete = await unitOfWork.Debits.GetByIdAsync(debitID);
+            Debit debitToDelete =await GetDebitByIDAsync(debitID);
             debitToDelete.IsApproved = false;
             unitOfWork.Debits.Delete(debitToDelete);
+            await unitOfWork.CommitAsync();
         }
 
         public async Task<IEnumerable<Debit>> GetAllApproveDebitsByUserIDAsync(Guid userID)
         {
             List<Debit> debits = (List<Debit>)await GetAllDebitsByUserIDAsync(userID);
-            return debits.Where(x => x.IsApproved);
+            return debits.Where(x => x.IsApproved == true);
         }
 
         public async Task<IEnumerable<Debit>> GetAllDebitsByUserIDAsync(Guid userID)
         {
-            return await unitOfWork.Debits.GetDebitsByUserIDAsync(userID);
+            List<Debit> debits = (List<Debit>)await unitOfWork.Debits.GetDebitsByUserIDAsync(userID);
+            return debits.Where(m => m.IsApproved != null);
         }
 
         public async Task<string> UpdateDebitAsync(Debit debit)

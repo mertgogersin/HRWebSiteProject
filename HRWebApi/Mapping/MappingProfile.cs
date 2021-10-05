@@ -25,6 +25,12 @@ namespace HRWebApi.Mapping
             CreateMap<Comment, CommentDTO>(); 
             CreateMap<CommentDTO, Comment>();
 
+            CreateMap<User, UpcomingBirthdaysDTO>();
+
+            CreateMap<DebitDTO, Debit>();
+            CreateMap<Debit, DebitDTO>();
+
+
         }
     }
 }
