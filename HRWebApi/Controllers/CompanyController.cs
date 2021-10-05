@@ -21,6 +21,7 @@ namespace HRWebApi.Controllers
         public CompanyController(ICompanyService _companyService, IMapper _mapper)
         {
             this.companyService = _companyService;
+
             this.mapper = _mapper;
         }
         [HttpGet]
