@@ -22,10 +22,14 @@ namespace HRWebApi.Mapping
             CreateMap<Company, CompanySaveDTO>();
             CreateMap<CompanySaveDTO, Company>();
 
+            CreateMap<Comment, CommentDTO>(); 
+            CreateMap<CommentDTO, Comment>();
+
             CreateMap<User, UpcomingBirthdaysDTO>();
 
             CreateMap<DebitDTO, Debit>();
             CreateMap<Debit, DebitDTO>();
+
 
         }
     }

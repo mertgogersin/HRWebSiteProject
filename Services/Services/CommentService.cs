@@ -47,6 +47,11 @@ namespace Services.Services
             return await unitOfWork.Comments.GetCommentsByCompanyIDAsync(companyID);
         }
 
+        public async Task<IEnumerable<Comment>> GetCommentsAsync()
+        {
+            return await unitOfWork.Comments.GetAllAsync();
+        }
+
         public async Task<string> UpdateCommentAsync(Comment comment)
         {
             string error = null;
