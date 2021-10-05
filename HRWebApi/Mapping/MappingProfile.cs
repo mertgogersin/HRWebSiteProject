@@ -14,7 +14,9 @@ namespace HRWebApi.Mapping
         public MappingProfile()
         {
             CreateMap<RegisterDTO, User>();
+
             CreateMap<DayOffDTO, DayOff>();
+            CreateMap<DayOff, DayOffDTO>();
 
             CreateMap<User, UserDTO>();
             CreateMap<UserDTO, User>();
@@ -37,6 +39,12 @@ namespace HRWebApi.Mapping
 
             CreateMap<File, GetFileDTO>();
             CreateMap<SaveFileDTO, File>();
+
+            CreateMap<Expense, ExpenseDTO>();
+            CreateMap<ExpenseDTO, Expense>();
+
+            CreateMap<Shift, ShiftDTO>();
+            CreateMap<ShiftDTO, Shift>();
 
         }
     }

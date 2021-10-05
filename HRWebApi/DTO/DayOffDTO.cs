@@ -11,5 +11,8 @@ namespace HRWebApi.DTO
         public string Title { get; set; }
         public string TypeName { get; set; }
         public string Description { get; set; }
+        public bool IsActive { get; set; }
+        public bool? IsApproved { get; set; }
+        public Guid DayOffTypeID { get; set; }
     }
 }

@@ -74,5 +74,10 @@ namespace Services.Services
             dayOffToDelete.IsActive = false;
             unitOfWork.OffDays.Delete(dayOffToDelete);
         }
+
+        public async Task<DayOff> GetDayOffByIDAsync(Guid dayOffID)
+        {
+            return await unitOfWork.OffDays.GetByIdAsync(dayOffID);
+        }
     }
 }

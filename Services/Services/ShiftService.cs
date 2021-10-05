@@ -49,6 +49,16 @@ namespace Services.Services
             return await unitOfWork.Shifts.GetShiftsByUserIDAsync(userID);
         }
 
+        public async Task<Shift> GetShiftByIDAsync(Guid shiftID)
+        {
+            return await unitOfWork.Shifts.GetByIdAsync(shiftID);
+        }
+
+        public async Task<IEnumerable<Shift>> GetShiftsAsync()
+        {
+            return await unitOfWork.Shifts.GetAllAsync();
+        }
+
         public async Task<string> UpdateShiftAsync(Shift shift)
         {
             string error = null;

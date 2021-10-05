@@ -61,7 +61,11 @@ namespace Services.Services
 
         public async Task<IEnumerable<Expense>> GetExpensesByUserIDAsync(Guid userID)
         {
-            return await unitOfWork.Expenses.GetExpensesByUserIDAsync(userID);
+            List<Expense> expenses = (List<Expense>)await unitOfWork.Expenses.GetExpensesByUserIDAsync(userID);
+            return expenses.Where(x => x.IsApproved != null);
+
         }
+
+        
     }
 }
