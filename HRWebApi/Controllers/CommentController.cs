@@ -23,6 +23,7 @@ namespace HRWebApi.Controllers
             this.commentService = _commentService;
             this.mapper = _mapper;
         }
+        //ss
         [HttpGet]
         public async Task<IActionResult> GetAllComments()
         {
