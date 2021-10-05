@@ -11,6 +11,8 @@ namespace Core.Services
     {
         Task<IEnumerable<Comment>> GetAllCommentsByCompanyIDAsync(Guid companyID);
         Task<IEnumerable<Comment>> GetCommentsAsync();
+        List<Comment> GetCompany(Guid companyID);
+        Task<Comment> GetCommentByIDAsync(Guid commentID);
         Task<string> AddCommentAsync(Comment comment);
         Task<string> UpdateCommentAsync(Comment comment);
         Task DeleteCommentAsync(Guid commentID);

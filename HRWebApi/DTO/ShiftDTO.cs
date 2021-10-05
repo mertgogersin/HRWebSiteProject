@@ -7,8 +7,11 @@ namespace HRWebApi.DTO
 {
     public class ShiftDTO
     {
-        public Guid Id { get; set; }
+        public Guid ShiftID { get; set; }
         public string FullName { get; set; }
+        public string Description { get; set; }
         public DateTime? BeginDate { get; set; }
+        public DateTime? EndDate { get; set; }
+        public DateTime? BreakTime { get; set; }
     }
 }

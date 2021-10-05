@@ -47,9 +47,20 @@ namespace Services.Services
             return await unitOfWork.Comments.GetCommentsByCompanyIDAsync(companyID);
         }
 
+        public async Task<Comment> GetCommentByIDAsync(Guid commentID)
+        {
+            return await unitOfWork.Comments.GetByIdAsync(commentID);
+        }
+
         public async Task<IEnumerable<Comment>> GetCommentsAsync()
         {
             return await unitOfWork.Comments.GetAllAsync();
+        }
+
+        public List<Comment> GetCompany(Guid companyID)
+        {
+            List<Comment> comments = unitOfWork.Comments.List(x => x.CompanyID == companyID && x.CommentContent != null).ToList();
+            return comments;
         }
 
         public async Task<string> UpdateCommentAsync(Comment comment)

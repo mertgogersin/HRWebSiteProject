@@ -67,22 +67,6 @@ namespace HRWebApi.Controllers
 
             return Ok(updateCompanyApproved);
         }
-        [HttpPost]
-        public async Task<IActionResult> AddDayOffTypeName(DayOffDTO dayOffDTO)
-        {
-            if (ModelState.IsValid)
-            {
-                var dayOffTypeToCreate = mapper.Map<DayOffDTO, DayOffType>(dayOffDTO);
-                DayOffType dayOffType = new DayOffType()
-                {
-                    DayOffTypeID = Guid.NewGuid(),
-                    TypeName = dayOffDTO.TypeName,
-                    Description = dayOffDTO.Description
-                };
-                await dayOffService.CreateDayOffTypeAsync(dayOffType);
-                var newDayOff = await dayOffService.CreateDayOffTypeAsync(dayOffTypeToCreate);
-            }
-            return BadRequest(ModelState.Values.SelectMany(x => x.Errors).ToList());
-        }
+       
     }
 }

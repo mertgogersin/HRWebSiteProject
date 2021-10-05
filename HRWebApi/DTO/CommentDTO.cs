@@ -7,6 +7,7 @@ namespace HRWebApi.DTO
 {
     public class CommentDTO
     {
+        public Guid CommentID { get; set; }
         public string CommentTitle { get; set; }
         public string CommentContent { get; set; }
         public Guid CompanyID { get; set; }//Yorum detay için şirket bilgileri
