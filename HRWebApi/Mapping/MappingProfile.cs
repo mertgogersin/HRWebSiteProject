@@ -29,6 +29,14 @@ namespace HRWebApi.Mapping
 
             CreateMap<DebitDTO, Debit>();
             CreateMap<Debit, DebitDTO>();
+            
+            CreateMap<NotificationDTO, Notification>();
+            CreateMap<Notification, NotificationDTO>();
+
+            CreateMap<FileType, FileTypeDTO>();
+
+            CreateMap<File, GetFileDTO>();
+            CreateMap<SaveFileDTO, File>();
 
         }
     }
