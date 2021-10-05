@@ -21,6 +21,7 @@ namespace Services.Services
             string error = null;
             try
             {
+                notification.IsActive = true;
                 await unitOfWork.Notifications.AddAsync(notification);
                 await unitOfWork.CommitAsync();
             }
@@ -60,19 +61,6 @@ namespace Services.Services
             return await unitOfWork.Notifications.GetByIdAsync(notificationID);
         }
 
-        public async Task<string> UpdateNotificationAsync(Notification notification)
-        {
-            string error = null;
-            try
-            {
-                unitOfWork.Notifications.Update(notification);
-                await unitOfWork.CommitAsync();
-            }
-            catch (Exception)
-            {
-                error = "Notification couldn't be updated";
-            }
-            return error;
-        }
+        
     }
 }

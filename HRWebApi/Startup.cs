@@ -40,6 +40,13 @@ namespace HRWebApi
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ICompanyService, CompanyService>();
+            services.AddScoped<ICommentService,CommentService>();
+            services.AddScoped<IDayOffService, DayoffService>();
+            services.AddScoped<IDebitService, DebitService>();
+            services.AddScoped<IExpenseService, ExpenseService>();
+            services.AddScoped<IFileService, FileService>();
+            services.AddScoped<IShiftService, ShiftService>();
+            services.AddScoped<INotificationService, NotificationService>();
 
             services.AddDbContext<HRContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("SqlConnectionString")));

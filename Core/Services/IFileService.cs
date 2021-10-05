@@ -10,6 +10,8 @@ namespace Core.Services
     public interface IFileService
     {
         Task<IEnumerable<File>> GetAllActiveFilesByUserIDAsync(Guid userID);
+        Task<File> GetFileByFileIDAsync(Guid fileID);
+        Task<IEnumerable<FileType>> GetFileTypesAsync();
         Task<IEnumerable<File>> GetAllFilesByUserIDAsync(Guid userID);
         Task<FileType> GetFileTypeByFileIDAsync(Guid fileTypeID);
         Task<string> AddFileAsync(File file);

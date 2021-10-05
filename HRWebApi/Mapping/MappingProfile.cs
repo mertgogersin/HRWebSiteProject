@@ -30,7 +30,6 @@ namespace HRWebApi.Mapping
             CreateMap<DebitDTO, Debit>();
             CreateMap<Debit, DebitDTO>();
 
-
         }
     }
 }

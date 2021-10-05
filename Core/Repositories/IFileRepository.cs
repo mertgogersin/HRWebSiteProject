@@ -10,5 +10,6 @@ namespace Core.Repositories
     public interface IFileRepository : IRepository<File>
     {
         Task<FileType> GetFileTypeByIDAsync(Guid fileTypeID);
+        Task<IEnumerable<FileType>> GetFileTypesAsync();
     }
 }

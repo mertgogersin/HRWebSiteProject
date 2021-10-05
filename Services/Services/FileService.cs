@@ -56,8 +56,15 @@ namespace Services.Services
         {
             return await unitOfWork.Files.GetFileTypeByIDAsync(fileTypeID); 
         }
-
-        public async Task<string> UpdateFileAsync(File file)
+        public async Task<IEnumerable<FileType>> GetFileTypesAsync()
+        {
+            return await unitOfWork.Files.GetFileTypesAsync();
+        }
+        public async Task<File> GetFileByFileIDAsync(Guid fileID)
+        {
+            return await unitOfWork.Files.GetByIdAsync(fileID);
+        }
+        public async Task<string> UpdateFileAsync(File file) //silinebilir
         {
             string error = null;
             try

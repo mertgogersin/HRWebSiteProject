@@ -1,21 +1,17 @@
-﻿using Core.Model.Authentication;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Entities
+namespace HRWebApi.DTO
 {
-    public class Notification
+    public class NotificationDTO
     {
         public Guid NotificationID { get; set; }
+        public string EmployeeName { get; set; }
         public string Description { get; set; }
         public DateTime? CreatedDate { get; set; }
-        public bool IsSeen { get; set; } = false;
-        public bool IsActive { get; set; } = false;
         public Guid UserID { get; set; }
-        //nav prop
-        public User User { get; set; }
+
     }
 }
