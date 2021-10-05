@@ -11,9 +11,9 @@ namespace Core.Services
     {
         Task<IEnumerable<Notification>> GetAllActiveNotificationsByUserIDAsync(Guid userID);
         Task<IEnumerable<Notification>> GetAllNotificationsByUserIDAsync(Guid userID);
+        Task<Notification> GetNotificationByIdAsync(Guid notificationID);
         Task SetSeenAllNotificationsByUserIDAsync(Guid userID);
         Task<string> AddNotificationAsync(Notification notification);
-        Task<string> UpdateNotificationAsync(Notification notification);
         Task DeleteNotificationAsync(Guid notificationID);
     }
 }

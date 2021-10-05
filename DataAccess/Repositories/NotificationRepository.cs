@@ -21,7 +21,6 @@ namespace DataAccess.Repositories
         {
             get { return context; }
         }
-
-        
+       
     }
 }

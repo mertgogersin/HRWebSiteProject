@@ -27,5 +27,9 @@ namespace DataAccess.Repositories
         {
             return await Context.FileTypes.Where(m => m.FileTypeID == fileTypeID).FirstOrDefaultAsync();
         }
+        public async Task<IEnumerable<FileType>> GetFileTypesAsync()
+        {
+            return await Context.FileTypes.ToListAsync();
+        }
     }
 }
