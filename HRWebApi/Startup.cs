@@ -36,7 +36,7 @@ namespace HRWebApi
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HRWebApi", Version = "v1" });
             });
 
-
+            
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ICompanyService, CompanyService>();
@@ -87,7 +87,6 @@ namespace HRWebApi
             }
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
