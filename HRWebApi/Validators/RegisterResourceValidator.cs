@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace HRWebApi.Validators
 {
-    public class RegisterUserResourceValidator : AbstractValidator<RegisterDTO>
+    public class RegisterResourceValidator : AbstractValidator<RegisterDTO>
     {
-        public RegisterUserResourceValidator()
+        public RegisterResourceValidator()
         {
             RuleFor(m => m.FirstName)
                 .MaximumLength(50)
@@ -24,6 +24,14 @@ namespace HRWebApi.Validators
             RuleFor(m => m.CompanyName)
                 .NotEmpty()
                 .WithMessage("Company Name can't be null.");
+
+            RuleFor(m => m.PhoneNumber)
+               .MaximumLength(50)
+               .WithMessage("Phone number can't longer than 50 chars.");
+
+            RuleFor(m => m.Email)
+               .MaximumLength(50)
+               .WithMessage("E-mail can't longer than 50 chars.");
         }
     }
 }

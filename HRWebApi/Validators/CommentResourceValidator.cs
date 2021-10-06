@@ -24,6 +24,10 @@ namespace HRWebApi.Validators
             RuleFor(x => x.CommentContent)
                 .MaximumLength(1500)
                 .WithMessage("Comment content can't be longer than 1500");
+
+            RuleFor(x => x.CompanyID)
+               .NotEmpty()
+               .WithMessage("Company id can not be empty.");
         }
     }
 }

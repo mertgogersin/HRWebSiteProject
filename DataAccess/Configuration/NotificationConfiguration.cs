@@ -15,10 +15,6 @@ namespace DataAccess.Configuration
         {
             builder.HasKey(x => x.NotificationID);
 
-            builder.Property(x => x.NotificationFromName)
-                .HasMaxLength(100)
-                .IsRequired();
-
             builder.Property(x => x.Description)
                 .HasMaxLength(200);
 
