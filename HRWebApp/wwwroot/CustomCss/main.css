@@ -1,0 +1,830 @@
+* {
+  box-sizing: border-box;
+  padding: 0px;
+  margin: 0px;
+  font-family: "Gilroy";
+}
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1.5rem;
+  position: fixed;
+  background-color: #517ffd;
+  width: 100%;
+  font-family: "Gilroy";
+  overflow: hidden;
+  z-index: 99;
+  font-size: 18px;
+}
+.logo {
+  padding: 0 50px;
+  margin-top: 8px;
+  margin-bottom: 20px;
+  height: 50px;
+}
+.nav-list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+}
+.nav-list .list-item {
+  margin-left: 5rem;
+  
+}
+.navbar a {
+  font-family: "Gilroy";
+  color: #fff;
+  text-decoration: none;
+  padding: 10px;
+}
+#back-to-top{
+  font-size: 18px;
+  display: inline-block;
+  background-color:#517ffd;
+  color:#fff;
+  width: 200px;
+  height: 40px;
+  text-align: center;
+  border-radius: 20px;
+  margin: 20px;  
+  position: fixed;
+  bottom: 30px;
+  right:20px;
+  transition: background-color .3s;
+  z-index: 1000;
+}
+#back-to-top:hover {
+  cursor: pointer;
+  background-color: #333;
+}
+#back-to-top:active {
+  background-color: #555;
+}
+#back-to-top::after {
+  content: "\f077";
+  font-family: FontAwesome;
+  font-weight:lighter;
+  font-style:inherit;
+  font-size: 1.5em;
+  line-height: 50px;
+  color: #fff;
+  margin-left: 5px;
+}
+.menu {
+  display: none;
+}
+.menu-line {
+  width: 20px;
+  height: 3px;
+  background-color: #fff;
+  margin-bottom: 5px;
+}
+.hamburger {
+  display: none;
+}
+
+.bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  background-color: #101010;
+}
+
+@media screen and (max-width: 768px) {
+
+  .header{
+    margin-bottom: 50px;
+    height: 300px;
+  }
+  .logo {
+    padding: 0 5px;
+    margin-bottom: 20px;
+    height: 50px;
+  }
+  .navbar {
+    float: none;   
+    text-align: center;    
+  }
+  .nav-list {
+    position: fixed;
+    left: -100%;
+    top: 5rem;
+    flex-direction: column;
+    background-color: #fff;
+    width: 100%;
+    border-radius: 10px;
+    text-align: center;
+    transition: 0.5s;
+    align-items: center;
+    
+  }
+  .nav-list.active {
+    text-align: center;
+    background: #517ffd;
+    left: 0;
+  }
+  .list-item a {
+    margin: 2.5rem 0;
+    
+  }
+  .hamburger {
+    display: block;
+    cursor: pointer;
+  }
+  .hamburger.active {
+    background: #517ffd;
+  }
+
+  .hamburger.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .hamburger.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  .button {
+    float: none;
+    display: block;
+    margin: 0%;
+    margin-bottom: 5px;
+    margin-right: 50px;
+    color: #162a4c;
+    
+  }
+  .flex-container {
+    display: none;
+    z-index: 90;
+  }
+  .container-app {
+    z-index: 100;
+  }
+  .container-title .title {
+    display: initial;
+  }
+
+  .footer-main{
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    padding-top: 10px;
+    
+    margin-left: 70px;
+  }
+
+  .flex-container .column{
+    flex: 50%;
+  }
+   .container-userStory h3{
+    margin-bottom: 20px;
+  }
+  .container-userStory .row{
+    display: flex;
+    flex-direction: column;
+  }
+  .stories{
+    display: contents;
+  }
+  .container-title .title{
+    display: contents;
+  }
+  .title h6{
+    display: contents;
+  }
+  grid-container{
+    margin-top: 25px;
+  }
+  .flex-container{
+    height: auto;
+    flex-direction: column;
+  }
+  .container-app .container .row{
+    height:auto;
+  }
+  .container-property{
+    margin-top: 375px;
+    margin-bottom: 500px;
+  }
+  .grid-container{
+    margin-top: 60px;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1230px) {
+  .navbar {
+    display: flex;
+  }
+  .nav-list {
+    display: flex;
+    align-items: center;
+  }
+  .logo {
+    padding: 0px 0px;
+    margin-top: 8px;
+    margin-bottom: 20px;
+  }
+  .container-userStory {
+    display: contents;   
+    margin-top: 600px;    
+  }  
+ .container-title .title {
+    display: contents;
+  }
+  footer{
+    z-index:-1;
+  }
+  .container-userStory .row{
+    display: flex;
+    flex-direction: column;
+  }
+  .stories{
+    display: contents;
+    padding-bottom: 5px;
+  }
+  .flex-container{
+    flex-direction: column;
+  }
+  .container .row{
+    height:auto;
+  }
+  .container-app .container .row{
+    height:auto;
+  }
+  .container-property{
+    margin-top: 700px;
+    margin-bottom: 600px;
+  }
+  .grid-container{
+    margin-top: 60px;
+  }  
+
+}
+
+.button {
+  display: inline-block;
+  border-radius: 65px;
+  background-color: #517ffd;
+  border: solid;
+  color: #fff;
+  text-align: center;
+  font-size: 20px;
+  padding: 10px;
+  width: 180px;
+  transition: all 0.6s;
+  cursor: pointer;
+  margin-top: 4px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.6s;
+}
+
+.button span:after {
+  content: "\00bb";
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+/*list-item altının çizilmesi */
+li.list-item {
+  display: inline-block;
+  padding-bottom: 0.5rem;
+  position: relative;
+}
+li.list-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 3px;
+  background-color: #fff;
+  transition: width 0.6s ease-out;
+}
+li.list-item:hover::before {
+  width: 100%;
+}
+@font-face {
+  font-family: "Gilroy";
+  src: url("Gilroy-Light.woff2") format("woff2"),
+    url("Gilroy-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+.header {
+  height: 600px;
+  background-color: #517ffd;
+  margin: 0 0 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.header h1 {
+  font-size: 40px;
+  line-height: 50px;
+  letter-spacing: -0.67px;
+  color: #fff;
+  margin-bottom: 20px;
+}
+.header p {
+  color: #fff;
+  margin-bottom: 25px;
+  font-size: 18px;
+  line-height: 24px;
+  font-family: "Gilroy";
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+
+.container-partner {
+  height: 350px;
+  width: 80%;
+  margin: 0 auto;
+  padding: 80px 0;
+}
+.container-property .row {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 650px;
+  width: 80%;
+  margin: 0 auto;
+  padding: 80px 0;
+}
+.flex-container {
+  display: flex;
+  flex-wrap: inherit;
+  background-color: fff;
+  padding: 20px;
+}
+
+.flex-container > div {
+  height: 400px;
+  width: 400px;
+  background-color: #ffffff;
+  border: 1px none #000;
+  font-size: 18px;
+  text-align: center;
+  justify-content: center;
+  color: #162a4c;
+}
+
+.flex-container h1 {
+  padding: 20px;
+}
+.flex-container hr {
+  margin: 30px;
+}
+.flex-container span {
+  display: inline-block;
+  padding-bottom: 0.125rem;
+  position: relative;
+  margin: 0px 14px;
+  text-decoration: none;
+  color: #162a4c;
+}
+.flex-container span::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: #376bfb;
+  transition: width 0.25s ease-out;
+}
+.flex-container span:hover::before {
+  width: 100%;
+}
+
+.flex-container span:hover {
+  margin: 0px 14px;
+  font-size: 24px;
+}
+
+.col-md-12 h2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+  font-size: 32px;
+  color: #162a4c;
+  padding: 30px;
+  text-align: center;
+  margin-bottom: 20px;
+  letter-spacing: -0.5px;
+  line-height: 40px;
+}
+
+.col-md-7 p {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  line-height: 24px;
+  text-align: center;
+  color: #162a4c;
+  margin-bottom: 60px;
+}
+
+.container-app {
+  height: auto;
+  background-color: #f6fafc;
+}
+
+.container-title .title {
+  width: 100%;
+  text-align: center;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  font-size: 50px;
+  margin: 30px;
+  font-weight: 600;
+  line-height: 40px;
+  letter-spacing: 0;
+  color: #162a4c;
+  text-align: center;
+  padding-bottom: 20px;
+  padding-top: 50px;
+}
+
+.column .card h6 {
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 40px;
+  letter-spacing: 0;
+  color: #162a4c;
+  text-align: center;
+}
+.container .row {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-content: space-around;
+  justify-content: space-around;
+  height: auto;
+}
+.column {
+  flex-direction: row;
+  margin: 0 auto;
+  margin-bottom: 50px;
+}
+
+/* Remove extra left and right margins, due to padding */
+.row {
+  margin: 0 -5px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive columns */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+
+/* Style the counter cards */
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  text-align: center;
+  background-color: #fff;
+  font-family: "Gilroy";
+  height: 300px;
+  width: 400px;
+}
+.card h6 {
+  padding: 20px;
+  text-align: center;
+  background-color: #fff;
+  font-family: "Gilroy";
+}
+.card p {
+  padding: 20px;
+  text-align: center;
+  background-color: #fff;
+  font-family: "Gilroy";
+  font-size: 20px;
+}
+
+.row .btn {
+  font-family: "Gilroy";
+  background-color: #fee5a8;
+  border: none;
+  color: black;
+  padding: 16px 32px;
+  text-align: center;
+  font-size: 20px;
+  margin: 4px 2px;
+  transition: 0.3s;
+  border-radius: 25px;
+}
+
+.btn:hover {
+  background-color: #296fff;
+  color: white;
+}
+
+.container-userStory {
+  width: auto;
+  height: auto;
+  background-color: #ffffffee;
+  margin: 50px  150px 150px 150px;
+  font-family: "Gilroy";
+  z-index: 0;
+}
+
+.container-userStory h3 {
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 40px;
+  letter-spacing: -0.5px;
+  color: #162a4c;
+  width: 100%;
+}
+
+.stories {
+  float: left;
+  width: 50%;
+  padding: 10px;
+  height: 300px;
+}
+
+.slideshow-container {
+  position: relative;
+  background: #f1f1f1f1;
+}
+
+.mySlides {
+  display: none;
+  padding: 80px;
+  text-align: center;
+  background-color: #fff;
+  height: 400px;
+}
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -30px;
+  padding: 16px;
+  color: #888;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+.next {
+  position: absolute;
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+.prev:hover,
+.next:hover {
+  background-color: #162a4c;
+  color: white;
+}
+.dot-container {
+  text-align: center;
+  padding: 20px;
+  background: #fff;
+}
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+.active,
+.dot:hover {
+  background-color: #717171;
+}
+
+q {
+  font-family: "Gilroy";
+  font-style: bold;
+  color: #162a4c;
+  font-size: 30px;
+}
+.author {
+  color: #162a4c;
+  font-size: 20px;
+}
+
+.user {
+  display: flex;
+  justify-content: space-around;
+  height: 500px;
+}
+.grid-container {
+  display: grid;
+  justify-content: space-around;
+
+  height: 400px;
+  align-content: center;
+  grid-template-columns: auto auto;
+  grid-gap: 10px;
+  background-color: #fff;
+  padding: 10px;
+}
+
+.flip-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: transparent;
+  width: 200px;
+  height: 200px;
+  perspective: 1000px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.flip-card-front {
+  background-color: #bbb;
+  color: black;
+}
+
+.flip-card-back {
+  background-color: #162a4c;
+  color: white;
+  transform: rotateY(180deg);
+}
+
+.flip-card-back h1,
+p {
+  padding-top: 15px;
+  font-size: 20px;
+  font-family: "Gilroy";
+  justify-content: center;
+  align-items: center;
+}
+.footer {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  padding-top: 10px;
+  margin: auto;
+}
+.footer-main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.footer > * {
+  flex: 1 90%;
+}
+.footer-left {
+  margin-right: 1.25em;
+  margin-bottom: 2em;
+}
+.footer ul {
+  list-style: none;
+  padding-left: 0;
+}
+.footer li {
+  line-height: 1em;
+  font-family: "Gilroy";
+}
+.footer a {
+  text-decoration: none;
+  display: inline-block;
+  padding: 8px 0;
+  color: #162a4c;
+  padding-bottom: 3px;
+  position: relative;
+}
+.footer-center {
+  margin-bottom: 2em;
+  margin-right: 1.25em;
+}
+.footer-center ul {
+  display: flex;
+  flex-flow: column;
+  color: #162a4c;
+  font-size: 18px;
+}
+.footer-right {
+  margin-bottom: 2em;
+  margin-right: 1.25em;
+}
+.footer-right ul {
+  display: flex;
+  flex-flow: column;
+  color: #162a4c;
+  font-size: 18px;
+}
+
+.box a {
+  font-family: "Gilroy";
+  color: #162a4c;
+}
+
+.footer-bottom {
+  position: fixed;
+  left: 0px;
+  bottom: 1px;
+  height: auto;
+  width: 100%;
+  background: #f6fafc;
+}
+.copyright__text {
+  text-align: center;
+  color: #162a4c;
+  font-size: 20px;
+}
+
+.footer-left p {
+  font-family: "Gilroy";
+  padding-right: 10%;
+  color: #162a4c;
+}
+.footer-left #logo {
+  height: 50px;
+  width: 50px;
+}
+.socials a {
+  background: transparent;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+
+
+
