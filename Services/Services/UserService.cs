@@ -42,9 +42,9 @@ namespace Services.Services
         {
             return await userManager.Users.ToListAsync();
         }
-        public List<User> GetEmployees(Guid companyId, bool isActive)
+        public List<User> GetEmployees(Guid companyId)
         {
-            List<User> employees = unitOfWork.Users.List(x => x.CompanyID == companyId && x.IsActive == isActive).ToList();
+            List<User> employees = unitOfWork.Users.List(x => x.CompanyID == companyId && x.IsActive).ToList();
             return employees;
         }
         public async Task<List<string>> UpdateUserInfoAsync(User user) //custom policy hazırlanacak
@@ -120,8 +120,7 @@ namespace Services.Services
             userToPassive.IsActive = false;
             await unitOfWork.CommitAsync();
         }
-        
-
+           
         public async Task SendEmailToUserAsync(string email, EmailType type, string content = "", string link = "")
         {
             User user = await userManager.FindByEmailAsync(email);

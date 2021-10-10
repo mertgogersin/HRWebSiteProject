@@ -16,7 +16,7 @@
 
     var apiUrl = "http://localhost:11404";
     $.ajax({
-        url: apiUrl + "/api/User/GetAllUsers",
+        url: apiUrl + "/api/Company/GetAllCompanies",
         type: "GET",
         success: function (data) {
             var companyLogoVms = [];
@@ -31,6 +31,7 @@
             })
         }
     })
+
 })
 
 

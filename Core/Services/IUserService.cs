@@ -14,7 +14,7 @@ namespace Core.Services
         Task<List<string>> RegisterEmployerAsync(User user, string password);
         Task<bool> LoginAsync(string email, string password, LoginType type);
         Task<IEnumerable<User>> GetUsersAsync();
-        List<User> GetEmployees(Guid companyId, bool isActive);
+        List<User> GetEmployees(Guid companyId);
         Task ActivateUserAsync(Guid userID);
         Task SetUserToPassiveAsync(Guid userID);
         User GetUserByID(Guid userID);
