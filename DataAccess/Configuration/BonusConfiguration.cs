@@ -14,10 +14,10 @@ namespace DataAccess.Configuration
         public void Configure(EntityTypeBuilder<Bonus> builder)
         {
             builder.HasKey(x => x.BonusID);
-                
 
             builder.Property(x => x.BonusAmount)
-                .IsRequired();
+                .IsRequired()
+                .HasColumnType("decimal(10,2)");
 
             builder.Property(x => x.Description)
                 .HasMaxLength(200);

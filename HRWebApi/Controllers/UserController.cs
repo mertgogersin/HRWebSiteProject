@@ -25,6 +25,7 @@ namespace HRWebApi.Controllers
         public UserController(IUserService userService, IMapper mapper, ICompanyService companyService)
         {
             this.userService = userService;
+            this.companyService = companyService;
             this.mapper = mapper;
         }
         [HttpPost]

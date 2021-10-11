@@ -25,7 +25,6 @@ namespace Services.Services
             {
                 await unitOfWork.Comments.AddAsync(comment);
                 await unitOfWork.CommitAsync();
-
             }
             catch (Exception)
             {
