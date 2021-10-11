@@ -26,7 +26,7 @@
                 type: "POST",
                 data: { "companyLogoVMs": companyLogoVms },
                 success: function (response) {
-                    $("container-partner").html(response);
+                    $(".container-partner").html(response);
                 }
             })
         }
