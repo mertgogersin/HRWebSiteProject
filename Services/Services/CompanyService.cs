@@ -50,11 +50,14 @@ namespace Services.Services
             List<User> employees = new List<User>();
             foreach (User item in await unitOfWork.Users.GetAllAsync())
             {
-                DateTime today = DateTime.Today;
-                DateTime next = new DateTime(today.Year, item.BirthDate.Value.Month, item.BirthDate.Value.Day);
-                if (next < today) next = next.AddYears(1);
-                int numDays = (next - today).Days;
-                if (numDays <= 30) employees.Add(item);
+                if (item.BirthDate != null)
+                {
+                    DateTime today = DateTime.Today;
+                    DateTime next = new DateTime(today.Year, item.BirthDate.Value.Month, item.BirthDate.Value.Day);
+                    if (next < today) next = next.AddYears(1);
+                    int numDays = (next - today).Days;
+                    if (numDays <= 30) employees.Add(item); 
+                }
             }
             return employees;
         }

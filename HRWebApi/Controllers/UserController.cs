@@ -86,10 +86,25 @@ namespace HRWebApi.Controllers
 
             return Ok(userDTOs);
         }
+        [HttpGet]
+        public async Task<IActionResult> GetAllEmployers()
+        {
+            IEnumerable<User> users = await userService.GetUsersAsync();
+            List<User> employers = new List<User>();
+            foreach (User item in users)
+            {
+                if(await userService.GetUserRoleAsync(item.Id) == "Employer")
+                {
+                    employers.Add(item);
+                }
+            }
+            return Ok(employers);
+        }
+        
         [HttpGet("{id}")]
         public IActionResult GetCompanyUsers(Guid id)
         {
-            IEnumerable<User> users = userService.GetEmployees(id, true);
+            IEnumerable<User> users = userService.GetEmployees(id);
             return Ok(users);
         }
         [HttpPut]
