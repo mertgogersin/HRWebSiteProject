@@ -1,9 +1,4 @@
-﻿using Core.EmailSenderManager;
-using Core.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Core.Settings;
 using System.Threading.Tasks;
 
 namespace Core.Repositories

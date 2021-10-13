@@ -20,14 +20,14 @@ namespace HRWebApi.Controllers
     {
         private readonly ICompanyService companyService;
         private readonly IUserService userService;
-        private readonly IDayOffService dayOffService;
+        private readonly IEmailService emailService;
         private readonly IMapper mapper;
 
-        public AdminController(IUserService _userService, ICompanyService _companyService, IDayOffService _dayOffService, IMapper _mapper)
+        public AdminController(IUserService _userService, ICompanyService _companyService, IEmailService emailService, IMapper _mapper)
         {
             this.userService = _userService;
             this.companyService = _companyService;
-            this.dayOffService = _dayOffService;
+            this.emailService = emailService;
             this.mapper = _mapper;
         }
         [HttpPut("{id}")]
@@ -60,7 +60,7 @@ namespace HRWebApi.Controllers
                 {
                     string content = "Your account has been approved.";
                     if (!status) { content = "Your account has been disapproved."; }
-                    await userService.SendEmailToUserAsync(item.Email, EmailType.Activated, content);
+                    await emailService.SendEmailToUserAsync(item.Email, EmailType.Activated, content);
 
                 }
             }
