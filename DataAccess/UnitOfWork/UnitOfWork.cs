@@ -1,5 +1,5 @@
-﻿using Core.EmailSenderManager;
-using Core.Repositories;
+﻿using Core.Repositories;
+using Core.Settings;
 using Core.UnitOfWork;
 using DataAccess.Context;
 using DataAccess.Repositories;
@@ -39,7 +39,7 @@ namespace DataAccess.UnitOfWork
 
         public IDebitRepository Debits => debitRepository = debitRepository ?? new DebitRepository(context);
 
-        public IEmailRepository Emails => emailRepository = emailRepository ?? new EmailRepository(context, emailSettings);
+        public IEmailRepository Emails => emailRepository = emailRepository ?? new EmailRepository(emailSettings);
 
         public IExpenseRepository Expenses => expenseRepository = expenseRepository ?? new ExpenseRepository(context);
 

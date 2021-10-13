@@ -1,9 +1,8 @@
-﻿using Core.EmailSenderManager;
-using Core.Repositories;
+﻿using Core.Repositories;
+using Core.Settings;
 using DataAccess.Context;
 using MailKit.Net.Smtp;
 using MailKit.Security;
-using Microsoft.Extensions.Options;
 using MimeKit;
 using System.Threading.Tasks;
 
@@ -11,11 +10,9 @@ namespace DataAccess.Repositories
 {
     public class EmailRepository : IEmailRepository
     {
-        HRContext context;
         private readonly EmailSettings emailSettings;
-        public EmailRepository(HRContext context, EmailSettings emailSettings)
+        public EmailRepository(EmailSettings emailSettings)
         {
-            this.context = context;
             this.emailSettings = emailSettings;
         }
 

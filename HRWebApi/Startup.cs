@@ -1,7 +1,7 @@
-using Core.EmailSenderManager;
 using Core.Entities;
 using Core.Model.Authentication;
 using Core.Services;
+using Core.Settings;
 using Core.UnitOfWork;
 using DataAccess.Context;
 using DataAccess.CustomPolicies;
@@ -36,11 +36,11 @@ namespace HRWebApi
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HRWebApi", Version = "v1" });
             });
 
-            
+
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ICompanyService, CompanyService>();
-            services.AddScoped<ICommentService,CommentService>();
+            services.AddScoped<ICommentService, CommentService>();
             services.AddScoped<IDayOffService, DayoffService>();
             services.AddScoped<IDebitService, DebitService>();
             services.AddScoped<IExpenseService, ExpenseService>();

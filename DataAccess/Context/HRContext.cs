@@ -32,8 +32,8 @@ namespace DataAccess.Context
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            //SeedContext.Initialize();
-        
+
+            builder.ApplyConfiguration(new RoleConfiguration());
             builder.ApplyConfiguration(new BonusConfiguration());
             builder.ApplyConfiguration(new CommentConfiguration());
             builder.ApplyConfiguration(new CompanyConfiguration());

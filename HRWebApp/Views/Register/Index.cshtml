@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Register</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        .error {
+            color: #6b6b6b;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    Registration
+                </div>
+                <div class="panel-body">
+                    <form id="registration">
+                        <input type="text" class="form-control firstName" name="firstName" placeholder="First Name" />
+                        <br />
+                        <input type="text" class="form-control lastName" name="lastName" placeholder="Last Name" />
+                        <br />
+                        <input type="text" class="form-control companyNumber" name="companyNumber" id="companyNumber" placeholder="Company Number" />
+                        <br />
+                        <input type="text" class="form-control email" name="email" placeholder="Company E-mail" />
+                        <br />
+                        <input type="text" class="form-control companyName" name="companyName" placeholder="Company Name" />
+                        <br />
+                        <input type="password" class="form-control password" name="password" placeholder="Password" id="password" />
+                        <br />
+                        <div class="notification">
+                         
+                        </div>
+                        <button onclick="RegisterEmployer()" class="btn btn-danger">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
+    <script src="~/PageScripts/register.js"></script>
+</body>
+</html>
+<script>
+    var apiUrl = "http://localhost:11404";
+    function RegisterEmployer() {
+        var firstName = $(".firstName").val();
+        var lastName = $(".lastName").val();
+        var companyNumber = $(".companyNumber").val();
+        if (!companyNumber.includes(0)) {
+            companyNumber = "0" + companyNumber;
+        }
+        var email = $(".email").val();
+        var companyName = $(".companyName").val();
+        var password = $(".password").val();
+
+        var registerDTO = {
+            "firstName": firstName,
+            "lastName": lastName,
+            "companyNumber": companyNumber,
+            "email": email,
+            "companyName": companyName,
+            "password": password
+        }
+
+        $.ajax({
+            url: apiUrl + "/api/User/RegisterEmployer",
+            type: "POST",
+            data: { "registerDTO": registerDTO },
+            success: function (response) {
+                response.map(item => {
+                    $(".notification").html(`<span>${item}</span>`)
+                })
+            }
+        })
+    }
+</script>

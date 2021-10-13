@@ -15,20 +15,7 @@ namespace HRWebApi
     {
         public static void Main(string[] args)
         {
-            var host = CreateHostBuilder(args).Build();
-            //using (var scope = host.Services.CreateScope())
-            //{
-            //    var services = scope.ServiceProvider;
-            //    try
-            //    {
-            //        SeedContext.Initialize(services);
-            //    }
-            //    catch  (Exception ex)
-            //    {
-            //        var logger = services.GetRequiredService<ILogger<Program>>();
-            //        logger.LogError(ex, "Db oluþtururken hata oluþtu.");
-            //    }
-            //}
+            var host = CreateHostBuilder(args).Build();          
             host.Run();
             
         }
