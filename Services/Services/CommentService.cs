@@ -58,7 +58,7 @@ namespace Services.Services
 
         public List<Comment> GetCompany(Guid companyID)
         {
-            List<Comment> comments = unitOfWork.Comments.List(x => x.CompanyID == companyID && x.CommentContent != null).ToList();
+            List<Comment> comments = unitOfWork.Comments.List(x => x.CompanyID == companyID && x.Content != null).ToList();
             return comments;
         }
 

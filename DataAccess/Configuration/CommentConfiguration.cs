@@ -15,11 +15,11 @@ namespace DataAccess.Configuration
         {
             builder.HasKey(x => x.CommentID);
 
-            builder.Property(x => x.CommentTitle)
+            builder.Property(x => x.Title)
                 .IsRequired()
                 .HasMaxLength(100);
 
-            builder.Property(x => x.CommentContent)
+            builder.Property(x => x.Content)
                .IsRequired()
                .HasMaxLength(1500);
 

@@ -17,10 +17,8 @@ namespace Core.Services
         List<User> GetEmployees(Guid companyId);
         Task ActivateUserAsync(Guid userID);
         Task SetUserToPassiveAsync(Guid userID);
-        User GetUserByID(Guid userID);
+        User GetUserByID(Guid userID);      
         Task<User> GetUserByEmailAsync(string email);
-        Task<string> GenerateEmailConfirmationTokenAsync(User user);
-        Task SendEmailToUserAsync(string email, EmailType type, string content = "", string link = "");
         Task<List<string>> UpdateUserInfoAsync(User user);
         Task SetUserStatus(Guid userID, bool status);
         Task<User> GetUserByIDAsync(Guid userID);
