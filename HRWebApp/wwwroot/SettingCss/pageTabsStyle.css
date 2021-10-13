@@ -1,0 +1,61 @@
+﻿
+* {
+    box-sizing: border-box
+}
+
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial;
+}
+
+.tablink {
+    background-color: #555;
+    color: white;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    font-size: 12px;
+    width: 14.28%;
+}
+
+    .tablink:hover {
+        background-color: #777;
+    }
+
+.tabcontent {
+    color: black;
+    display: none;
+    padding: 100px 20px;
+    height: 100%;
+}
+
+#sistemAyarlari {
+    background-color: white;
+}
+
+#sirketBilgileri {
+    background-color: white;
+}
+
+#kurallar {
+    background-color: white;
+}
+
+#tatilTakvimleri {
+    background-color: white;
+}
+
+#veriAktar {
+    background-color: white;
+}
+
+#gelistiriciAyarlari {
+    background-color: white;
+}
+
+#diger {
+    background-color: white;
+}
