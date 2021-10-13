@@ -9,7 +9,7 @@ namespace Core.Services
 {
     public interface ICommentService
     {
-        Task<IEnumerable<Comment>> GetAllCommentsByCompanyIDAsync(Guid companyID);
+        Comment GetCommentByCompanyIDAsync(Guid companyID);
         Task<IEnumerable<Comment>> GetCommentsAsync();
         List<Comment> GetCompany(Guid companyID);
         Task<Comment> GetCommentByIDAsync(Guid commentID);
