@@ -34,11 +34,11 @@ namespace HRWebApi.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetCommentsByCompanyID(Guid id)
+        public async Task<IActionResult> GetCommentByCompanyID(Guid id)
         {
-            List<Comment> comments = (List<Comment>)await commentService.GetAllCommentsByCompanyIDAsync(id);
-            List<CommentDTO> commentDTOs = mapper.Map<List<Comment>, List<CommentDTO>>(comments);
-            return Ok(commentDTOs);
+            Comment comment = await commentService.GetCommentByIDAsync(id);
+            CommentDTO commentDTO = mapper.Map<Comment, CommentDTO>(comment);
+            return Ok(commentDTO);
         }
         [HttpPost]
         public async Task<IActionResult> AddComment(CommentDTO commentDTO)
