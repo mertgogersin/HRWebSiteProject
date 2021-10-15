@@ -1,0 +1,91 @@
+﻿body {
+    background-color: rgba(0,0,0,.15);
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol !important;
+}
+
+.detailViewContainer {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: inherit;
+    align-items: stretch;
+    width: 100% !important;
+}
+
+.itemsEmployeeContainer {
+    margin: 5px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 0.28571429rem;
+    width: 235px !important;
+    padding-right: 5px !important;
+    height: 125px !important;
+}
+
+#itemAvatarColor {
+    width: 50px !important;
+    height: 50px !important;
+    border-radius: 10px !important;
+    overflow: hidden;
+    margin: 10px auto 0;
+    float: left !important;
+    margin-top: 0 !important;
+}
+
+.letter-avatar {
+    padding-top: 10px;
+    font-size: 20px;
+    font-weight: 200;
+    text-align: center;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.info {
+    text-align: left !important;
+    padding-left: 60px !important;
+    float: left !important;
+    position: absolute !important;
+    color: #162a4c;
+}
+
+.title .name .email {
+    max-width: 130px;
+    color: #162a4c;
+}
+
+.info .name {
+    font-size: 14px;
+    margin-top: 20px;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    display: block;
+    width: 100%;
+    margin-top: 0 !important;
+}
+
+.info .email, .info .title {
+    margin-top: 2px;
+    font-size: 12px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    display: block;
+    min-width: 100%;
+}
+
+.check-container {
+    padding-left: 0;
+    float: right;
+    right: 10px;
+    display: inline-block;
+    position: relative;
+    margin-bottom: 0 !important;
+    line-height: 20px;
+    font-size: 14px;
+    color: rgba(22,42,76,.7);
+    cursor: pointer;
+}
