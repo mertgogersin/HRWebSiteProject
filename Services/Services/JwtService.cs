@@ -34,7 +34,30 @@ namespace HRWebApp.Service.Concretes
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
         }
-      
-        
+        public string ValidateUser(string token)
+        {
+            var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+            var tokenHandler = new JwtSecurityTokenHandler();
+            string userID = null;
+            SecurityToken securityToken = null;
+            try
+            {
+                //Check if token is valid(expire time etc.)
+                tokenHandler.ValidateToken(token, new TokenValidationParameters { ValidateLifetime = true, IssuerSigningKey = new SymmetricSecurityKey(key), ValidateAudience = false, ValidateIssuer = false }, out securityToken);
+                if (securityToken != null)
+                {
+                    userID = ((JwtSecurityToken)securityToken).Claims.Where(x => x.Type == "id").FirstOrDefault().Value;
+
+                }
+                return userID;
+
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+
     }
 }

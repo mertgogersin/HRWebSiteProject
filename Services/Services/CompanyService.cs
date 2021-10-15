@@ -2,11 +2,9 @@
 using Core.Model.Authentication;
 using Core.Services;
 using Core.UnitOfWork;
-using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Services.Services
@@ -56,7 +54,7 @@ namespace Services.Services
                     DateTime next = new DateTime(today.Year, item.BirthDate.Value.Month, item.BirthDate.Value.Day);
                     if (next < today) next = next.AddYears(1);
                     int numDays = (next - today).Days;
-                    if (numDays <= 30) employees.Add(item); 
+                    if (numDays <= 30) employees.Add(item);
                 }
             }
             return employees;

@@ -1,14 +1,7 @@
 ﻿using Core.Settings;
-using HRWebApp.Model.JwtValidator;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HRWebApp.Controllers
 {
@@ -23,28 +16,18 @@ namespace HRWebApp.Controllers
         {
             return View();
         }
-        
-        public IActionResult RegisterEmployer(string token)
+        [HttpGet("{id}")]
+        public IActionResult RegisterEmployer(string id)
         {
-            TokenValidator tokenValidator = new TokenValidator(appSettings);
-            string userID = tokenValidator.ValidateUser(token);
-            if(userID == null)
+            if (id == null)
             {
                 TempData["expiredToken"] = "Your email is expired please try again";
                 return RedirectToAction("Index", "HomePage");
             }
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri("http://localhost:11404");
-                var content = new StringContent(userID, Encoding.UTF8, "application/json");
-                var response = client.PostAsync("/api/User/ValidateEmployer/", content).Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    TempData["success"] = "Your account has been activated. You can sign in now.";
-                    HttpContext.Session.SetString("userID", userID);
-                }
-                return RedirectToAction("Index", "HomePage");
-            }
+            TempData["success"] = "Your account has been activated. You can sign in now.";
+            HttpContext.Session.SetString("userID", id);
+            return RedirectToAction("Index", "HomePage");
+
         }
     }
 }
