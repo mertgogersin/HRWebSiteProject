@@ -10,5 +10,6 @@ namespace Core.Services
     public interface IJwtService
     {
         string generateJwtToken(User user);
+        string ValidateUser(string token);
     }
 }

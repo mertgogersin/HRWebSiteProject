@@ -4,8 +4,6 @@ using Core.Enums;
 using Core.Model.Authentication;
 using Core.Services;
 using HRWebApi.DTO;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -38,7 +36,7 @@ namespace HRWebApi.Controllers
             //modelstate, jquery validation ile kontrol edilecek
             if (ModelState.IsValid)
             {
-         
+
                 var user = mapper.Map<RegisterDTO, User>(registerDTO);
                 Company company = new Company()
                 {
@@ -55,19 +53,21 @@ namespace HRWebApi.Controllers
                 }
                 string token = jwtService.generateJwtToken(user);
                 var confirmationLink = "<a href='"
-                    + Url.Action("RegisterEmployer", "Register", new { token = token }, Request.Scheme) //mvc deki action controller a linkleriz.(ActivateUser: Action, Register: Controller)
+                    + Url.Action("ValidateEmployer", "Register", new { token = token }, Request.Scheme) //mvc deki action controller a linkleriz.(ActivateUser: Action, Register: Controller)
                     + "'>Click here</a>";
                 await emailService.SendEmailToUserAsync(user.Email, EmailType.Register, confirmationLink);
                 return Ok("Email has been sent, please check your inbox."); // ajax ın success function ına gider. mvc kısmında token validate edilecek              
             }
-            
+
             return BadRequest(ModelState.Values.SelectMany(x => x.Errors).ToList());
         }
-        [HttpPost]
-        public async Task<IActionResult> ValidateEmployer(string userID)
+        [HttpGet]
+        public async Task<IActionResult> ValidateEmployer(string token)
         {
-            await userService.ActivateUserAsync(Guid.Parse(userID));
-            return Ok("Success");
+            string id = jwtService.ValidateUser(token);
+            if (id != null)
+                await userService.ActivateUserAsync(Guid.Parse(id));
+            return Redirect("http://localhost:37338/Register/RegisterEmployer/" + id); //mvc action'ına gider
         }
         [HttpPost]
         public async Task<IActionResult> Login(LoginDTO loginDTO)
@@ -105,14 +105,14 @@ namespace HRWebApi.Controllers
             List<User> employers = new List<User>();
             foreach (User item in users)
             {
-                if(await userService.GetUserRoleAsync(item.Id) == "Employer")
+                if (await userService.GetUserRoleAsync(item.Id) == "Employer")
                 {
                     employers.Add(item);
                 }
             }
             return Ok(employers);
         }
-        
+
         [HttpGet("{id}")]
         public IActionResult GetCompanyUsers(Guid id)
         {
