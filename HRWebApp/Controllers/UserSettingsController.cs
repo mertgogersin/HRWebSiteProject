@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using HRWebApp.Model.VMs;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,11 @@ namespace HRWebApp.Controllers
         {
             return View();
         }
+
+        public IActionResult GetCompany(List<CompanyVM> companyVMs)
+        {
+            return PartialView("GetCompany", companyVMs);
+        }
+
     }
 }

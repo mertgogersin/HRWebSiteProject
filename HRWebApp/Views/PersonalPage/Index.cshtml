@@ -3,12 +3,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Ayarlar Sayfası</title>
-    <link href="~/SettingCss/chartCss.css" rel="stylesheet" />
-    <link href="~/SettingCss/pageTabsStyle.css" rel="stylesheet" />
+    <title>Yönetici Sayfası</title>
     <link href="~/SettingCss/style.css" rel="stylesheet" />
+    <link href="~/SettingCss/employeeProcess.css" rel="stylesheet" />
     <link href="~/SettingCss/notification-style.css" rel="stylesheet" />
-
+    <link href="~/SettingCss/employeeList.css" rel="stylesheet" />
+    <link href="~/SettingCss/dayOffRequest.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
@@ -26,7 +27,7 @@
         <div class="sidebar-menu">
             <ul>
                 <li>
-                    <a href="talepet.html">
+                    <a href="">
                         <span class="ti-target"></span>
                         <span>Talep Et</span>
                     </a>
@@ -44,7 +45,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="izinler.html">
                         <span class="ti-pencil-alt"></span>
                         <span>İzinler</span>
                     </a>
@@ -103,56 +104,59 @@
                 <span class="ti-search"></span>
                 <input type="search" placeholder="Birşeyler Ara :)">
             </div>
+            <div>
+                <div class="button">
+                    <form action="calisanEkle.html">
+                        <input type="submit" value="Yeni Çalışan Ekle" />
+                    </form>
+                </div>
+            </div>
         </header>
-        <main>
-            <button class="tablink" onclick="openPage('sistemAyarlari', this)">Sistem Ayarları</button>
-            <button class="tablink" onclick="openPage('sirketBilgileri', this)">Şirket Bilgileri</button>
-            <button class="tablink" onclick="openPage('kurallar', this)" id="defaultOpen">Kurallar</button>
-            <button class="tablink" onclick="openPage('tatilTakvimleri', this)">Tatil Takvimleri</button>
-            <button class="tablink" onclick="openPage('veriAktar', this)">Veri Aktar</button>
-            <button class="tablink" onclick="openPage('gelistiriciAyarlari', this)">Geliştirici Ayarları</button>
-            <button class="tablink" onclick="openPage('diger', this)">Diğer</button>
-
-            <div id="sistemAyarlari" class="tabcontent">
-                <h3>Sistem Ayarlari</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            </div>
-
-            <div id="sirketBilgileri" class="tabcontent">
-                <h3>Şirket Bilgileri</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            </div>
-
-            <div id="kurallar" class="tabcontent">
-                <h3>Kurallar</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            </div>
-
-            <div id="tatilTakvimleri" class="tabcontent">
-                <h3>Tatil Takvimleri</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            </div>
-
-            <div id="veriAktar" class="tabcontent">
-                <h3>Veri Aktar</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            </div>
-
-            <div id="gelistiriciAyarlari" class="tabcontent">
-                <h3>Geliştirici Ayarları</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            </div>
-
-            <div id="diger" class="tabcontent">
-                <h3>Diğer</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            </div>
-
-        </main>
     </div>
+
+    <main>
+
+        <div id="detailViewContainerId" class="detailViewContainer">
+            <div id="itemsContainer" class="itemsEmployeeContainer">
+                <div id="itemTitle" class="itemEmployeeTitle">
+                    <span>
+                        <div id="itemAvatarColor" class="itemEmployeeAvatar">
+                            <div class="letter-avatar">AÇ</div>
+                        </div>
+                    </span>
+                    <div class="info">
+                        <div class="name">
+                            Ahmet Çamkıran
+                        </div>
+                        <div class="title">
+                            Halkla İlişkiler Uzmanı
+                        </div>
+                        <div class="email">
+                            info@monitepol.com
+                        </div>
+                    </div>
+                    <div class="table-card">
+                        <table>
+                            <thead>
+                                <tr>
+
+                                    <th><a href="zimmetEkle.html"><span class="ti-id-badge"></span></a></th>
+                                    <th><a href="odemeEkle.html"><span class="ti-money"></span></a></th>
+                                    <th><a href="mesaiEkle.html"><span class="ti-write"></span></a></th>
+
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 </body>
 </html>
-<script src="~/PageScripts/chartJs.js"></script>
-<script src="~/PageScripts/pageTabsScript.js"></script>
+
 <script src="~/PageScripts/script.js"></script>
-<script src="~/PageScripts/UserSettingPage.js"></script>
+<script src="~/PageScripts/dayOffRequest.js"></script>
+<script src="~/PageScripts/debitAdd.js"></script>
+<script src="~/PageScripts/addPayment.js"></script>
+<script src="~/PageScripts/avatarColor.js"></script>
