@@ -79,6 +79,11 @@
                 response.map(item => {
                     $(".notification").html(`<span>${item}</span>`)
                 })
+            },
+            error: function (errors) {
+                errors.map(item => {
+                    $(".notification").html(`<span>${item}</span>`)
+                })
             }
         })
     }

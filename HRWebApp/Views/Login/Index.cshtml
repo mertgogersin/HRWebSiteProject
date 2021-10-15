@@ -37,7 +37,7 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="Submit"></label>
                     <div class="col-md-4">
-                        <button id="Submit" class="btn btn-success" type="Submit">Giriş Yap</button>
+                        <button id="Submit" class="btn btn-success" onclick="Login()">Giriş Yap</button>
                     </div>
                 </div>
             </fieldset>
@@ -46,3 +46,26 @@
 
 </body>
 </html>
+<script>
+    var apiUrl = "http://localhost:11404";
+    function Login() {
+        var loginDTO = {
+            "email": $("#Email").val(),
+            "password": $("#password").val()
+        };
+        $.ajax({
+            url: apiUrl + "/api/User/Login/",
+            type: "POST",
+            data: { "loginDTO": loginDTO },
+            success: function (response) {
+                $.ajax({
+                    url: "/Login/LoginUser/" + response.id,
+                    type: "GET",
+                    success: function (response) {
+                        window.location.href = "/PersonalPage/Index/";
+                    }
+                })
+            }
+        })
+    }
+</script>
