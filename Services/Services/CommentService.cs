@@ -41,9 +41,9 @@ namespace Services.Services
 
         }
 
-        public async Task<IEnumerable<Comment>> GetAllCommentsByCompanyIDAsync(Guid companyID)
+        public Comment GetCommentByCompanyIDAsync(Guid companyID)
         {
-            return await unitOfWork.Comments.GetCommentsByCompanyIDAsync(companyID);
+            return unitOfWork.Comments.List(x => x.CompanyID == companyID).FirstOrDefault();
         }
 
         public async Task<Comment> GetCommentByIDAsync(Guid commentID)
