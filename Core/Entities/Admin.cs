@@ -11,7 +11,7 @@ namespace Core.Entities
         public int AdminID { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        //public string GithubDeneme { get; set; }
-        //public string UygulamaDeneme { get; set; }
+        
+
     }
 }
