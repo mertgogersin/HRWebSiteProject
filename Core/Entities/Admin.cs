@@ -12,5 +12,6 @@ namespace Core.Entities
         public string Email { get; set; }
         public string Password { get; set; }
         //public string GithubDeneme { get; set; }
+        //public string GithubDeneme2 { get; set; }
     }
 }
