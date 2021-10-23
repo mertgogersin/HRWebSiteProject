@@ -21,6 +21,6 @@ namespace Core.Entities
         public Plan Plan { get; set; }
         public Comment Comment { get; set; }
         public ICollection<User> Users { get; set; }
-
+        //dsfgdfg
     }
 }
