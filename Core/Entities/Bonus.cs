@@ -18,6 +18,7 @@ namespace Core.Entities
         public string Description { get; set; }
         //nav prop
         public User User { get; set; }
+        //public string UygulamaDeneme { get; set; }
 
     }
 }
