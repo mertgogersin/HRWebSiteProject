@@ -16,6 +16,6 @@ namespace Core.Entities
         public Guid? CompanyID { get; set; }
         //nav prop
         public Company Company { get; set; }
-        //asdasdasdasdsad
+        //aqwqweqew
     }
 }
